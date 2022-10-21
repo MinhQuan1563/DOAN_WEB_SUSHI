@@ -1,0 +1,31 @@
+/* Phone */
+@media (max-width: 320px) {
+    .hide-on-mobile {
+        display: none;
+    }
+
+    .section__content-list {
+        grid-template-columns: repeat(1, 1fr);
+    }
+}
+
+@media (min-width: 320px) and (max-width: 740px) {
+    .hide-on-mobile {
+        display: none;
+    }
+
+    .section__content-list {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+/* Tablet */
+@media (min-width: 739px) and (max-width: 1024px) {
+    .hide-on-tablet {
+        display: none;
+    }
+
+    .section__content-list {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
