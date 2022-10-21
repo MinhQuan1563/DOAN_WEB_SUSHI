@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FOODY</title>
+    <link rel="icon" href="../images/favicon.png">
+    <link href="https://fonts.googleapis.com/css2?family=Barlow&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
+    <link rel="stylesheet" href="../fonts/fontawesome-free-6.1.2-web/css/all.min.css">
+    <link rel="stylesheet" href="../fonts/themify-icons/themify-icons.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/base.css">
+    <link rel="stylesheet" href="../css/responsive.css">
+</head>
+<body>
+    <div id="main">
+        <!-- SIDEBAR -->
+        <div class="sidebar">
+            <div class="sidebar__logo">
+                <img src="../images/logo.svg" alt="">
+            </div>
+
+            <ul class="sidebar__menu">
+                <li class="sidebar__menu-item" title="Trang chủ">
+                    <i class="fa-solid fa-house"></i>
+                </li>
+                <li class="sidebar__menu-item current">
+                    <i class="fa-solid fa-utensils"></i>
+                </li>
+                <li class="sidebar__menu-item">
+                    <i class="fa-solid fa-cart-shopping"></i>
+                </li>
+                <li class="sidebar__menu-item active">
+                    <i class="fa-solid fa-location-dot"></i>
+                </li>
+                <li class="sidebar__menu-item hide">
+                    <i class="fa-solid fa-chart-simple"></i>
+                </li>
+                <li class="sidebar__menu-item hide">
+                    <i class="ti-settings"></i>
+                </li>
+            </ul>
+
+            <div class="sidebar__log-out hide">
+                <i class="fa-solid fa-arrow-right-from-bracket"></i>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section__header">
+                <div class="section__header-title">
+                    <img src="../images/logo.png" alt="">
+                    <div class="section__header-title-searchbar">
+                        <div class="section__header-searchbar-child">
+                            <input type="text" placeholder="Search for food, coffe, etc..." />
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </div>
+                    </div>
+                    <div class="section__header-title-notified section__header-title-icon">
+                        <i class="ti-bell"></i>
+                        <div class="section__header-title-text">Thông báo</div>
+                    </div>
+                    <div class="section__header-title-signup section__header-title-icon">
+                        <i class="fa-regular fa-user"></i>
+                        <div class="section__header-title-text">Đăng ký <br> Đăng nhập</div>
+                    </div>
+                </div>
+                <div class="section__header-search">
+                    
+                </div>
+            </div>
+
+            <div class="section__contact">
+                <div class="section__contact-left">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1904.0456885702786!2d106.68236887772456!3d10.759361877281822!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31752f1c81c64183%3A0xd3109d7a7a8f753c!2zMjczIEFuIEQuIFbGsMahbmcsIFBoxrDhu51uZyAzLCBRdeG6rW4gNSwgVGjDoG5oIHBo4buRIEjhu5MgQ2jDrSBNaW5oLCBWaeG7h3QgTmFt!5e0!3m2!1svi!2s!4v1666201119865!5m2!1svi!2s" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
+                <div class="section__contact-right">
+                    <div class="section__contact-header">
+                        <h1>Liên Hệ</h1>
+                        <hr>
+                    </div>
+                    <ul class="section__contact-list">
+                        <li>
+                            <p>
+                                <i class="fa-solid fa-map-location-dot"></i>
+                                Địa chỉ chúng tôi
+                            </p>
+                            <p><strong>954-956 Nguyễn Văn Linh, Phường Tân Phong, Quận 7</strong></p>
+                        </li>
+                        <li>
+                            <p>
+                                <i class="fa-solid fa-envelope"></i>
+                                Email chúng tôi
+                            </p>
+                            <a href=""><strong>email_gidodi@gmai.com</strong></a>
+                        </li>
+                        <li>
+                            <p>
+                                <i class="fa-solid fa-phone"></i>
+                                Điện thoại
+                            </p>
+                            <p><strong>+180010031</strong></p>
+                        </li>
+                        <!-- <li>
+                            <p>Thời gian làm việc</p>
+                            <p><strong>Thứ 2 đến Chủ Nhật từ 8h đến 21h</strong></p>
+                        </li> -->
+                    </ul>
+                    <div class="section__contact-send">
+                        <h2>Gửi thắc mắc cho chúng tôi</h2>
+                        <hr>
+                        <br>
+                        <form action="">
+                            <input id="fullname" type="text" name="fullname" placeholder="Tên của bạn">
+                            <div class="sitebox-email-phone">
+                                <input id="email" type="text" name="email" placeholder="Email của bạn">
+                                <input id="phone" type="text" name="phone" placeholder="Số điện thoại của bạn">
+                            </div>
+                            <textarea id="message" name="message" rows="10" placeholder="Nội dung"></textarea>
+                            <div class="section__contact-recaptcha">
+                                This site is protected by reCAPTCHA and the Google
+                                <a href="https://policies.google.com/privacy" target="_blank" rel="noreferrer">Privacy Policy</a> 
+                                and <a href="https://policies.google.com/terms" target="_blank" rel="noreferrer">Terms of Service</a> apply.
+                            </div>
+                            <button class="section__contact-btn" type="submit">Gửi cho chúng tôi</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <footer class="section__footer">
+                <div class="footer__counters">
+                    <ul class="footer__counters-inner">
+                        <li class="footer__counters-item">
+                            <img src="../images/footer-1.png" alt="">
+                            <div class="footer__counters-text">
+                                <h1>Đa dạng</h1>
+                                <h3>Hải Sản Tươi Ngon Từ 10 Quốc Gia</h3>
+                            </div>
+                        </li>
+                        <li class="footer__counters-item">
+                            <img src="../images/footer-2.png" alt="">
+                            <div class="footer__counters-text">
+                                <h1>Giao Nhanh 2H</h1>
+                                <h3>Giao Hàng Nhanh Đóng Gói Chuẩn</h3>
+                            </div>
+                        </li>
+                        <li class="footer__counters-item">
+                            <img src="../images/footer-3.png" alt="">
+                            <div class="footer__counters-text">
+                                <h1>+ 10</h1>
+                                <h3>Năm kinh nghiệm</h3>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <span>Jager Restro - tươi ngon từ hải sản đang bơi - Là chuỗi hệ thống nhà hàng Fresh To Go mang đến cho khách hàng những món Sashimi và Sushi ngon nhất, chất lượng nhất từ những loại hải sản đang bơi</span>
+                    </div>
+                    <div class="col">
+                        <h3>
+                            Chính Sách
+                            <!-- <div class="underline"><span></span></div> -->
+                        </h3>
+                        <!-- <p>273, An Dương Vương Phường 3, Quận 5, Thành Phố Hồ Chí Minh</p>
+                        <p>LNG</p>
+                        <p>Nha Trang KHánh Hòa</p>
+                        <p>Viet nam</p> -->
+                        <ul>
+                            <li><a href="#">Chính Sách Đổi Hàng</a></li>
+                            <li><a href="">Chính Sách Giao Hàng</a></li>
+                            <li><a href="">Chính Sách Thành Viên</a></li>
+                            <li><a href="">Chính Sách Khiếu Nại</a></li>
+                        </ul>
+                        <p class="email-id">Email Cửa Hàng: SHUSHISAIGON@gmail.com</p>
+                        <h4>Tel: +84 0964184548</h4>
+                    </div>
+                    <div class="col">
+                        <h3>
+                            Thực Đơn
+                            <!-- <div class="underline"><span></span></div> -->
+                        </h3>
+                        <ul>
+                            <li><a href="#">Trang Chủ</a></li>
+                            <li><a href="#">Sản Phẩm</a></li>
+                            <li><a href="#">Khuyến Mãi</a></li>
+                            <li><a href="#">Phục Vụ</a></li>
+                            <li><a href="#">Liên Hệ</a></li>
+        
+                        </ul>
+                    </div>
+                    <div class="col">
+                        <h3>
+                            Đăng ký nhận tin
+                            <!-- <div class="underline"><span></span></div> -->
+                        </h3>
+                        <form >
+                            <i class="fa-regular fa-envelope"></i>
+                            <input type="email" placeholder="Nhập email của bạn" required>
+                            <button type="submit">
+                                <i class="fa-solid fa-arrow-right"></i>
+                            </button>
+                        </form>
+                        <div class="social-icons">
+                            <a href="#"><i class="fa-brands fa-facebook"></i></a>
+                            <a href="#"><i class="fa-brands fa-facebook-messenger"></i></a> 
+                            <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                            <a href="#"><i class="fa-brands fa-tiktok"></i></a>
+                            <a href="#"><i class="fa-brands fa-twitter"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+                <div class="container text-center">	
+                    <b>CÔNG TY TNHH 4 Thành Viên</b>
+                    <br>
+                    <b>Địa chỉ trụ sở chính:</b> 
+                    273, An Dương Vương, Phường 03, Quận 5, Thành phố Hồ Chí Minh
+                    <br>
+                    <b>Hotline:</b> 
+                    <a href="tel: +0378068647">0378068647</a> - <a href="tel: +18008131">18008131</a>
+                    <br>
+                    <a href="mailto: nhom_11_web@gmail.com">
+                        <b>Email Chủ Cửa Hàng:</b> 
+                        webThaySang_nhom11@gmail.com
+                        <br>
+                    </a>
+            </div>
+            </footer>
+        </div>
+        
+
+        <!-- Trượt lên trên cùng -->
+        <button id="scroll-to-top" title="Trượt lên">
+            <i class="ti-arrow-up scroll-to-top__icon"></i>
+        </button>
+    </div>
+
+    <!-- Javascript -->
+    <script type="module" src="../scripts/main.js"></script>
+</body>
+</html>
