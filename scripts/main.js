@@ -1,18 +1,15 @@
 import {products} from "./json.js"
 
-const $ = document.querySelector.bind(document);
-const $$ = document.querySelectorAll.bind(document);
+const sidebarItems = document.querySelectorAll('.sidebar__menu-item');
+const sectionItems = document.querySelectorAll('.section__header-menu li');
+const productList = document.querySelector('.section__content-list');
+const pagi = document.getElementById('pagination');
+const scrollToTop = document.getElementById('scroll-to-top');
+const btnNext = document.querySelector('.btn-next');
+const btnPrev = document.querySelector('.btn-prev');
+const pageNum = document.querySelector('.pagi-number-page');
 
-const sidebarItems = $$('.sidebar__menu-item');
-const sectionItems = $$('.section__header-menu li');
-const sectionActive = $('.section__header-menu li.active');
-const productList = $('.section__content-list');
-const pagi = $('#pagination');
-const btnNext = $('.btn-next');
-const btnPrev = $('.btn-prev');
-const scrollToTop = $('#scroll-to-top');
-
-// Xử lý thay đổi URL
+// ** Xử lý thay đổi URL trên sidebar
 function sidebarControl() {
     sidebarItems.forEach(function(sidebarItem, index) {
         sidebarItem.onclick = function() {
@@ -38,68 +35,36 @@ function sidebarControl() {
     renderProduct(products[0]);
 }
 
-// Xử lý render sản phẩm ra màn hình
+// ** Xử lý render sản phẩm ra màn hình
 function renderProduct(items) {
     const htmls = items.map((item, index) => {
         if(index >= start1 && index < end) {
             return `
-        <li class="section__content-item">
-            <div class="section__content-item-img" style="background-image: url('${item.image}');"></div>
-            <div class="section__content-item-text">
-                <h3>${item.name}</h3>
-                <p>${item.price}</p>
-            </div>
-            <i class="eye-icon ti-eye" style="display: none;"></i>
-        </li>`
+                <li class="section__content-item">
+                    <div class="section__content-item-img" style="background-image: url('${item.image}');"></div>
+                    <div class="section__content-item-text">
+                        <h3>${item.name}</h3>
+                        <p>${item.price}</p>
+                    </div>
+                    <i class="eye-icon ti-eye" style="display: none;"></i>
+                </li>`
         }
     });
 
     productList.innerHTML = htmls.join('');
 }
 
-// Xử lý phân trang
-var perPage = 8;
-var curPage = 1;
-var start1 = 0;
-var end = perPage;
-var totalPage = Math.ceil(perPage / products[0].length) + 1;
-
-function PagiHandle() {
-    btnNext.onclick = function() {
-        curPage++;
-        if(curPage > totalPage) {
-            curPage = totalPage;
-        }
-
-        start1 = (curPage - 1) * perPage;
-        end = curPage * perPage;
-
-        renderProduct(products[0]);
-    }
-
-    btnPrev.onclick = function() {
-        curPage--;
-        if(curPage <= 1) {
-            curPage = 1 ;
-        }
-        start1 = (curPage - 1) * perPage;
-        end = curPage * perPage;
-
-        renderProduct(products[0]);
-    }
-}
-
-// Xử lý di chuột qua danh sách các sản phẩm
+// ** Xử lý di chuột qua các sản phẩm trong danh sách
 function productHandle() {
-    var productItems = $$('.section__content-item');
-    var sectionImages = $$('.section__content-item-img');
-    var details = $$('.eye-icon');
+    var productItems = document.querySelectorAll('.section__content-item');
+    var sectionImages = document.querySelectorAll('.section__content-item-img');
+    var details = document.querySelectorAll('.eye-icon');
     
     productItems.forEach((item, index) => {
-        sectionImages[index].style.transition = 'all linear 0.3s';
+        sectionImages[index].style.transition = 'all linear 0.3s'; // cho các hành động mượt hơn
         item.onmouseover = () => {
-            sectionImages[index].style.backgroundSize = '110%';
-            details[index].style.display = 'block';
+            sectionImages[index].style.backgroundSize = '110%'; // Zoom to nhỏ hình ảnh sản phẩm
+            details[index].style.display = 'block'; // Ẩn hiện con mắt
         }
         item.onmouseout = () => {
             sectionImages[index].style.backgroundSize = '100%';
@@ -112,43 +77,135 @@ function productHandle() {
 function sectionControl(list) {
     list.forEach((item, index) => {
         item.onclick = () => {
-            $('.section__header-menu li.active').classList.remove('active')
+
+            getCurrentPage(1);
+
+            document.querySelector('.section__header-menu li.active').classList.remove('active')
             item.classList.add('active')
-    
+            
             renderProduct(products[index]);
-            PagiHandle();
             productHandle();
+
+            if(products[index].length > 8) {
+                pagi.style.display = "flex";
+                PagiHandle(index);
+                renderNumPage();
+            }
+            else {
+                pagi.style.display = "none";
+            }
+            changeNumPage(index);
         }
     })
     
 }
 
-function start() {
-    sidebarControl();
-    sectionControl(sectionItems);
-    productHandle();
-    PagiHandle(products[0]);
+// ** Xử lý phân trang
+var perPage = 8; // Số sản phẩm tối đa trong 1 trang
+var curPage = 1; // Trang hiện tại 
+var start1 = 0; // index sản phẩm đầu
+var end = perPage; // index sản phẩm cuối
+var totalPage;
+
+// Lấy ra trang hiện tại
+function getCurrentPage(curPage) {
+    start1 = (curPage - 1) * perPage;
+    end = curPage * perPage;
 }
 
-// ** Scroll to top
-// Khi người dùng cuộn chuột thì gọi hàm scrollFunction
-window.onscroll = function() {scrollFunction()};
-// khai báo hàm scrollFunction
-function scrollFunction() {
-    // Kiểm tra vị trí hiện tại của con trỏ so với nội dung trang
-    if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
-        //nếu lớn hơn 200px thì hiện button
-        scrollToTop.style.display = "block";
-    } else {
-        //nếu nhỏ hơn 200px thì ẩn button
-        scrollToTop.style.display = "none";
+function PagiHandle(index) {
+    totalPage = Math.ceil(products[index].length / perPage); // Tổng số trang của 1 loại sp
+    // Ấn next tới trang tiếp theo
+    btnNext.onclick = function() {
+        curPage++;
+        if(curPage >= totalPage) {
+            curPage = totalPage;
+            btnNext.classList.remove('active');
+            btnPrev.classList.add('active');
+        }
+        else {
+            btnNext.classList.add('active');
+            btnPrev.classList.add('active');
+        }
+        document.querySelector('.pagi-number-page li.active').classList.remove('active');
+        document.querySelectorAll('.pagi-number-page li')[curPage - 1].classList.add('active');
+        getCurrentPage(curPage);
+        renderProduct(products[index]);
+        productHandle();
+    }
+    // Ấn prev tới trang trước đó
+    btnPrev.onclick = function() {
+        curPage--;
+        if(curPage <= 1) {
+            curPage = 1 ;
+            btnNext.classList.add('active');
+            btnPrev.classList.remove('active');
+        }
+        else {
+            btnNext.classList.add('active');
+            btnPrev.classList.add('active');
+        }
+        document.querySelector('.pagi-number-page li.active').classList.remove('active');
+        document.querySelectorAll('.pagi-number-page li')[curPage - 1].classList.add('active');
+        getCurrentPage(curPage);
+        renderProduct(products[index]);
+        productHandle();
     }
 }
-//gán sự kiện click cho button
-scrollToTop.addEventListener("click", function(){
-    //Nếu button được click thì nhảy về đầu trang
-    document.body.scrollTop = 0;
-    document.documentElement.scrollTop = 0;
-});
 
-start();
+// Xử lý hiện số trang ra màn hình
+function renderNumPage() {
+    var html = '';
+    html += `
+        <li class="active">${1}</li>`;
+
+    for(let i=2; i <= totalPage; i++) {
+        html += `
+        <li>${i}</li>`;
+    }
+    pageNum.innerHTML = html;
+}
+
+// Xử lý thay đổi số trang
+function changeNumPage(index) {
+    var numPages = document.querySelectorAll('.pagi-number-page li');
+    for(let i=0; i < numPages.length; i++) {
+        numPages[i].onclick = function() {
+            document.querySelector('.pagi-number-page li.active').classList.remove('active');
+            numPages[i].classList.add('active');
+            let value = i + 1;
+            curPage = value;
+            getCurrentPage(curPage);
+            renderProduct(products[index]);
+            productHandle();
+        }
+    }
+}
+
+// ** Xử lý cuộn lên trang đầu
+function scrollTopHandle() {
+    window.onscroll = function() {
+        // Kiểm tra vị trí hiện tại của con trỏ so với nội dung trang
+        if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
+            //nếu lớn hơn 200px thì hiện button
+            scrollToTop.style.display = "block";
+        } else {
+            //nếu nhỏ hơn 200px thì ẩn button
+            scrollToTop.style.display = "none";
+        }
+    };
+    //gán sự kiện click cho button
+    scrollToTop.addEventListener("click", function(){
+        //Nếu button được click thì nhảy về đầu trang
+        document.body.scrollTop = 0;
+        document.documentElement.scrollTop = 0;
+    });
+}
+
+
+
+// ==> Gọi các hàm để thực hiện xử lý
+sidebarControl();
+sectionControl(sectionItems);
+productHandle();
+scrollTopHandle();

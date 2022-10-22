@@ -1,6 +1,39 @@
 export {products};
 
 var products = [
+    // Bento
+    [
+        {
+            image: '../images/img-1-1.png',
+            name: 'Cơm Cá Đỏ Sốt Teriyaki',
+            price: '99,000 VND'
+        },
+        {
+            image: '../images/img-1-2.png',
+            name: 'Cơm Bento Thịt Heo Chiên Xù Sốt Tonkatsu',
+            price: '99,000 VND'
+        },
+        {
+            image: '../images/img-1-6.png',
+            name: 'Cơm Cá Hồi Sốt Teriyaki',
+            price: '159,000 VND'
+        },
+        {
+            image: '../images/img-1-7.png',
+            name: 'Cơm Tôm Chiên Xù',
+            price: '169,000 VND'
+        },
+        {
+            image: '../images/img-1-8.png',
+            name: 'Cơm Hải Sản',
+            price: '169,000 VND'
+        },
+        {
+            image: '../images/img-1-9.png',
+            name: 'Cơm Lươn Nhật',
+            price: '189,000 VND'
+        }
+    ],
     // Sushi
     [
         {
@@ -79,54 +112,6 @@ var products = [
             price: '199,000 VND'
         },
     ],
-    // Bento
-    [
-        {
-            image: '../images/img-1-1.png',
-            name: 'Cơm Cá Đỏ Sốt Teriyaki',
-            price: '99,000 VND'
-        },
-        {
-            image: '../images/img-1-2.png',
-            name: 'Cơm Bento Thịt Heo Chiên Xù Sốt Tonkatsu',
-            price: '99,000 VND'
-        },
-        {
-            image: '../images/img-1-3.png',
-            name: 'Cơm Bento Gà Sốt Teriyaki',
-            price: '99,000 VND'
-        },
-        {
-            image: '../images/img-1-4.png',
-            name: 'Cơm Cá Hồi Bơ',
-            price: '139,000 VND'
-        },
-        {
-            image: '../images/img-1-5.png',
-            name: 'Cơm Cá Sa Ba Sốt Teriyaki',
-            price: '149,000 VND'
-        },
-        {
-            image: '../images/img-1-6.png',
-            name: 'Cơm Cá Hồi Sốt Teriyaki',
-            price: '159,000 VND'
-        },
-        {
-            image: '../images/img-1-7.png',
-            name: 'Cơm Tôm Chiên Xù',
-            price: '169,000 VND'
-        },
-        {
-            image: '../images/img-1-8.png',
-            name: 'Cơm Hải Sản',
-            price: '169,000 VND'
-        },
-        {
-            image: '../images/img-1-9.png',
-            name: 'Cơm Lươn Nhật',
-            price: '189,000 VND'
-        }
-    ],
     // Sashimi
     [
         {
@@ -203,6 +188,31 @@ var products = [
             image: '../images/img-2-15.png',
             name: 'Sashimi Sò Đỏ Hokkigai',
             price: '239,000₫'
+        },
+        {
+            image: '../images/img-2-16.png',
+            name: 'Sashimi Trứng Cá Chuồn',
+            price: '169,000₫'
+        },
+        {
+            image: '../images/img-2-17.png',
+            name: 'Sashimi Thân Cá Hồi',
+            price: '199,000₫'
+        },
+        {
+            image: '../images/img-2-15.png',
+            name: 'Sashimi Sò Đỏ Hokkigai',
+            price: '239,000₫'
+        },
+        {
+            image: '../images/img-2-16.png',
+            name: 'Sashimi Trứng Cá Chuồn',
+            price: '169,000₫'
+        },
+        {
+            image: '../images/img-2-17.png',
+            name: 'Sashimi Thân Cá Hồi',
+            price: '199,000₫'
         },
         {
             image: '../images/img-2-16.png',
