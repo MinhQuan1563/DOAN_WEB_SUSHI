@@ -8,11 +8,14 @@ const scrollToTop = document.getElementById('scroll-to-top');
 const btnNext = document.querySelector('.btn-next');
 const btnPrev = document.querySelector('.btn-prev');
 const pageNum = document.querySelector('.pagi-number-page');
+const overlay = document.querySelector('.overlay');
+const closeDetail = document.querySelector('.close-icon');
+const modal = document.querySelector('.modal');
 
 // ** Xử lý thay đổi URL trên sidebar
 function sidebarControl() {
     sidebarItems.forEach(function(sidebarItem, index) {
-        sidebarItem.onclick = function() {
+        sidebarItem.onclick = () => {
             switch(index) {
                 case 0:
                     window.location.pathname = "/html/home.html";
@@ -70,6 +73,19 @@ function productHandle() {
             sectionImages[index].style.backgroundSize = '100%';
             details[index].style.display = 'none';
         }
+
+        details[index].onclick = () => {
+            overlay.classList.add('open');
+        }
+        closeDetail.onclick = () => {
+            overlay.classList.remove('open');
+        }
+        overlay.onclick = () => {
+            overlay.classList.remove('open');
+        }
+        modal.onclick = (e) => {
+            e.stopPropagation();
+        }
     })
 }
 
@@ -78,7 +94,7 @@ function sectionControl(list) {
     list.forEach((item, index) => {
         item.onclick = () => {
 
-            getCurrentPage(1);
+            pageDefault();
 
             document.querySelector('.section__header-menu li.active').classList.remove('active')
             item.classList.add('active')
@@ -116,7 +132,7 @@ function getCurrentPage(curPage) {
 function PagiHandle(index) {
     totalPage = Math.ceil(products[index].length / perPage); // Tổng số trang của 1 loại sp
     // Ấn next tới trang tiếp theo
-    btnNext.onclick = function() {
+    btnNext.onclick = () => {
         curPage++;
         if(curPage >= totalPage) {
             curPage = totalPage;
@@ -134,7 +150,7 @@ function PagiHandle(index) {
         productHandle();
     }
     // Ấn prev tới trang trước đó
-    btnPrev.onclick = function() {
+    btnPrev.onclick = () => {
         curPage--;
         if(curPage <= 1) {
             curPage = 1 ;
@@ -170,21 +186,81 @@ function renderNumPage() {
 function changeNumPage(index) {
     var numPages = document.querySelectorAll('.pagi-number-page li');
     for(let i=0; i < numPages.length; i++) {
-        numPages[i].onclick = function() {
+        numPages[i].onclick = () => {
             document.querySelector('.pagi-number-page li.active').classList.remove('active');
             numPages[i].classList.add('active');
+            if(i == 0) {
+                btnNext.classList.add('active');
+                btnPrev.classList.remove('active');
+            }
+            else if(i == numPages.length - 1) {
+                btnNext.classList.remove('active');
+                btnPrev.classList.add('active');
+            }
+            else {
+                btnNext.classList.add('active');
+                btnPrev.classList.add('active');
+            }
             let value = i + 1;
             curPage = value;
             getCurrentPage(curPage);
             renderProduct(products[index]);
             productHandle();
+
         }
     }
 }
 
+// Trang mặc định ban đầu
+function pageDefault() {
+    getCurrentPage(1);
+    btnNext.classList.add('active');
+    btnPrev.classList.remove('active');
+}
+
+// ** Xử lý form Đăng ký / Đăng nhập
+const loginBtn = document.getElementById('section__header-login');
+const overlayLogin = document.querySelector('.overlay.login');
+const modalLogin = document.querySelector('.modal.login');
+const closeLogin = document.querySelectorAll('.close-icon.login');
+const signupBtn = document.querySelector('.wrapper__not-account span');
+const formSignup = document.querySelector('.sign-up');
+const formSignin = document.querySelector('.sign-in');
+const loginBack = document.querySelector('.login-back-icon');
+
+loginBtn.onclick = () => {
+    formSignup.style.display = 'none';
+    formSignin.style.display = 'block';
+    overlayLogin.classList.add('open');
+}
+
+for(let i = 0; i < closeLogin.length; i++) {
+    closeLogin[i].onclick = () => {
+        overlayLogin.classList.remove('open');
+    }
+}
+
+overlayLogin.onclick = () => {
+    overlayLogin.classList.remove('open');
+}
+
+modalLogin.onclick = (e) => {
+    e.stopPropagation();
+}
+
+signupBtn.onclick = () => {
+    formSignup.style.display = 'block';
+    formSignin.style.display = 'none';
+}
+
+loginBack.onclick = () => {
+    formSignup.style.display = 'none';
+    formSignin.style.display = 'block';
+}
+
 // ** Xử lý cuộn lên trang đầu
 function scrollTopHandle() {
-    window.onscroll = function() {
+    window.onscroll = () => {
         // Kiểm tra vị trí hiện tại của con trỏ so với nội dung trang
         if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
             //nếu lớn hơn 200px thì hiện button

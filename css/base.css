@@ -67,3 +67,39 @@ a {
     background-color: transparent;
     transition: background-color ease-in 0.2s;
 }
+
+/* MODAL */
+.overlay {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+    display: none;
+}
+
+.overlay.open {
+    display: flex;
+}
+
+.modal {
+    background-color: white;
+    position: relative;
+    animation: modalFadeIn linear 0.5s;
+}
+
+@keyframes modalFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-200px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
