@@ -1,21 +1,19 @@
 import {products} from "./json.js"
 
-const sidebarItems = document.querySelectorAll('.sidebar__menu-item');
 const sectionItems = document.querySelectorAll('.section__header-menu li');
 const productList = document.querySelector('.section__content-list');
 const pagi = document.getElementById('pagination');
 const scrollToTop = document.getElementById('scroll-to-top');
-const btnNext = document.querySelector('.btn-next');
-const btnPrev = document.querySelector('.btn-prev');
+
 const pageNum = document.querySelector('.pagi-number-page');
 const overlay = document.querySelector('.overlay');
-const closeDetail = document.querySelector('.close-icon');
 const modal = document.querySelector('.modal');
 
 // ** Xử lý thay đổi URL trên sidebar
+const sidebarItems = document.querySelectorAll('.sidebar__menu-item');
 function sidebarControl() {
     sidebarItems.forEach(function(sidebarItem, index) {
-        sidebarItem.onclick = () => {
+        sidebarItem.onclick = function() {
             switch(index) {
                 case 0:
                     window.location.pathname = "/html/home.html";
@@ -58,32 +56,42 @@ function renderProduct(items) {
 }
 
 // ** Xử lý di chuột qua các sản phẩm trong danh sách
-function productHandle() {
+function productHandle(k) {
     var productItems = document.querySelectorAll('.section__content-item');
     var sectionImages = document.querySelectorAll('.section__content-item-img');
+    var closeDetail = document.querySelector('.modal > i.close-icon');
+
     var details = document.querySelectorAll('.eye-icon');
     
     productItems.forEach((item, index) => {
         sectionImages[index].style.transition = 'all linear 0.3s'; // cho các hành động mượt hơn
-        item.onmouseover = () => {
+        item.onmouseover = function() {
             sectionImages[index].style.backgroundSize = '110%'; // Zoom to nhỏ hình ảnh sản phẩm
             details[index].style.display = 'block'; // Ẩn hiện con mắt
         }
-        item.onmouseout = () => {
+        item.onmouseout = function() {
             sectionImages[index].style.backgroundSize = '100%';
             details[index].style.display = 'none';
         }
 
-        details[index].onclick = () => {
+        details[index].onclick = function() {
+            document.querySelector('.modal__inner-img').style.backgroundImage = `url(${products[k][index + perPage*(curPage-1)].image})`;
+            document.querySelector('.modal__inner-heading').innerText = products[k][index + perPage*(curPage-1)].name;
+            document.querySelector('.modal__inner-price').innerText = products[k][index + perPage*(curPage-1)].price;
             overlay.classList.add('open');
         }
-        closeDetail.onclick = () => {
+
+        overlay.onclick = function() {
+            quantity.value = 1;
             overlay.classList.remove('open');
         }
-        overlay.onclick = () => {
+
+        closeDetail.onclick = function() {
+            quantity.value = 1;
             overlay.classList.remove('open');
         }
-        modal.onclick = (e) => {
+
+        modal.onclick = function(e) {
             e.stopPropagation();
         }
     })
@@ -92,7 +100,7 @@ function productHandle() {
 // Điều khiển nút bấm trên Section
 function sectionControl(list) {
     list.forEach((item, index) => {
-        item.onclick = () => {
+        item.onclick = function() {
 
             pageDefault();
 
@@ -100,7 +108,7 @@ function sectionControl(list) {
             item.classList.add('active')
             
             renderProduct(products[index]);
-            productHandle();
+            productHandle(index);
 
             if(products[index].length > 8) {
                 pagi.style.display = "flex";
@@ -123,6 +131,8 @@ var start1 = 0; // index sản phẩm đầu
 var end = perPage; // index sản phẩm cuối
 var totalPage;
 
+const btnNext = document.querySelector('.btn-next');
+const btnPrev = document.querySelector('.btn-prev');
 // Lấy ra trang hiện tại
 function getCurrentPage(curPage) {
     start1 = (curPage - 1) * perPage;
@@ -132,7 +142,7 @@ function getCurrentPage(curPage) {
 function PagiHandle(index) {
     totalPage = Math.ceil(products[index].length / perPage); // Tổng số trang của 1 loại sp
     // Ấn next tới trang tiếp theo
-    btnNext.onclick = () => {
+    btnNext.onclick = function() {
         curPage++;
         if(curPage >= totalPage) {
             curPage = totalPage;
@@ -145,12 +155,13 @@ function PagiHandle(index) {
         }
         document.querySelector('.pagi-number-page li.active').classList.remove('active');
         document.querySelectorAll('.pagi-number-page li')[curPage - 1].classList.add('active');
+        
         getCurrentPage(curPage);
         renderProduct(products[index]);
-        productHandle();
+        productHandle(index);
     }
     // Ấn prev tới trang trước đó
-    btnPrev.onclick = () => {
+    btnPrev.onclick = function() {
         curPage--;
         if(curPage <= 1) {
             curPage = 1 ;
@@ -163,17 +174,17 @@ function PagiHandle(index) {
         }
         document.querySelector('.pagi-number-page li.active').classList.remove('active');
         document.querySelectorAll('.pagi-number-page li')[curPage - 1].classList.add('active');
+
         getCurrentPage(curPage);
         renderProduct(products[index]);
-        productHandle();
+        productHandle(index);
     }
 }
 
 // Xử lý hiện số trang ra màn hình
 function renderNumPage() {
     var html = '';
-    html += `
-        <li class="active">${1}</li>`;
+    html += `<li class="active">${1}</li>`;
 
     for(let i=2; i <= totalPage; i++) {
         html += `
@@ -185,10 +196,12 @@ function renderNumPage() {
 // Xử lý thay đổi số trang
 function changeNumPage(index) {
     var numPages = document.querySelectorAll('.pagi-number-page li');
+
     for(let i=0; i < numPages.length; i++) {
-        numPages[i].onclick = () => {
+        numPages[i].onclick = function() {
             document.querySelector('.pagi-number-page li.active').classList.remove('active');
             numPages[i].classList.add('active');
+
             if(i == 0) {
                 btnNext.classList.add('active');
                 btnPrev.classList.remove('active');
@@ -201,11 +214,12 @@ function changeNumPage(index) {
                 btnNext.classList.add('active');
                 btnPrev.classList.add('active');
             }
+
             let value = i + 1;
             curPage = value;
             getCurrentPage(curPage);
             renderProduct(products[index]);
-            productHandle();
+            productHandle(index);
 
         }
     }
@@ -214,11 +228,12 @@ function changeNumPage(index) {
 // Trang mặc định ban đầu
 function pageDefault() {
     getCurrentPage(1);
+    curPage = 1;
     btnNext.classList.add('active');
     btnPrev.classList.remove('active');
 }
 
-// ** Xử lý form Đăng ký / Đăng nhập
+// ** Xử lý ẩn/hiện form Đăng ký/Đăng nhập
 const loginBtn = document.getElementById('section__header-login');
 const overlayLogin = document.querySelector('.overlay.login');
 const modalLogin = document.querySelector('.modal.login');
@@ -228,44 +243,144 @@ const formSignup = document.querySelector('.sign-up');
 const formSignin = document.querySelector('.sign-in');
 const loginBack = document.querySelector('.login-back-icon');
 
-loginBtn.onclick = () => {
+loginBtn.onclick = function() {
     formSignup.style.display = 'none';
     formSignin.style.display = 'block';
     overlayLogin.classList.add('open');
 }
 
 for(let i = 0; i < closeLogin.length; i++) {
-    closeLogin[i].onclick = () => {
+    closeLogin[i].onclick = function() {
         overlayLogin.classList.remove('open');
     }
 }
 
-overlayLogin.onclick = () => {
+overlayLogin.onclick = function() {
     overlayLogin.classList.remove('open');
 }
 
-modalLogin.onclick = (e) => {
+modalLogin.onclick = function(e) {
     e.stopPropagation();
 }
 
-signupBtn.onclick = () => {
+signupBtn.onclick = function() {
     formSignup.style.display = 'block';
     formSignin.style.display = 'none';
 }
 
-loginBack.onclick = () => {
+loginBack.onclick = function() {
     formSignup.style.display = 'none';
     formSignin.style.display = 'block';
 }
 
+// ** Xử lý lưu dữ liệu trên form Đăng ký/Đăng nhập
+const loginUsername = document.getElementById('username');
+const loginEmail = document.getElementById('email');
+const loginpassword = document.getElementById('password');
+const loginAgainPassword = document.getElementById('again-password');
+const overlayNotify = document.querySelector('.overlay-notify');
+const loginNotify = document.querySelector('.login-notify');
+
+function addLogin() {
+    var arrLogin = [];
+    var Name = loginUsername.value;
+    var email = loginEmail.value;
+    var password = loginpassword.value;
+    arrLogin = localStorage.getItem('login') ? JSON.parse(localStorage.getItem('login')) : [];
+    var User = {
+        Name: Name,
+        Email: email,
+        Password: password
+    }
+    arrLogin.push(User);
+    localStorage.setItem('login', JSON.stringify(arrLogin));
+    clear();
+}
+
+// Kiểm tra đăng nhập
+function checkSignin() {
+    var Email = document.getElementById('Email').value;
+    var Password = document.getElementById('Password').value;
+    const arr = JSON.parse(localStorage.getItem('login'));
+    for (let i = 0; i < arr.length; i++) {
+        if (Email == arr[i].Email && Password == arr[i].Password) {
+            return true;
+        }
+    }
+    return false;
+}
+
+function clear() {
+    loginUsername.value = "";
+    loginEmail.value = "";
+    loginpassword.value = "";
+    loginAgainPassword.value = "";
+}
+
+document.getElementById('login-btn').onclick = function() {
+    setTimeout(function() {
+        addLogin();
+        overlayNotify.style.transform = 'translateX(0)';
+        overlayNotify.style.opacity = '1';
+        overlayNotify.innerHTML = `<div class="login-notify success">
+                                        <i class="fa-solid fa-circle-check"></i>
+                                        Đăng ký thành công
+                                    </div>`;
+    }, 500)
+    
+    setTimeout(function() {
+        overlayNotify.style.transform = 'translateX(100%)';
+        overlayNotify.style.opacity = '0';
+        formSignup.style.display = 'none';
+        formSignin.style.display = 'block';
+    }, 2000)
+}
+
+document.getElementById('Login-Btn').onclick = function() {
+    if(checkSignin()) {
+        setTimeout(function() {
+            overlayNotify.style.transform = 'translateX(0)';
+            overlayNotify.style.opacity = '1';
+            overlayNotify.innerHTML = `<div class="login-notify success">
+                                        <i class="fa-solid fa-circle-check"></i>
+                                        Đăng nhập thành công
+                                    </div>`;
+        }, 500)
+
+        setTimeout(function() {
+            overlayNotify.style.transform = 'translateX(100%)';
+            overlayNotify.style.opacity = '0';
+            overlayLogin.classList.remove('open');
+        }, 2000)
+    }
+    else {
+        setTimeout(function() {
+            overlayNotify.style.transform = 'translateX(0)';
+            overlayNotify.style.opacity = '1';
+            overlayNotify.innerHTML = `<div class="login-notify error">
+                                        <i class="fa-solid fa-circle-xmark"></i>
+                                        Đăng nhập thất bại!!
+                                    </div>`;
+        }, 500)
+
+        setTimeout(function() {
+            overlayNotify.style.transform = 'translateX(100%)';
+            overlayNotify.style.opacity = '0';
+            document.getElementById('Email').value = "";
+            document.getElementById('Password').value = "";
+        }, 2000)
+    }
+}
+
 // ** Xử lý cuộn lên trang đầu
 function scrollTopHandle() {
-    window.onscroll = () => {
+    window.onscroll = function() {
         // Kiểm tra vị trí hiện tại của con trỏ so với nội dung trang
         if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
             //nếu lớn hơn 200px thì hiện button
             scrollToTop.style.display = "block";
-        } else {
+        }
+        else {
             //nếu nhỏ hơn 200px thì ẩn button
             scrollToTop.style.display = "none";
         }
@@ -278,10 +393,31 @@ function scrollTopHandle() {
     });
 }
 
+// ** Xử lý tăng giảm số lượng
+const amountBtns = document.querySelectorAll(".modal__inner-amount input[type='button']");
+var quantity = document.querySelector(".modal__inner-amount input[type='text']");
+
+amountBtns.forEach((amountBtn, index) => {
+    amountBtn.onclick = function() {
+        if(index == 0) {
+            if(quantity.value == 1) {
+                quantity.value = 1;
+            }
+            else {
+                quantity.value--;
+            }
+        }
+        else {
+            quantity.value++;
+        }
+    }
+})
+
+// ** Check lỗi login
 
 
 // ==> Gọi các hàm để thực hiện xử lý
 sidebarControl();
 sectionControl(sectionItems);
-productHandle();
+productHandle(0);
 scrollTopHandle();

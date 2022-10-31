@@ -79,7 +79,7 @@ a {
     display: flex;
     align-items: center;
     justify-content: center;
-    z-index: 100;
+    z-index: 1000;
     display: none;
 }
 
@@ -90,7 +90,7 @@ a {
 .modal {
     background-color: white;
     position: relative;
-    animation: modalFadeIn linear 0.5s;
+    animation: modalFadeIn linear 0.4s;
 }
 
 @keyframes modalFadeIn {

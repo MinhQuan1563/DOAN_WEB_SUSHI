@@ -26,7 +26,7 @@
                 <li class="sidebar__menu-item" title="Trang chủ">
                     <i class="fa-solid fa-house"></i>
                 </li>
-                <li class="sidebar__menu-item active current">
+                <li class="sidebar__menu-item active">
                     <i class="fa-solid fa-utensils"></i>
                 </li>
                 <li class="sidebar__menu-item">
@@ -35,10 +35,7 @@
                 <li class="sidebar__menu-item">
                     <i class="fa-solid fa-location-dot"></i>
                 </li>
-                <li class="sidebar__menu-item hide">
-                    <i class="fa-solid fa-chart-simple"></i>
-                </li>
-                <li class="sidebar__menu-item hide">
+                <li class="sidebar__menu-item">
                     <i class="ti-settings"></i>
                 </li>
             </ul>
@@ -126,12 +123,7 @@
                     <div class="col">
                         <h3>
                             Chính Sách
-                            <!-- <div class="underline"><span></span></div> -->
                         </h3>
-                        <!-- <p>273, An Dương Vương Phường 3, Quận 5, Thành Phố Hồ Chí Minh</p>
-                        <p>LNG</p>
-                        <p>Nha Trang KHánh Hòa</p>
-                        <p>Viet nam</p> -->
                         <ul>
                             <li><a href="#">Chính Sách Đổi Hàng</a></li>
                             <li><a href="">Chính Sách Giao Hàng</a></li>
@@ -144,7 +136,6 @@
                     <div class="col">
                         <h3>
                             Thực Đơn
-                            <!-- <div class="underline"><span></span></div> -->
                         </h3>
                         <ul>
                             <li><a href="#">Trang Chủ</a></li>
@@ -158,7 +149,6 @@
                     <div class="col">
                         <h3>
                             Đăng ký nhận tin
-                            <!-- <div class="underline"><span></span></div> -->
                         </h3>
                         <form >
                             <i class="fa-regular fa-envelope"></i>
@@ -248,10 +238,10 @@
             <div class="modal">
                 <i class="fa-solid fa-xmark close-icon"></i>
                 <div class="modal__inner">
-                    <div class="modal__inner-img" style="background-image: url(../images/img-0-8.png);"></div>
+                    <div class="modal__inner-img"></div>
                     <div class="modal__inner-content">
-                        <div class="modal__inner-heading">Sashimi Cá Chim Việt Nam</div>
-                        <div class="modal__inner-price">Giá: 299.000 VND</div>
+                        <div class="modal__inner-heading"></div>
+                        <div class="modal__inner-price"></div>
                         <form action="">
                             <div class="modal__inner-size">
                                 <label for="">Size</label>
@@ -265,11 +255,8 @@
                                 <label for="">Số lượng</label>
                                 <form action="">
                                     <input type="button" value="-">
-                                    <input type="text" value="1">
+                                    <input type="text" value="1" id="quantity">
                                     <input type="button" value="+">
-                                    <!-- <input type="button" value="-" onclick="minusQuantity()" class="qty-btn">
-                                    <input type="text" id="quantity" name="quantity" value="1" min="1" data-limit="0" class="quantity-selector">
-                                    <input type="button" value="+" onclick="plusQuantity()" class="qty-btn"> -->
                                 </form>
                             </div>
                             <input class="modal__inner-add-cart" type="button" value="Thêm vào giỏ">
@@ -288,15 +275,15 @@
                     </h1>
                     <form action="">
                         <div class="wrapper__form">
-                            <input class="wrapper__input" type="email" placeholder=" "/>
+                            <input class="wrapper__input" type="email" id="Email" placeholder=" "/>
                             <label class="wrapper__label" for="">Email của bạn</label>
                         </div>
                         <div class="wrapper__form">
-                            <input class="wrapper__input" type="password" placeholder=" "/>
+                            <input class="wrapper__input" type="password" id="Password" placeholder=" "/>
                             <label class="wrapper__label" for="">Password của bạn</label>
                         </div>
-                        <input type="submit" class="wapper__submit" value="Đăng Nhập">
                     </form>
+                    <input type="submit" class="wapper__submit" id="Login-Btn" value="Đăng Nhập">
                     <div class="wrapper__not-account">
                         Bạn chưa có tài khoản?
                         <span>Đăng ký</span>
@@ -308,22 +295,26 @@
                     <h1 class="wrapper__title">
                         Đăng Ký
                     </h1>
-                    <form action="">
+                    <form action="" id="form-login">
                         <div class="wrapper__form">
-                            <input class="wrapper__input" type="text" placeholder=" "/>
+                            <input id="username" class="wrapper__input" type="text" placeholder=" "/>
                             <label class="wrapper__label" for="">Tên của bạn</label>
+                            <div class="error-message"></div>
                         </div>
                         <div class="wrapper__form">
-                            <input class="wrapper__input" type="email" placeholder=" "/>
+                            <input id="email" class="wrapper__input" type="email" placeholder=" "/>
                             <label class="wrapper__label" for="">Email của bạn</label>
+                            <div class="error-message"></div>
                         </div>
                         <div class="wrapper__form">
-                            <input class="wrapper__input" type="password" placeholder=" "/>
+                            <input id="password" class="wrapper__input" type="password" placeholder=" "/>
                             <label class="wrapper__label" for="">Password của bạn</label>
+                            <div class="error-message"></div>
                         </div>
                         <div class="wrapper__form">
-                            <input class="wrapper__input" type="password" placeholder=" "/>
+                            <input id="again-password" class="wrapper__input" type="password" placeholder=" "/>
                             <label class="wrapper__label" for="">Nhập lại password</label>
+                            <div class="error-message"></div>
                         </div>
                     </form>
                     <div class="wrapper__aside">
@@ -331,8 +322,12 @@
                         <a href="">Điều khoản dịch vụ</a> & 
                         <a href="">Chính sách bảo mật</a>
                     </div>
-                    <input type="submit" class="wapper__submit" value="Đăng Ký"> 
+                    <input type="submit" class="wapper__submit" id="login-btn" value="Đăng Ký">
                 </div>
+            </div>
+
+            <div class="overlay-notify">
+
             </div>
         </div>
 
@@ -341,6 +336,8 @@
             <i class="ti-arrow-up scroll-to-top__icon"></i>
         </button>
     </div>
+
+
 
     <!-- Javascript -->
     <script type="module" src="../scripts/main.js"></script>

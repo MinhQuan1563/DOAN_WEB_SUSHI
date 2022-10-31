@@ -23,36 +23,21 @@
             </div>
 
             <ul class="sidebar__menu">
-                <a href="home.html" class="">
-                    <li class="sidebar__menu-item active" title="Trang chủ">
-                        <i class="fa-solid fa-house"></i>
-                    </li>
-                </a>
-                <a href="food.html" class="" title="Cửa hàng">
-                    <li class="sidebar__menu-item">
-                        <i class="fa-solid fa-utensils"></i>
-                    </li>
-                </a>
-                <a href="checkout.html" class="" title="Giỏ hàng">
-                    <li class="sidebar__menu-item">
-                        <i class="fa-solid fa-cart-shopping"></i>
-                    </li>
-                </a>
-                <a href="location.html" class="" title="Vị trí và liên hệ">
-                    <li class="sidebar__menu-item">
-                        <i class="fa-solid fa-location-dot"></i>
-                    </li>
-                </a>
-                <a href="chart.html" class="hide" title="Biểu đồ người dùng">
-                    <li class="sidebar__menu-item">
-                        <i class="fa-solid fa-chart-simple"></i>
-                    </li>
-                </a>
-                <a href="#" class="hide">
-                    <li class="sidebar__menu-item active">
-                        <i class="ti-settings"></i>
-                    </li>
-                </a>
+                <li class="sidebar__menu-item">
+                    <i class="fa-solid fa-house"></i>
+                </li>
+                <li class="sidebar__menu-item">
+                    <i class="fa-solid fa-utensils"></i>
+                </li>
+                <li class="sidebar__menu-item">
+                    <i class="fa-solid fa-cart-shopping"></i>
+                </li>
+                <li class="sidebar__menu-item">
+                    <i class="fa-solid fa-location-dot"></i>
+                </li>
+                <li class="sidebar__menu-item active">
+                    <i class="ti-settings"></i>
+                </li>
             </ul>
 
             <div class="sidebar__log-out hide">
@@ -60,8 +45,34 @@
             </div>
         </div>
 
-        <div class="section">
-            
+        <div class="setting">
+            <div class="setting__header">
+                Settings
+            </div>
+            <div class="setting__body">
+                <ul class="setting__sidebar">
+                    <li class="setting__sidebar-item">
+                        <i class="fa-solid fa-utensils"></i>
+                        <span>Sản Phẩm</span>
+                    </li>
+                    <li class="setting__sidebar-item">
+                        <i class="fa-solid fa-users"></i>
+                        <span>Khách Hàng</span>
+                    </li>
+                    <li class="setting__sidebar-item">
+                        <i class="fa-solid fa-basket-shopping"></i>
+                        <span>Đơn Hàng</span>
+                    </li>
+                    <li class="setting__sidebar-item">
+                        <i class="fa-solid fa-chart-simple"></i>
+                        <span>Doanh Thu</span>
+                    </li>
+                </ul>
+                
+                <div class="setting__content">
+                    
+                </div>
+            </div>
         </div>
         
         <!-- Trượt lên trên cùng -->
@@ -71,6 +82,6 @@
     </div>
 
     <!-- Javascript -->
-    <script type="module" src="../scripts/main.js"></script>
+    <script type="module" src="../scripts/settings.js"></script>
 </body>
 </html>

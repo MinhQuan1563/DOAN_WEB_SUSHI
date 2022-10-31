@@ -35,10 +35,7 @@
                 <li class="sidebar__menu-item active">
                     <i class="fa-solid fa-location-dot"></i>
                 </li>
-                <li class="sidebar__menu-item hide">
-                    <i class="fa-solid fa-chart-simple"></i>
-                </li>
-                <li class="sidebar__menu-item hide">
+                <li class="sidebar__menu-item">
                     <i class="ti-settings"></i>
                 </li>
             </ul>
@@ -62,7 +59,7 @@
                         <i class="ti-bell"></i>
                         <div class="section__header-title-text">Thông báo</div>
                     </div>
-                    <div class="section__header-title-signup section__header-title-icon">
+                    <div class="section__header-title-icon" id="section__header-login" >
                         <i class="fa-regular fa-user"></i>
                         <div class="section__header-title-text">Đăng ký <br> Đăng nhập</div>
                     </div>
@@ -87,26 +84,26 @@
                                 <i class="fa-solid fa-map-location-dot"></i>
                                 Địa chỉ chúng tôi
                             </p>
-                            <p><strong>954-956 Nguyễn Văn Linh, Phường Tân Phong, Quận 7</strong></p>
+                            <p><strong>273, An Dương Vương, Phường 03, Quận 5, Thành phố Hồ Chí Minh</strong></p>
                         </li>
                         <li>
                             <p>
                                 <i class="fa-solid fa-envelope"></i>
                                 Email chúng tôi
                             </p>
-                            <a href=""><strong>email_gidodi@gmai.com</strong></a>
+                            <a href="mailto: webThaySang_nhom11@gmail.com"><strong>webThaySang_nhom11@gmail.com</strong></a>
                         </li>
                         <li>
                             <p>
                                 <i class="fa-solid fa-phone"></i>
                                 Điện thoại
                             </p>
-                            <p><strong>+180010031</strong></p>
+                            <a href="tel: +18008131"><strong>+18008131</strong></a>
                         </li>
-                        <!-- <li>
+                        <li>
                             <p>Thời gian làm việc</p>
                             <p><strong>Thứ 2 đến Chủ Nhật từ 8h đến 21h</strong></p>
-                        </li> -->
+                        </li>
                     </ul>
                     <div class="section__contact-send">
                         <h2>Gửi thắc mắc cho chúng tôi</h2>
@@ -163,12 +160,7 @@
                     <div class="col">
                         <h3>
                             Chính Sách
-                            <!-- <div class="underline"><span></span></div> -->
                         </h3>
-                        <!-- <p>273, An Dương Vương Phường 3, Quận 5, Thành Phố Hồ Chí Minh</p>
-                        <p>LNG</p>
-                        <p>Nha Trang KHánh Hòa</p>
-                        <p>Viet nam</p> -->
                         <ul>
                             <li><a href="#">Chính Sách Đổi Hàng</a></li>
                             <li><a href="">Chính Sách Giao Hàng</a></li>
@@ -181,7 +173,6 @@
                     <div class="col">
                         <h3>
                             Thực Đơn
-                            <!-- <div class="underline"><span></span></div> -->
                         </h3>
                         <ul>
                             <li><a href="#">Trang Chủ</a></li>
@@ -195,7 +186,6 @@
                     <div class="col">
                         <h3>
                             Đăng ký nhận tin
-                            <!-- <div class="underline"><span></span></div> -->
                         </h3>
                         <form >
                             <i class="fa-regular fa-envelope"></i>
@@ -232,6 +222,70 @@
             </footer>
         </div>
         
+        <div class="overlay login">
+            <div class="modal login">
+                <div class="wrapper sign-in">
+                    <i class="fa-solid fa-xmark close-icon login"></i>
+                    <h1 class="wrapper__title">
+                        Đăng Nhập
+                    </h1>
+                    <form action="">
+                        <div class="wrapper__form">
+                            <input class="wrapper__input" type="email" id="Email" placeholder=" "/>
+                            <label class="wrapper__label" for="">Email của bạn</label>
+                        </div>
+                        <div class="wrapper__form">
+                            <input class="wrapper__input" type="password" id="Password" placeholder=" "/>
+                            <label class="wrapper__label" for="">Password của bạn</label>
+                        </div>
+                    </form>
+                    <input type="submit" class="wapper__submit" id="Login-Btn" value="Đăng Nhập">
+                    <div class="wrapper__not-account">
+                        Bạn chưa có tài khoản?
+                        <span>Đăng ký</span>
+                    </div>
+                </div>
+                <div class="wrapper sign-up">
+                    <i class="fa-solid fa-arrow-left login-back-icon"></i>
+                    <i class="fa-solid fa-xmark close-icon login"></i>
+                    <h1 class="wrapper__title">
+                        Đăng Ký
+                    </h1>
+                    <form action="" id="form-login">
+                        <div class="wrapper__form">
+                            <input id="username" class="wrapper__input" type="text" placeholder=" "/>
+                            <label class="wrapper__label" for="">Tên của bạn</label>
+                            <div class="error-message"></div>
+                        </div>
+                        <div class="wrapper__form">
+                            <input id="email" class="wrapper__input" type="email" placeholder=" "/>
+                            <label class="wrapper__label" for="">Email của bạn</label>
+                            <div class="error-message"></div>
+                        </div>
+                        <div class="wrapper__form">
+                            <input id="password" class="wrapper__input" type="password" placeholder=" "/>
+                            <label class="wrapper__label" for="">Password của bạn</label>
+                            <div class="error-message"></div>
+                        </div>
+                        <div class="wrapper__form">
+                            <input id="again-password" class="wrapper__input" type="password" placeholder=" "/>
+                            <label class="wrapper__label" for="">Nhập lại password</label>
+                            <div class="error-message"></div>
+                        </div>
+                    </form>
+                    <div class="wrapper__aside">
+                        Bằng việc đăng ký bạn đã đồng ý với Jager Resto về 
+                        <a href="">Điều khoản dịch vụ</a> & 
+                        <a href="">Chính sách bảo mật</a>
+                    </div>
+                    <input type="submit" class="wapper__submit" id="login-btn" value="Đăng Ký">
+                </div>
+            </div>
+
+            <div class="overlay-notify">
+                
+            </div>
+        </div>
 
         <!-- Trượt lên trên cùng -->
         <button id="scroll-to-top" title="Trượt lên">
