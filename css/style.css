@@ -62,7 +62,7 @@
     border: 2px solid #ea7c69;
 }
 
-.sidebar__menu-item.active>* {
+.sidebar__menu-item.active > * {
     position: relative;
     z-index: 10;
     color: var(--white-color);
@@ -118,6 +118,22 @@
     max-width: 80%;
 }
 
+.section__content.food {
+    display: none;
+}
+
+.section__content.checkout {
+    display: none;
+}
+
+.section__content.section__contact {
+    display: none;
+}
+
+.section__content.home {
+    display: block;
+}
+
 .section__header-title {
     display: flex;
     justify-content: space-evenly;
@@ -144,8 +160,11 @@
     background-color: #2d303e;
     border: 1px solid var(--border-color);
     margin-left: 70px;
+    border-radius: 8px;
+    overflow: hidden;
 }
 
+.section__delete,
 .section__header-searchbar-child i {
     padding: 16px;
     font-size: 16px;
@@ -162,12 +181,14 @@
     padding: 16px;
     border: none;
     font-size: 1.6rem;
-    transition: border ease-in 0.2s;
 }
 
 .section__header-searchbar-child input:focus {
     outline: none;
-    border: 1px solid var(--primary-color);
+}
+
+.section__header-title-searchbar {
+    position: relative;
 }
 
 .section__header-title-searchbar img {
@@ -444,7 +465,7 @@ h1.special {
 }
 
 /* LOCATION */
-.section__contact {
+.section__contact.section__content {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
@@ -566,7 +587,7 @@ h1.special {
     color: var(--white-color);
     font-size: 1.6rem;
     line-height: 2.4rem;
-    margin: 5px 0;
+    margin: 5px 0 20px;
 }
 
 .section__contact-recaptcha a {
@@ -1333,6 +1354,7 @@ strong {
 }
 
 /* Check loi */
+.notify,
 .overlay-notify {
     position: absolute;
     top: 0;
@@ -1342,6 +1364,7 @@ strong {
     opacity: 0;
 }
 
+.inner-notify,
 .login-notify {
     color: var(--white-color);
     padding: 20px;
@@ -1352,14 +1375,17 @@ strong {
     border-radius: 50px;
 }
 
+.inner-notify.success,
 .login-notify.success {
     color: #3eda3e;
 }
 
+.inner-notify.error,
 .login-notify.error {
     color: #de1818;
 }
 
+.inner-notify i,
 .login-notify i {
     margin-right: 6px;
 }
@@ -1390,7 +1416,7 @@ strong {
     overflow: hidden;
     transition: max-width 0.3s;
     position: fixed;
-    background-image: linear-gradient(90deg, #80808094, var(--border-color));
+    background-image: linear-gradient(-90deg, #80808094, var(--border-color));
 }
 
 .setting__sidebar:hover {
@@ -1425,9 +1451,24 @@ strong {
 }
 
 .setting__content {
-    background-color: var(--sidebar-color);
+    background-color: #393c49;
     height: 80vh;
     width: 100%;
     margin-left: 90px;
     border-radius: 10px;
+}
+
+/* Xoa tim kiem */
+.section__delete {
+    display: none;
+}
+
+.section__delete p {
+    margin: 0;
+    transform: rotate(0);
+    transition: .3s;
+}
+
+.section__delete:hover p {
+    transform: rotate(180deg);
 }

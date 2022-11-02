@@ -8,28 +8,38 @@ const scrollToTop = document.getElementById('scroll-to-top');
 const pageNum = document.querySelector('.pagi-number-page');
 const overlay = document.querySelector('.overlay');
 const modal = document.querySelector('.modal');
+const sectionContents = document.querySelectorAll('.section__content');
 
 // ** Xử lý thay đổi URL trên sidebar
 const sidebarItems = document.querySelectorAll('.sidebar__menu-item');
 function sidebarControl() {
     sidebarItems.forEach(function(sidebarItem, index) {
         sidebarItem.onclick = function() {
+            document.querySelector('.sidebar__menu-item.active').classList.remove('active');
+            sidebarItem.classList.add('active');
+
+            sectionContents.forEach(function(sectionContent) {
+                sectionContent.style.display = 'none';
+            })
+            document.querySelector('.section__header-menu').style.display = "none";
+
             switch(index) {
                 case 0:
-                    window.location.pathname = "/html/home.html";
+                    document.querySelector('.section__content.home').style.display = "block";
                     break;
                 case 1:
-                    window.location.pathname = "/html/food.html";
+                    document.querySelector('.section__content.food').style.display = "block";
+                    document.querySelector('.section__header-menu').style.display = "flex";
                     break;
                 case 2:
-                    window.location.pathname = "/html/checkout.html";
+                    document.querySelector('.section__content.checkout').style.display = "block";
                     break;
                 case 3:
-                    window.location.pathname = "/html/location.html";
+                    document.querySelector('.section__contact.section__contact').style.display = "flex";
                     break;
-                case 4:
-                    window.location.pathname = "/html/settings.html";
-                    break;
+                // case 4:
+                //     window.location.pathname = "/html/settings.html";
+                //     break;
             }
         }
     })
@@ -59,7 +69,7 @@ function renderProduct(items) {
 function productHandle(k) {
     var productItems = document.querySelectorAll('.section__content-item');
     var sectionImages = document.querySelectorAll('.section__content-item-img');
-    var closeDetail = document.querySelector('.modal > i.close-icon');
+    var closeDetail = document.querySelectorAll('.modal > i.close-icon');
 
     var details = document.querySelectorAll('.eye-icon');
     
@@ -243,24 +253,30 @@ const formSignup = document.querySelector('.sign-up');
 const formSignin = document.querySelector('.sign-in');
 const loginBack = document.querySelector('.login-back-icon');
 
-loginBtn.onclick = function() {
-    formSignup.style.display = 'none';
-    formSignin.style.display = 'block';
-    overlayLogin.classList.add('open');
-}
-
-for(let i = 0; i < closeLogin.length; i++) {
-    closeLogin[i].onclick = function() {
-        overlayLogin.classList.remove('open');
+function openFormLogin() {
+    loginBtn.onclick = function() {
+        const arr = JSON.parse(localStorage.getItem('accountStorage'));
+        if(arr[0].isAdmin == false && arr[0].isUser == false) {
+            formSignup.style.display = 'none';
+            formSignin.style.display = 'block';
+            overlayLogin.classList.add('open');
+        }
     }
 }
 
-overlayLogin.onclick = function() {
-    overlayLogin.classList.remove('open');
-}
-
-modalLogin.onclick = function(e) {
-    e.stopPropagation();
+function closeFormLogin() {
+    for(let i = 0; i < closeLogin.length; i++) {
+        closeLogin[i].onclick = function() {
+            overlayLogin.classList.remove('open');
+        }
+    }
+    overlayLogin.onclick = function() {
+        overlayLogin.classList.remove('open');
+    }
+    
+    modalLogin.onclick = function(e) {
+        e.stopPropagation();
+    }
 }
 
 signupBtn.onclick = function() {
@@ -273,40 +289,79 @@ loginBack.onclick = function() {
     formSignin.style.display = 'block';
 }
 
+openFormLogin();
+closeFormLogin();
+
 // ** Xử lý lưu dữ liệu trên form Đăng ký/Đăng nhập
 const loginUsername = document.getElementById('username');
 const loginEmail = document.getElementById('email');
 const loginpassword = document.getElementById('password');
 const loginAgainPassword = document.getElementById('again-password');
 const overlayNotify = document.querySelector('.overlay-notify');
-const loginNotify = document.querySelector('.login-notify');
+
+var accounts = [];
+
+function setDefaultAccount() {
+    accounts = [
+        {
+            isAdmin: false,
+            isUser: false,
+            isLogout: true
+        },
+        {
+            Name: 'user',
+            Email: 'user',
+            Password: 'user'
+        }
+    ];
+    
+    localStorage.setItem("accountStorage", JSON.stringify(accounts));
+}
 
 function addLogin() {
-    var arrLogin = [];
     var Name = loginUsername.value;
     var email = loginEmail.value;
     var password = loginpassword.value;
-    arrLogin = localStorage.getItem('login') ? JSON.parse(localStorage.getItem('login')) : [];
+    var arr = localStorage.getItem('accountStorage') ? JSON.parse(localStorage.getItem('accountStorage')) : [];
     var User = {
         Name: Name,
         Email: email,
         Password: password
     }
-    arrLogin.push(User);
-    localStorage.setItem('login', JSON.stringify(arrLogin));
+    arr.push(User);
+    localStorage.setItem('accountStorage', JSON.stringify(arr));
     clear();
 }
 
-// Kiểm tra đăng nhập
+// Kiểm tra đăng nhập Người dùng bình thường
 function checkSignin() {
     var Email = document.getElementById('Email').value;
     var Password = document.getElementById('Password').value;
-    const arr = JSON.parse(localStorage.getItem('login'));
-    for (let i = 0; i < arr.length; i++) {
-        if (Email == arr[i].Email && Password == arr[i].Password) {
+    const arr = JSON.parse(localStorage.getItem('accountStorage'));
+    for(let i = 0; i < arr.length; i++) {
+        if(arr[i].Email == Email && arr[i].Password == Password) {
+            arr[1].Name = arr[i].Name;
+            arr[1].Email = arr[i].Email;
+            arr[1].Password = arr[i].Password;
+            localStorage.setItem('accountStorage', JSON.stringify(arr));
             return true;
         }
     }
+
+    return false;
+}
+
+// Kiểm tra đăng nhập Người dùng là Admin
+function checkAdmin() {
+    var Email = document.getElementById('Email').value;
+    var Password = document.getElementById('Password').value;
+    const arr = JSON.parse(localStorage.getItem('accountStorage'));
+    for(let i = 0; i < arr.length; i++) {
+        if (Email == "admin" && Password == "admin") {
+            return true;
+        }
+    }
+
     return false;
 }
 
@@ -337,7 +392,12 @@ document.getElementById('login-btn').onclick = function() {
 }
 
 document.getElementById('Login-Btn').onclick = function() {
-    if(checkSignin()) {
+    const arr = JSON.parse(localStorage.getItem('accountStorage'));
+    if(checkAdmin()) {
+        arr[0].isAdmin = true;
+        arr[0].isUser = false;
+        arr[0].isLogout = false;
+
         setTimeout(function() {
             overlayNotify.style.transform = 'translateX(0)';
             overlayNotify.style.opacity = '1';
@@ -345,6 +405,7 @@ document.getElementById('Login-Btn').onclick = function() {
                                         <i class="fa-solid fa-circle-check"></i>
                                         Đăng nhập thành công
                                     </div>`;
+            checkAccount();
         }, 500)
 
         setTimeout(function() {
@@ -352,6 +413,30 @@ document.getElementById('Login-Btn').onclick = function() {
             overlayNotify.style.opacity = '0';
             overlayLogin.classList.remove('open');
         }, 2000)
+
+    }
+    else if(checkSignin()) {
+        arr[0].isUser = true;
+        arr[0].isAdmin = false;
+        arr[0].isLogout = false;
+
+        setTimeout(function() {
+            overlayNotify.style.transform = 'translateX(0)';
+            overlayNotify.style.opacity = '1';
+            overlayNotify.innerHTML = `<div class="login-notify success">
+                                        <i class="fa-solid fa-circle-check"></i>
+                                        Đăng nhập thành công
+                                    </div>`;
+            checkSignin();                        
+            checkAccount();
+        }, 500)
+
+        setTimeout(function() {
+            overlayNotify.style.transform = 'translateX(100%)';
+            overlayNotify.style.opacity = '0';
+            overlayLogin.classList.remove('open');
+        }, 2000)
+
     }
     else {
         setTimeout(function() {
@@ -370,7 +455,76 @@ document.getElementById('Login-Btn').onclick = function() {
             document.getElementById('Password').value = "";
         }, 2000)
     }
+
+    localStorage.setItem('accountStorage',JSON.stringify(arr))
 }
+
+// Kiểm tra tài khoản đã có hay chưa
+function checkAccount() {
+    const arr = JSON.parse(localStorage.getItem("accountStorage"));
+
+    if(arr == null ) {
+        setDefaultAccount();
+    }
+    else {
+        if(arr[0].isAdmin == false && arr[0].isUser == false) {
+            openFormLogin();
+        }
+        else {
+            if(arr[0].isAdmin == true) {
+                document.querySelector('.sidebar__menu-item:last-child').classList.remove('hide');
+                document.querySelector('.section__header-title-text.login').innerText = 'Admin';
+            }
+            else if(arr[0].isUser == true) {
+                document.querySelector('.section__header-title-text.login').innerText = arr[1].Name;
+            }
+
+            document.querySelector('.sidebar__log-out').classList.remove('hide');
+            document.getElementById('section__header-login').style.color = 'white';
+            document.getElementById('section__header-login').style.cursor = 'default';
+        }
+
+        localStorage.setItem('accountStorage',JSON.stringify(arr));
+    }   
+}
+
+// Xử lý khi ấn vào nút Log out
+const logout = document.querySelector('.sidebar__log-out');
+const notify = document.querySelector('.notify'); 
+
+function checkLogout() {
+    logout.onclick = function() {
+        const arr = JSON.parse(localStorage.getItem("accountStorage"));
+
+        arr[0].isLogout = true;
+        arr[0].isAdmin = false;
+        arr[0].isUser = false;
+
+        setTimeout(function() {
+            notify.style.transform = 'translateX(0)';
+            notify.style.opacity = '1';
+            notify.innerHTML = `<div class="inner-notify success">
+                                    <i class="fa-solid fa-person-running"></i>
+                                    Đăng xuất thành công
+                                </div>`;
+        }, 500)
+        
+        setTimeout(function() {
+            notify.style.transform = 'translateX(100%)';
+            notify.style.opacity = '0';
+        }, 1500)
+
+        document.querySelector('.section__header-title-text.login').innerHTML = 'Đăng ký <br> Đăng nhập';
+        document.querySelector('.sidebar__log-out').classList.add('hide');
+        localStorage.setItem('accountStorage',JSON.stringify(arr));
+
+        setTimeout(function() {
+            window.location.pathname = "/html/index.html";
+        }, 2000)
+    }
+}
+
+checkLogout();
 
 // ** Xử lý cuộn lên trang đầu
 function scrollTopHandle() {
@@ -416,8 +570,63 @@ amountBtns.forEach((amountBtn, index) => {
 // ** Check lỗi login
 
 
+// ** tìm kiếm sản phẩm
+// const search = document.querySelector('#section__search');
+// const itemsContainer = document.querySelector('.section__content-list');
+// const pagination = document.querySelector('#pagination');
+// const clearSearch = document.querySelector('.section__delete');
+// const itemsprodust = itemsContainer.querySelectorAll('.section__content-item');
+// Array.from(itemsprodust).forEach(function(item) {
+//     item.addEventListener('mouseenter', scaleOut);
+//     item.addEventListener('mouseleave', scaleIn);
+// });
+
+// function scaleOut(e) {
+//     e.target.style.transform = 'scale(1.05)'
+//     e.target.style.transition = `0.7s`
+// }
+
+// function scaleIn(e) {
+//     e.target.style.transform = 'scale(1)'
+//     e.target.style.transition = `0.7s`
+// }
+// //Search input events 
+// search.addEventListener('input', searchEvent);
+
+// function searchEvent(e) {
+//     //hiển thị nút xóa input tìm kiếm
+//     if (e.target.value.length > 0) {
+//         clearSearch.style.display = 'block';
+//         pagination.style.display = 'none';
+//     } else {
+//         clearSearch.style.display = 'none';
+//         location.reload();
+//     }
+//     const text = e.target.value.toLowerCase();
+//     const items = itemsContainer.querySelectorAll('.section__content-item');
+//     Array.from(items).forEach(function(item) {
+//         const ListItems = item.children[1].textContent;
+//         if (ListItems.toLocaleLowerCase().indexOf(text) != -1) {
+//             item.style.display = 'block';
+//         } else {
+//             item.style.display = 'none';
+//         }
+//     })
+// }
+
+// //Xóa sự kiện Search
+// clearSearch.addEventListener('click', deleteEvent);
+
+// function deleteEvent(e) {
+//     search.value = '';
+//     e.target.style.display = 'none';
+//     //load lại web
+//     location.reload();
+// }
+
 // ==> Gọi các hàm để thực hiện xử lý
 sidebarControl();
 sectionControl(sectionItems);
 productHandle(0);
 scrollTopHandle();
+checkAccount();

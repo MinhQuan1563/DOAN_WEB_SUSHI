@@ -200,29 +200,29 @@ var products = [
             price: '199,000₫'
         },
         {
-            image: '../images/img-2-15.png',
-            name: 'Sashimi Sò Đỏ Hokkigai',
-            price: '239,000₫'
-        },
-        {
-            image: '../images/img-2-16.png',
-            name: 'Sashimi Trứng Cá Chuồn',
-            price: '169,000₫'
-        },
-        {
-            image: '../images/img-2-17.png',
-            name: 'Sashimi Thân Cá Hồi',
+            image: '../images/img-2-2.png',
+            name: 'Sashimi Cá Chim Việt Nam',
             price: '199,000₫'
         },
         {
-            image: '../images/img-2-16.png',
-            name: 'Sashimi Trứng Cá Chuồn',
+            image: '../images/img-2-4.png',
+            name: 'Sashimi Tôm Sú Việt Nam',
+            price: '249,000₫'
+        },
+        {
+            image: '../images/img-2-6.png',
+            name: 'Sashimi Bào Ngư Hàn Quốc',
+            price: '499,000₫'
+        },
+        {
+            image: '../images/img-2-8.png',
+            name: 'Sashimi Bạch Tuộc',
             price: '169,000₫'
         },
         {
-            image: '../images/img-2-17.png',
-            name: 'Sashimi Thân Cá Hồi',
-            price: '199,000₫'
+            image: '../images/img-2-10.png',
+            name: 'Sashimi Bụng Cá Cam',
+            price: '299,000₫'
         }
     ],
     // Combo Sashimi
@@ -415,3 +415,17 @@ var products = [
         },
     ]
 ]
+
+// localStorage.setItem("product", JSON.stringify(products));
+
+// const temp = JSON.parse(localStorage.getItem("product"))
+
+// var item = {
+//     image: '../images/img-7-1.png',
+//     name: 'Coca-Cola',
+//     price: '10,000₫'
+// }
+
+// temp.push(item)
+
+// console.log(temp)
