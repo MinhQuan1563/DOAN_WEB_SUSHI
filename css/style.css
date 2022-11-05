@@ -171,6 +171,7 @@
     cursor: pointer;
     text-shadow: 0 0 2px white;
     background-color: var(--primary-color);
+    border-radius: 8px;
 }
 
 .section__header-searchbar-child input {
@@ -367,7 +368,7 @@ p {
     color: white;
 }
 
-.section__content h1 {
+.section__content.home h1 {
     font-size: 40px;
     line-height: 48px;
     margin-top: 30px;
@@ -469,6 +470,8 @@ h1.special {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
+    max-width: 90%;
+    margin: auto;
 }
 
 .section__contact-left {
@@ -1390,8 +1393,218 @@ strong {
     margin-right: 6px;
 }
 
+/* CART */
+.checkout__container > h1 {
+    padding: 0;
+    margin-bottom: 30px;
+    color: greenyellow;
+    font-weight: 900;
+    font-size: 32px;
+}
+
+.checkout__cart {
+	display: flex;
+}
+
+.checkout__cart-products {
+	flex: 0.75;
+    margin-bottom: 50px;
+	border: 1px solid silver;
+    overflow: hidden;
+    border-radius: 20px;
+}
+
+.checkout__cart-product {
+	display: flex;
+    align-items: center;
+	height: 100px;
+	overflow: hidden;
+	margin-bottom: 20px;
+    transform: scale(1.01);
+    box-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+    border-radius: 20px;
+	border: 2.4px solid var(--sidebar-color);
+    margin: 10px 10px 20px;
+
+}
+
+.checkout__cart-product > img {
+	width: 100px;
+	height: 100px;
+	object-fit: cover;
+    border-radius: 20px;
+}
+
+.checkout__cart-product > img:hover {
+    transform: scale(1.04);
+}
+
+.product-info {
+	padding: 0 16px;
+	position: relative;
+    font-weight: 900;
+    font-size: 1.6rem;
+    flex-basis: 40%;
+}
+.product-name-one, .product-price-one, .product-quantity-one {
+    color: goldenrod;
+    margin-bottom: 2px;
+}
+
+.product-name, .product-price, .product-offer {
+	margin-bottom: 10px;
+    color: aquamarine;
+}
+
+.product-remove {
+	padding: 10px 25px;
+	background-color: rgba(0, 128, 0, 0.7);
+	color: white;
+	cursor: pointer;
+	border-radius: 5px;
+    font-size: 1.5rem;
+}
+
+.product-remove:hover {
+	background-color: rgba(0, 128, 0, 1);
+}
+
+.product-quantity {
+    display: flex;
+    color: var(--white-color);
+    align-items: center;
+    font-size: 16px;
+    font-weight: 900;
+    flex-basis: 30%;
+}
+
+.product-quantity > input {
+	width: 50px;
+    height: 30px;
+    margin-left: 10px;
+    text-align: center;
+    font-weight: bold;
+    color: chocolate;
+    outline: none;
+}
+
+.product-remove i {
+	margin-right: 5px;
+}
+
+.checkout__cart-total {
+	flex: 0.25;
+	margin-left: 20px;
+	padding: 20px;
+    max-height: 260px;
+	border: 1px solid silver;
+	border-radius: 20px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+}
+
+.checkout__cart-total img {
+    position: relative;
+    top: -3.7rem;
+    width: 150px;
+    align-self: center;
+    flex-basis: 10%;
+}
+
+.checkout__cart-total div {
+	display: flex;
+	justify-content: space-between;
+    align-items: center;
+    margin: 0;
+	font-size: 18px;
+    color: var(--white-color);
+}
+
+.checkout__cart-total p {
+    margin: 16px 0;
+}
+
+.checkout__cart-total span {
+    display: block;
+    text-align: center;
+    height: 40px;
+    line-height: 40px;
+    background-color: tomato;
+    color: white;
+    text-decoration: none;
+    margin-top: 34px;
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 6px;
+}
+
+.checkout__cart-total span:hover {
+	background-color: red;
+}
+
+/* logo item checkout */
+.header__cart-notice {
+    position: absolute ;
+    padding: 1px 5px;
+    background-color: var(--white-color);
+    color: var(--primary-color) !important;
+    font-size: 1.4rem;
+    font-weight: bold;
+    line-height: 1.3rem;
+    border-radius: 9px;
+    top: -10px;
+    right: 8px;
+    border: 2px solid #ea7c69;
+}
+
+@media screen and (max-width: 700px){
+	.checkout__remove-name {
+		display: none;
+	}
+
+	.checkout__cart-product {
+		height: 150px;
+	}
+
+	.checkout__cart-product > img {
+		height: 150px;
+		width: 200px;
+	}
+
+	.product-name, .product-price, .product-offer {
+		margin-bottom: 10px;
+	}
+
+}
+
+@media screen and (max-width: 900px){
+
+	.checkout__cart {
+		flex-direction: column;
+	}
+
+	.checkout__cart-total {
+		margin-left: 0;
+		margin-bottom: 20px;
+	}
+
+}
+
+@media screen and (max-width: 1220px){
+
+	.container {
+		max-width: 95%;
+	}
+
+}
 
 /* SETTINGS */
+.setting {
+    display: none;
+}
+
 .setting__header {
     font-size: 32px;
     color: var(--white-color);

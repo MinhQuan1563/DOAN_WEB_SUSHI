@@ -21,7 +21,6 @@ function sidebarControl() {
             sectionContents.forEach(function(sectionContent) {
                 sectionContent.style.display = 'none';
             })
-            document.querySelector('.section__header-menu').style.display = "none";
 
             switch(index) {
                 case 0:
@@ -29,7 +28,6 @@ function sidebarControl() {
                     break;
                 case 1:
                     document.querySelector('.section__content.food').style.display = "block";
-                    document.querySelector('.section__header-menu').style.display = "flex";
                     break;
                 case 2:
                     document.querySelector('.section__content.checkout').style.display = "block";
@@ -37,9 +35,9 @@ function sidebarControl() {
                 case 3:
                     document.querySelector('.section__contact.section__contact').style.display = "flex";
                     break;
-                // case 4:
-                //     window.location.pathname = "/html/settings.html";
-                //     break;
+                case 4:
+                    window.location.pathname = '/html/settings.html';
+                    break;
             }
         }
     })
@@ -69,7 +67,7 @@ function renderProduct(items) {
 function productHandle(k) {
     var productItems = document.querySelectorAll('.section__content-item');
     var sectionImages = document.querySelectorAll('.section__content-item-img');
-    var closeDetail = document.querySelectorAll('.modal > i.close-icon');
+    var closeDetail = document.querySelector('.modal > i.close-icon');
 
     var details = document.querySelectorAll('.eye-icon');
     
@@ -414,6 +412,8 @@ document.getElementById('Login-Btn').onclick = function() {
             overlayLogin.classList.remove('open');
         }, 2000)
 
+        window.location.pathname = "/html/settings.html";
+
     }
     else if(checkSignin()) {
         arr[0].isUser = true;
@@ -569,60 +569,7 @@ amountBtns.forEach((amountBtn, index) => {
 
 // ** Check lỗi login
 
-
 // ** tìm kiếm sản phẩm
-// const search = document.querySelector('#section__search');
-// const itemsContainer = document.querySelector('.section__content-list');
-// const pagination = document.querySelector('#pagination');
-// const clearSearch = document.querySelector('.section__delete');
-// const itemsprodust = itemsContainer.querySelectorAll('.section__content-item');
-// Array.from(itemsprodust).forEach(function(item) {
-//     item.addEventListener('mouseenter', scaleOut);
-//     item.addEventListener('mouseleave', scaleIn);
-// });
-
-// function scaleOut(e) {
-//     e.target.style.transform = 'scale(1.05)'
-//     e.target.style.transition = `0.7s`
-// }
-
-// function scaleIn(e) {
-//     e.target.style.transform = 'scale(1)'
-//     e.target.style.transition = `0.7s`
-// }
-// //Search input events 
-// search.addEventListener('input', searchEvent);
-
-// function searchEvent(e) {
-//     //hiển thị nút xóa input tìm kiếm
-//     if (e.target.value.length > 0) {
-//         clearSearch.style.display = 'block';
-//         pagination.style.display = 'none';
-//     } else {
-//         clearSearch.style.display = 'none';
-//         location.reload();
-//     }
-//     const text = e.target.value.toLowerCase();
-//     const items = itemsContainer.querySelectorAll('.section__content-item');
-//     Array.from(items).forEach(function(item) {
-//         const ListItems = item.children[1].textContent;
-//         if (ListItems.toLocaleLowerCase().indexOf(text) != -1) {
-//             item.style.display = 'block';
-//         } else {
-//             item.style.display = 'none';
-//         }
-//     })
-// }
-
-// //Xóa sự kiện Search
-// clearSearch.addEventListener('click', deleteEvent);
-
-// function deleteEvent(e) {
-//     search.value = '';
-//     e.target.style.display = 'none';
-//     //load lại web
-//     location.reload();
-// }
 
 // ==> Gọi các hàm để thực hiện xử lý
 sidebarControl();

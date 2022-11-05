@@ -6,10 +6,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FOODY</title>
     <link rel="icon" href="../images/favicon.png">
-    <link href="https://fonts.googleapis.com/css2?family=Barlow&display=swap" rel="stylesheet">
+
+    <!-- Reset CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
+    
+    <!-- Link Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Barlow&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../fonts/fontawesome-free-6.1.2-web/css/all.min.css">
     <link rel="stylesheet" href="../fonts/themify-icons/themify-icons.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" crossorigin="anonymous">
+
+    <!-- Link CSS -->
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/base.css">
     <link rel="stylesheet" href="../css/responsive.css">
@@ -64,14 +71,6 @@
                         <div class="section__header-title-text login">Đăng ký <br> Đăng nhập</div>
                     </div>
                 </div>
-                <ul class="section__header-menu" style="display: none;">
-                    <li class="active">Bento</li>
-                    <li>Sushi</li>
-                    <li>Sashimi</li>
-                    <li>Combo Sashimi</li>
-                    <li>Món ăn kèm</li>
-                    <li>Nước uống và tráng miệng</li>
-                </ul>
                 <div class="section__header-search">
                     
                 </div>
@@ -143,6 +142,14 @@
             </div>
 
             <div class="section__content food">
+                <ul class="section__header-menu">
+                    <li class="active">Bento</li>
+                    <li>Sushi</li>
+                    <li>Sashimi</li>
+                    <li>Combo Sashimi</li>
+                    <li>Món ăn kèm</li>
+                    <li>Nước uống và tráng miệng</li>
+                </ul>
                 <div class="section__content-title">
                     <h2>Thực đơn</h2>
                     <div class="section__content-filter">
@@ -159,7 +166,93 @@
             </div>
 
             <div class="section__content checkout">
-                
+                <div class="checkout__container">
+                    <h1 >Danh Sách Món Đã Chọn</h1>
+                    <div class="checkout__cart">
+                        <div class="checkout__cart-products">
+                            <div class="checkout__cart-product">
+                                <img src="../images/img-1-1.png">
+                                <div class="product-info">
+                                    <div class="product-name-one">Tên Món: </div>
+                                    <h3 class="product-name">Cơm Cá Đỏ Sốt Teriyakida</h3>
+                                    <div class="product-price-one">Đơn Giá: </div>
+                                    <h4 class="product-price">99,000VND</h4>
+                                </div>
+                                <div class="product-quantity">
+                                    <div class="product-quantity-one">Số lượng:</div>
+                                    <input value="1" type="number" min="1">
+                                </div>
+                                <div class="product-remove">
+                                    <i class="fa fa-trash" aria-hidden="true"></i>
+                                    <span class="checkout__remove-name">Xóa</span>
+                                </div>
+                            </div>
+                            <div class="checkout__cart-product">
+                                <img src="../images/img-1-1.png">
+                                <div class="product-info">
+                                    <div class="product-name-one">Tên Món: </div>
+                                    <h3 class="product-name">Cơm Cá Đỏ Sốt Teriyakida</h3>
+                                    <div class="product-price-one">Đơn Giá: </div>
+                                    <h4 class="product-price">99,000VND</h4>
+                                </div>
+                                <div class="product-quantity">
+                                    <div class="product-quantity-one">Số lượng:</div>
+                                    <input value="1" type="number" min="1">
+                                </div>
+                                <div class="product-remove">
+                                    <i class="fa fa-trash" aria-hidden="true"></i>
+                                    <span class="checkout__remove-name">Xóa</span>
+                                </div>
+                            </div>
+                            <div class="checkout__cart-product">
+                                <img src="../images/img-1-1.png">
+                                <div class="product-info">
+                                    <div class="product-name-one">Tên Món: </div>
+                                    <h3 class="product-name">Cơm Cá Đỏ Sốt Teriyakida</h3>
+                                    <div class="product-price-one">Đơn Giá: </div>
+                                    <h4 class="product-price">99,000VND</h4>
+                                </div>
+                                <div class="product-quantity">
+                                    <div class="product-quantity-one">Số lượng:</div>
+                                    <input value="1" type="number" min="1">
+                                </div>
+                                <div class="product-remove">
+                                    <i class="fa fa-trash" aria-hidden="true"></i>
+                                    <span class="checkout__remove-name">Xóa</span>
+                                </div>
+                            </div>
+                            <div class="checkout__cart-product">
+                                <img src="../images/img-1-1.png">
+                                <div class="product-info">
+                                    <div class="product-name-one">Tên Món: </div>
+                                    <h3 class="product-name">Cơm Cá Đỏ Sốt Teriyakida</h3>
+                                    <div class="product-price-one">Đơn Giá: </div>
+                                    <h4 class="product-price">99,000VND</h4>
+                                </div>
+                                <div class="product-quantity">
+                                    <div class="product-quantity-one">Số lượng:</div>
+                                    <input value="1" type="number" min="1">
+                                </div>
+                                <div class="product-remove">
+                                    <i class="fa fa-trash" aria-hidden="true"></i>
+                                    <span class="checkout__remove-name">Xóa</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="checkout__cart-total">
+                            <img src="../images/logo.png" alt="">
+                            <div>
+                                <h3>Số sản phẩm</h3>
+                                <p>4</p>
+                            </div>
+                            <div>
+                                <h3>Tổng tiền</h3>
+                                <p>181,000 VND</p>
+                            </div>
+                            <span href="#">Thanh toán</span>
+                        </div>
+                    </div>
+                </div>
             </div>
 
             <div class="section__content section__contact">
