@@ -333,11 +333,11 @@ function addLogin() {
 
 // Kiểm tra đăng nhập Người dùng bình thường
 function checkSignin() {
-    var Email = document.getElementById('Email').value;
+    var Name = document.getElementById('Username').value;
     var Password = document.getElementById('Password').value;
     const arr = JSON.parse(localStorage.getItem('accountStorage'));
     for(let i = 0; i < arr.length; i++) {
-        if(arr[i].Email == Email && arr[i].Password == Password) {
+        if(arr[i].Name == Name && arr[i].Password == Password) {
             arr[1].Name = arr[i].Name;
             arr[1].Email = arr[i].Email;
             arr[1].Password = arr[i].Password;
@@ -351,11 +351,11 @@ function checkSignin() {
 
 // Kiểm tra đăng nhập Người dùng là Admin
 function checkAdmin() {
-    var Email = document.getElementById('Email').value;
+    var Name = document.getElementById('Username').value;
     var Password = document.getElementById('Password').value;
     const arr = JSON.parse(localStorage.getItem('accountStorage'));
     for(let i = 0; i < arr.length; i++) {
-        if (Email == "admin" && Password == "admin") {
+        if (Name == "admin" && Password == "admin") {
             return true;
         }
     }

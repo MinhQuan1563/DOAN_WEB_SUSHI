@@ -416,16 +416,7 @@ var products = [
     ]
 ]
 
-// localStorage.setItem("product", JSON.stringify(products));
-
-// const temp = JSON.parse(localStorage.getItem("product"))
-
-// var item = {
-//     image: '../images/img-7-1.png',
-//     name: 'Coca-Cola',
-//     price: '10,000₫'
-// }
-
-// temp.push(item)
-
-// console.log(temp)
+const arr = JSON.parse(localStorage.getItem('product'));
+if(arr === null) {
+    localStorage.setItem("product", JSON.stringify(products));
+}

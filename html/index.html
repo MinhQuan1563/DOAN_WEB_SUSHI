@@ -178,10 +178,23 @@
                                     <div class="product-price-one">Đơn Giá: </div>
                                     <h4 class="product-price">99,000VND</h4>
                                 </div>
-                                <div class="product-quantity">
-                                    <div class="product-quantity-one">Số lượng:</div>
-                                    <input value="1" type="number" min="1">
+                                <div class="product-info-two">
+                                    <div class="product-size-quanti">
+                                        <div class="product-amount" style="margin: 0;">
+                                            <div class="product-text">Số lượng:</div>
+                                            <input value="1" type="number" min="1">
+                                        </div>
+                                        <div class="product-size">
+                                            <div class="product-text">Size:</div>
+                                            <div class="product-size-value">M</div>
+                                        </div>
+                                    </div>
+                                    <div class="product-size">
+                                        <div class="product-text">Thành tiền:</div>
+                                        <div class="product-size-value">120000 VND</div>
+                                    </div>
                                 </div>
+                                
                                 <div class="product-remove">
                                     <i class="fa fa-trash" aria-hidden="true"></i>
                                     <span class="checkout__remove-name">Xóa</span>
@@ -195,10 +208,23 @@
                                     <div class="product-price-one">Đơn Giá: </div>
                                     <h4 class="product-price">99,000VND</h4>
                                 </div>
-                                <div class="product-quantity">
-                                    <div class="product-quantity-one">Số lượng:</div>
-                                    <input value="1" type="number" min="1">
+                                <div class="product-info-two">
+                                    <div class="product-size-quanti">
+                                        <div class="product-amount" style="margin: 0;">
+                                            <div class="product-text">Số lượng:</div>
+                                            <input value="1" type="number" min="1">
+                                        </div>
+                                        <div class="product-size">
+                                            <div class="product-text">Size:</div>
+                                            <div class="product-size-value">M</div>
+                                        </div>
+                                    </div>
+                                    <div class="product-size">
+                                        <div class="product-text">Thành tiền:</div>
+                                        <div class="product-size-value">120000 VND</div>
+                                    </div>
                                 </div>
+                                
                                 <div class="product-remove">
                                     <i class="fa fa-trash" aria-hidden="true"></i>
                                     <span class="checkout__remove-name">Xóa</span>
@@ -212,10 +238,23 @@
                                     <div class="product-price-one">Đơn Giá: </div>
                                     <h4 class="product-price">99,000VND</h4>
                                 </div>
-                                <div class="product-quantity">
-                                    <div class="product-quantity-one">Số lượng:</div>
-                                    <input value="1" type="number" min="1">
+                                <div class="product-info-two">
+                                    <div class="product-size-quanti">
+                                        <div class="product-amount" style="margin: 0;">
+                                            <div class="product-text">Số lượng:</div>
+                                            <input value="1" type="number" min="1">
+                                        </div>
+                                        <div class="product-size">
+                                            <div class="product-text">Size:</div>
+                                            <div class="product-size-value">M</div>
+                                        </div>
+                                    </div>
+                                    <div class="product-size">
+                                        <div class="product-text">Thành tiền:</div>
+                                        <div class="product-size-value">120000 VND</div>
+                                    </div>
                                 </div>
+                                
                                 <div class="product-remove">
                                     <i class="fa fa-trash" aria-hidden="true"></i>
                                     <span class="checkout__remove-name">Xóa</span>
@@ -229,10 +268,23 @@
                                     <div class="product-price-one">Đơn Giá: </div>
                                     <h4 class="product-price">99,000VND</h4>
                                 </div>
-                                <div class="product-quantity">
-                                    <div class="product-quantity-one">Số lượng:</div>
-                                    <input value="1" type="number" min="1">
+                                <div class="product-info-two">
+                                    <div class="product-size-quanti">
+                                        <div class="product-amount" style="margin: 0;">
+                                            <div class="product-text">Số lượng:</div>
+                                            <input value="1" type="number" min="1">
+                                        </div>
+                                        <div class="product-size">
+                                            <div class="product-text">Size:</div>
+                                            <div class="product-size-value">M</div>
+                                        </div>
+                                    </div>
+                                    <div class="product-size">
+                                        <div class="product-text">Thành tiền:</div>
+                                        <div class="product-size-value">120000 VND</div>
+                                    </div>
                                 </div>
+                                
                                 <div class="product-remove">
                                     <i class="fa fa-trash" aria-hidden="true"></i>
                                     <span class="checkout__remove-name">Xóa</span>
@@ -427,11 +479,11 @@
                             </div>
                             <div class="modal__inner-amount">
                                 <label for="">Số lượng</label>
-                                <form action="">
+                                <div style="display: flex;">
                                     <input type="button" value="-">
                                     <input type="text" value="1" id="quantity">
                                     <input type="button" value="+">
-                                </form>
+                                </div>
                             </div>
                             <input class="modal__inner-add-cart" type="button" value="Thêm vào giỏ">
                         </form>
@@ -449,8 +501,9 @@
                     </h1>
                     <form action="">
                         <div class="wrapper__form">
-                            <input class="wrapper__input" type="email" id="Email" placeholder=" "/>
-                            <label class="wrapper__label" for="">Email của bạn</label>
+                            <input id="Username" class="wrapper__input" type="text" placeholder=" "/>
+                            <label class="wrapper__label" for="">Tên của bạn</label>
+                            <div class="error-message"></div>
                         </div>
                         <div class="wrapper__form">
                             <input class="wrapper__input" type="password" id="Password" placeholder=" "/>

@@ -27,7 +27,7 @@
 <body>
     <div id="main">
         <header>
-            <h2>SmartPhone Store - Admin</h2>
+            <h2>Sushi Store - Admin</h2>
         </header>
     
         <!-- Menu -->
@@ -82,146 +82,93 @@
             <div class="section__product">
                 <table class="table-header">
                     <tr>
-                        <!-- Theo độ rộng của table content -->
-                        <th title="Sắp xếp" style="width: 5%" onclick="sortProductsTable('stt')">Stt <i class="fa fa-sort"></i></th>
-                        <th title="Sắp xếp" style="width: 10%" onclick="sortProductsTable('masp')">Mã <i class="fa fa-sort"></i></th>
-                        <th title="Sắp xếp" style="width: 40%" onclick="sortProductsTable('ten')">Tên <i class="fa fa-sort"></i></th>
-                        <th title="Sắp xếp" style="width: 15%" onclick="sortProductsTable('gia')">Giá <i class="fa fa-sort"></i></th>
-                        <th title="Sắp xếp" style="width: 15%" onclick="sortProductsTable('khuyenmai')">Khuyến mãi <i class="fa fa-sort"></i></th>
+                        <th title="Sắp xếp" style="width: 5%">STT</th>
+                        <th title="Sắp xếp" style="width: 10%">Loại</th>
+                        <th title="Sắp xếp" style="width: 40%">Tên</th>
+                        <th title="Sắp xếp" style="width: 15%">Giá</th>
+                        <th title="Sắp xếp" style="width: 15%">Hình Ảnh</th>
                         <th style="width: 15%">Hành động</th>
                     </tr>
                 </table>
     
-                <div class="table-content">
+                <div class="table-content" id="table-product">
+                    
                 </div>
     
                 <div class="table-footer">
-                    <select name="kieuTimSanPham">
-                        <option value="ma">Tìm theo mã</option>
-                        <option value="ten">Tìm theo tên</option>
-                    </select>
-                    <input type="text" placeholder="Tìm kiếm..." onkeyup="timKiemSanPham(this)">
-                    <button onclick="document.getElementById('khungThemSanPham').style.transform = 'scale(1)'; autoMaSanPham()">
+                    <button id="add-product">
                         <i class="fa fa-plus-square"></i>
                         Thêm sản phẩm
                     </button>
                 </div>
     
-                <div id="khungThemSanPham" class="overlay">
-                    <span class="close" onclick="this.parentElement.style.transform = 'scale(0)';">&times;</span>
+                <div class="overlay product">
+                    <div class="close" onclick="this.parentElement.style.transform = 'scale(0)';">
+                        <i class="fa-solid fa-xmark"></i>
+                    </div>
                     <table class="overlayTable table-outline table-content table-header">
                         <tr>
                             <th colspan="2">Thêm Sản Phẩm</th>
                         </tr>
                         <tr>
-                            <td>Mã sản phẩm:</td>
-                            <td><input type="text" id="maspThem"></td>
-                        </tr>
-                        <tr>
-                            <td>Tên sản phẩm:</td>
-                            <td><input type="text"></td>
-                        </tr>
-                        <tr>
-                            <td>Hãng:</td>
+                            <td>Loại sản phẩm:</td>
                             <td>
-                                <select name="chonCompany" onchange="autoMaSanPham(this.value)">
-                                    <script>
-                                        var company = ["Apple", "Samsung", "Oppo", "Nokia", "Huawei", "Xiaomi","Realme", "Vivo", "Philips", "Mobell", "Mobiistar", "Itel","Coolpad", "HTC", "Motorola"];
-                                        for(var c of company) {
-                                            document.writeln(`<option value="`+c+`">`+c+`</option>`);
-                                        }
-                                    </script>
+                                <select>
+                                    <option value="0">Bento</option>
+                                    <option value="1">Sushi</option>
+                                    <option value="2">Sashimi</option>
+                                    <option value="3">Combo Sashimi</option>
+                                    <option value="4">Món ăn kèm</option>
+                                    <option value="5">Nước uống và tráng miệng</option>
                                 </select>
                             </td>
                         </tr>
                         <tr>
-                            <td>Hình:</td>
+                            <td>Tên sản phẩm:</td>
+                            <td><input type="text" class="name"></td>
+                        </tr>
+                        <tr>
+                            <td>Hình ảnh:</td>
                             <td>
-                                <img class="hinhDaiDien" id="anhDaiDienSanPhamThem" src="">
-                                <input type="file" accept="image/*" onchange="capNhatAnhSanPham(this.files, 'anhDaiDienSanPhamThem')">
+                                <img src="">
+                                <input type="file" name="" id="">
                             </td>
                         </tr>
                         <tr>
                             <td>Giá tiền:</td>
-                            <td><input type="text"></td>
+                            <td><input type="text" class="price"></td>
                         </tr>
                         <tr>
-                            <td>Số sao (số nguyên 0->5):</td>
-                            <td><input type="text"></td>
-                        </tr>
-                        <tr>
-                            <td>Đánh giá (số nguyên):</td>
-                            <td><input type="text"></td>
-                        </tr>
-                        <tr>
-                            <td>Khuyến mãi:</td>
-                            <td>
-                                <select>
-                                    <option value="">Không</option>
-                                    <option value="tragop">Trả góp</option>
-                                    <option value="giamgia">Giảm giá</option>
-                                    <option value="giareonline">Giá rẻ online</option>
-                                    <option value="moiramat">Mới ra mắt</option>
-                                </select>
+                            <td colspan="2" class="table-footer">
+                                <button id="add-btn">THÊM</button>
                             </td>
                         </tr>
-                        <tr>
-                            <td>Giá trị khuyến mãi:</td>
-                            <td><input type="text" placeholder=""></td>
-                        </tr>
-                        <tr>
-                            <th colspan="2">Thông số kĩ thuật</th>
-                        </tr>
-                        <tr>
-                            <td>Màn hình:</td>
-                            <td><input type="text"></td>
-                        </tr>
-                        <tr>
-                            <td>Hệ điều hành:</td>
-                            <td><input type="text"></td>
-                        </tr>
-                        <tr>
-                            <td>Camara sau:</td>
-                            <td><input type="text"></td>
-                        </tr>
-                        <tr>
-                            <td>Camara trước:</td>
-                            <td><input type="text"></td>
-                        </tr>
-                        <tr>
-                            <td>CPU:</td>
-                            <td><input type="text"></td>
-                        </tr>
-                        <tr>
-                            <td>RAM:</td>
-                            <td><input type="text"></td>
-                        </tr>
-                        <tr>
-                            <td>Bộ nhớ trong:</td>
-                            <td><input type="text"></td>
-                        </tr>
-                        <tr>
-                            <td>Thẻ nhớ:</td>
-                            <td><input type="text"></td>
-                        </tr>
-                        <tr>
-                            <td>Dung lượng Pin:</td>
-                            <td><input type="text"></td>
-                        </tr>
-                        <tr>
-                            <td colspan="2" class="table-footer"> <button onclick="themSanPham()">THÊM</button> </td>
-                        </tr>
                     </table>
+
+                    <div class="notify">
+                        
+                    </div>
                 </div>
-                <div id="khungSuaSanPham" class="overlay"></div>
-            </div> <!-- // sanpham -->
-    
+
+                <div class="notify__delete">
+                    <div class="notify__delete-text">
+                        Bạn có chắc sẽ xóa sản phẩm này không?
+                    </div>
+                    <div class="notify__delete-btn">
+                        <div class="notify__delete-ok">
+                            OK
+                        </div>
+                        <div class="notify__delete-cancel">
+                            Hủy
+                        </div>
+                    </div>
+                </div>
+            </div>
     
             <!-- Đơn Hàng -->
             <div class="section__order">
                 <table class="table-header">
                     <tr>
-                        <!-- Theo độ rộng của table content -->
                         <th title="Sắp xếp" style="width: 5%" onclick="sortDonHangTable('stt')">Stt <i class="fa fa-sort"></i></th>
                         <th title="Sắp xếp" style="width: 13%" onclick="sortDonHangTable('madon')">Mã đơn <i class="fa fa-sort"></i></th>
                         <th title="Sắp xếp" style="width: 7%" onclick="sortDonHangTable('khach')">Khách <i class="fa fa-sort"></i></th>
@@ -242,7 +189,6 @@
                         Đến ngày: <input type="date" id="toDate">
     
                         <button><i class="fa fa-search"></i> Tìm</button>
-                        <!-- onclick="locDonHangTheoKhoangNgay()" -->
                     </div>
     
                     <select name="kieuTimDonHang">
@@ -250,17 +196,15 @@
                         <option value="khachhang">Tìm theo tên khách hàng</option>
                         <option value="trangThai">Tìm theo trạng thái</option>
                     </select>
-                    <input type="text" placeholder="Tìm kiếm..." onkeyup="timKiemDonHang(this)">
                 </div>
     
-            </div> <!-- // don hang -->
+            </div>
     
     
             <!-- Khách hàng -->
             <div class="section__customer">
                 <table class="table-header">
                     <tr>
-                        <!-- Theo độ rộng của table content -->
                         <th title="Sắp xếp" style="width: 5%" onclick="sortKhachHangTable('stt')">Stt <i class="fa fa-sort"></i></th>
                         <th title="Sắp xếp" style="width: 15%" onclick="sortKhachHangTable('hoten')">Họ tên <i class="fa fa-sort"></i></th>
                         <th title="Sắp xếp" style="width: 20%" onclick="sortKhachHangTable('email')">Email <i class="fa fa-sort"></i></th>
@@ -282,8 +226,9 @@
                     <input type="text" placeholder="Tìm kiếm..." onkeyup="timKiemNguoiDung(this)">
                     <button onclick="openThemNguoiDung()"><i class="fa fa-plus-square"></i> Thêm người dùng</button>
                 </div>
-            </div> <!-- // khach hang -->
-        </div> <!-- // main -->
+            </div>
+
+        </div>
     
     
         <footer>

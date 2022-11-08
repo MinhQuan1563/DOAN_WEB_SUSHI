@@ -1,3 +1,7 @@
+html {
+    background-color: #2f353a !important;
+}
+
 hr {
     color: rgb(95, 95, 95);
     background-color: rgb(95, 95, 95);
@@ -9,11 +13,12 @@ hr {
 }
 
 a {
-    text-decoration: none;
     color: #222;
 }
 
+
 /* header */
+
 header {
     z-index: 10;
     width: 100%;
@@ -30,7 +35,9 @@ header h2 {
     color: #fff;
 }
 
+
 /* =========== Menu ================= */
+
 .sidebar {
     float: left;
     width: 170px;
@@ -50,7 +57,6 @@ header h2 {
     position: relative;
     margin: 0;
     color: #73818f;
-    transition: background .3s ease-in-out;
 }
 
 .sidebar .nav-item {
@@ -84,18 +90,21 @@ header h2 {
     text-align: center;
 }
 
+
 /* ==================== section ==================== */
+
 .section {
     float: left;
     width: calc(100% - 175px);
 }
 
 .section > div {
-    /* Mặc định ẩn mọi thứ trong section */
     display: none;
 }
 
-/* ===================== HOME ================== */
+
+/* HOME */
+
 .home .canvasContainer {
     display: inline-block;
     width: 49%;
@@ -109,40 +118,20 @@ header h2 {
     justify-content: center;
 }
 
+/* Table */
 
-/* =================== Các class xử lý ảnh ================ */
-/* Ảnh ẩn trong td */
-.hideImg td img {
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 0;
-    border-radius: 5px;
-    transition-duration: .1s;
-    z-index: 2;
-}
-
-.hideImg td:hover img {
-    height: 150px;
-}
-
-/* Ảnh đại diện */
-.hinhDaiDien {
-    max-height: 100px;
-    max-width: 100px;
-}
-
-/* ==================== table ====================== */
 .table-outline {
     width: 100%;
     border: 1px solid #23282c;
 }
+
 
 /* phần chứa header (th) */
 .table-header {
     width: 100%;
 }
 
+/*chỉnh cho tên nằm về trái*/
 .table-header th {
     color: #e4e7ea;
     background-color: #3e464d;
@@ -154,7 +143,7 @@ header h2 {
 }
 
 .table-header th i {
-    /* Ẩn icon sort */
+    /* Ẩn icon sort */  
     transform: scale(0);
     transition-duration: .2s;
 }
@@ -163,14 +152,33 @@ header h2 {
     transform: scale(1)
 }
 
+
+/*Chỉnh cho nội dung nằm giữa*/
 .table-header th,
-.table-content td {
+.table-header td {
     padding: 12px;
     font-size: 1.6rem;
     text-align: center;
-    vertical-align: top;
     border-top: 1px solid #23282c;
+    vertical-align: top;
+    font-weight: 900;
 }
+
+.table-header tr td {
+    margin-bottom: 40px;
+}
+
+.table-header td {
+    color: #e4e7ea;
+}
+
+/*Chỉnh size ảnh*/
+.table-content img {
+    width: 120px;
+    height: auto;
+    border-radius: 5px;
+}
+
 
 /* phần chứa nội dung  */
 .table-content {
@@ -179,18 +187,40 @@ header h2 {
     overflow: auto;
     margin: 0 auto;
     width: 100%;
+    font-size: 2rem;
 }
 
-.table-content tr:nth-of-type(even) {
+.table-content table {
+    width: 100%;
+}
+
+.table-content tr:nth-child(2n + 1) {
     background-color: #3e4144;
 }
 
-.table-content td {
-    position: relative;
-    color: #e4e7ea;
+.table-content tr:nth-child(2n) {
+    background-color: #2f353a;
 }
 
+.table-content tr:nth-child(2n + 1) td {
+    border-left: 1px solid #2f353a;
+}
+
+.table-content tr:nth-child(2n) td {
+    border-left: 1px solid #3e4144;
+}
+
+.table-content td {
+    padding:  8px;
+    position: relative;
+    color: #e4e7ea;
+    text-align: center;
+    line-height: 24px;
+}
+
+
 /* Link chi tiet san pham */
+
 .table-content td a {
     display: block;
     color: #e4e7ea;
@@ -200,7 +230,9 @@ header h2 {
     text-decoration: underline;
 }
 
+
 /* Hành động */
+
 .table-content td i {
     padding: 6px;
     cursor: pointer;
@@ -222,7 +254,9 @@ header h2 {
     color: #f86c6b
 }
 
+
 /*  phần footer table  */
+
 .table-footer {
     background-color: #3e464d;
     padding: 12px;
@@ -231,16 +265,16 @@ header h2 {
     border-top: 1px solid #23282c;
 }
 
-.table-footer input,
-.table-footer button,
-.table-footer select {
-    padding: 5px 10px;
+.table-footer button {
+    padding: 10px 16px;
     border: 3px solid transparent;
     background-color: #cccece;
     outline: none;
 }
 
+
 /* Nút bấm ở footer */
+
 .table-footer button {
     cursor: pointer;
     background-color: #23282c;
@@ -253,18 +287,13 @@ header h2 {
     border-color: #73818f;
 }
 
-/* ================== Những table thêm sửa sẽ có dạng overlay -> mặc định ẩn  ====================== */
-.overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    overflow-y: auto;
-    z-index: 14;
-    transition: .2s ease;
+
+/* Overlay */
+.overlay.product {
     transform: scale(0);
+    transition: .2s ease;
     background-color: #020202d8;
+    display: flex;
 }
 
 .overlayTable {
@@ -289,13 +318,12 @@ header h2 {
 }
 
 .close {
-    /* nút tắt form */
     position: fixed;
-    top: 5px;
-    right: 5px;
+    top: 0px;
+    right: 0px;
     font-size: 4.8rem;
-    width: 16px;
-    height: 16px;
+    width: 50px;
+    height: 50px;
     line-height: 16px;
     text-align: center;
     color: #aaa;
@@ -309,21 +337,86 @@ header h2 {
     border-radius: 50%;
 }
 
-/* ======================= id =================== */
-
-/* Div Tìm theo ngày */
-.timTheoNgay {
-    float: left;
-    margin-right: 50px;
-    padding-right: 10px;
-    color: #e4e7ea;
-    border-right: 2px solid #777;
+button, select, input {
+    outline: none;
 }
 
-/* ========================= tooltip from w3school  ====================== */
+/* Hiện thông báo */
+.notify__delete,
+.notify {
+    position: absolute;
+    top: 6%;
+    padding: 20px;
+    margin: 20px;
+    font-size: 18px;
+    font-weight: 900;
+    background-color: white;
+    border-bottom-right-radius: 18px;
+    border-top-left-radius: 18px;
+    opacity: 0;
+    transition: 0.3s ease-in;
+}
+
+.notify__delete {
+    border-radius: unset;
+}
+
+.notify.success {
+    color: #3eda3e;
+}
+
+.notify.error {
+    color: #de1818;
+}
+
+.notify i {
+    margin-right: 6px;
+}
+
+/* Hiện nút xóa sp */
+.notify__delete {
+    left: 50%;
+    transform: translateX(-50%);
+    opacity: 1;
+    transform: translateY(-170%);
+}
+
+.notify__delete-text {
+    font-size: 16px;
+    line-height: 20px;
+}
+
+.notify__delete-btn {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.notify__delete-ok,
+.notify__delete-cancel {
+    padding: 16px;
+    cursor: pointer;
+}
+
+.notify__delete-ok:hover {
+    background-color: rgba(255, 255, 255, 0.8);
+    color: #3eda3e;
+}
+
+.notify__delete-cancel:hover {
+    background-color: rgba(255, 255, 255, 0.8);
+    color: #de1818;
+}
+
+/* tooltip */
 .tooltip {
     position: relative;
     display: inline-block;
+}
+
+.tooltip i {
+    font-size: 20px;
+    cursor: pointer;
 }
 
 .tooltip .tooltiptext {
@@ -336,7 +429,7 @@ header h2 {
     padding: 5px;
     position: absolute;
     z-index: 21;
-    bottom: -150%;
+    bottom: -120%;
     left: 50%;
     margin-left: -25px;
     opacity: 0;
@@ -359,8 +452,12 @@ header h2 {
     opacity: 1;
 }
 
+
 /* ======================== Switch Slider (Togggle) ======================= */
+
+
 /* The switch - the box around the slider */
+
 .switch {
     position: relative;
     display: inline-block;
@@ -412,7 +509,9 @@ input:checked+.slider:before {
     transform: translateX(13px);
 }
 
+
 /* Rounded sliders */
+
 .slider.round {
     border-radius: 34px;
 }
@@ -421,7 +520,9 @@ input:checked+.slider:before {
     border-radius: 50%;
 }
 
+
 /* ========= ScrollBar ============ */
+
 ::-webkit-scrollbar {
     width: 5px;
     height: 5px;
@@ -439,7 +540,9 @@ input:checked+.slider:before {
     background: #bbb;
 }
 
+
 /* Thanh % */
+
 .progress {
     display: block;
     position: relative;
@@ -460,17 +563,21 @@ input:checked+.slider:before {
     left: 0;
 }
 
+
 /* background color class */
 
 .bg-info {
     background-color: #63c2de;
 }
+
 .bg-danger {
     background-color: #f86c6b;
 }
+
 .bg-success {
     background-color: #4dbd74;
 }
+
 .bg-warning {
     background-color: #ffc107;
 }
