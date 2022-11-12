@@ -58,7 +58,7 @@
                     <img style="z-index: 1000;" src="../images/logo.png" alt="">
                     <div class="section__header-title-searchbar">
                         <div class="section__header-searchbar-child">
-                            <input type="text" placeholder="Search for food, coffe, etc..." />
+                            <input type="text" placeholder="Search for sushi, sashimi, bento..." />
                             <i class="fa-solid fa-magnifying-glass"></i>
                         </div>
                     </div>
@@ -348,7 +348,7 @@
                         <hr>
                         <br>
                         <form action="">
-                            <input id="fullname" type="text" name="fullname" placeholder="Tên của bạn">
+                            <input id="contact-fullname" type="text" name="fullname" placeholder="Tên của bạn">
                             <div class="sitebox-email-phone">
                                 <input id="contact-email" type="text" name="email" placeholder="Email của bạn">
                                 <input id="contact-phone" type="text" name="phone" placeholder="Số điện thoại của bạn">
@@ -364,6 +364,8 @@
                     </div>
                 </div>
             </div>
+
+
 
             <footer class="section__footer">
                 <div class="footer__counters">
@@ -501,13 +503,14 @@
                     </h1>
                     <form action="">
                         <div class="wrapper__form">
-                            <input id="Username" class="wrapper__input" type="text" placeholder=" "/>
-                            <label class="wrapper__label" for="">Tên của bạn</label>
+                            <input id="Username" class="wrapper__input" type="text" placeholder="Tên đăng nhập"/>
+                            <!-- <label class="wrapper__label" for="">Tên đăng nhập</label> -->
                             <div class="error-message"></div>
                         </div>
                         <div class="wrapper__form">
-                            <input class="wrapper__input" type="password" id="Password" placeholder=" "/>
-                            <label class="wrapper__label" for="">Password của bạn</label>
+                            <input class="wrapper__input" type="password" id="Password" placeholder="Mật khẩu"/>
+                            <!-- <label class="wrapper__label" for="">Mật khẩu</label> -->
+                            <div class="error-message"></div>
                         </div>
                     </form>
                     <input type="submit" class="wapper__submit" id="Login-Btn" value="Đăng Nhập">
@@ -524,23 +527,25 @@
                     </h1>
                     <form action="" id="form-login">
                         <div class="wrapper__form">
-                            <input id="username" class="wrapper__input" type="text" placeholder=" "/>
-                            <label class="wrapper__label" for="">Tên của bạn</label>
+                            <input id="fullname" class="wrapper__input" type="text" placeholder="Họ tên"/>
+                            <!-- <label class="wrapper__label" for="">Họ tên</label> -->
+                            <div class="error-message">
+                                
+                            </div>
+                        </div>
+                        <div class="wrapper__form">
+                            <input id="username" class="wrapper__input" type="text" placeholder="Tên đăng nhập"/>
+                            <!-- <label class="wrapper__label" for="">Tên đăng nhập</label> -->
                             <div class="error-message"></div>
                         </div>
                         <div class="wrapper__form">
-                            <input id="email" class="wrapper__input" type="email" placeholder=" "/>
-                            <label class="wrapper__label" for="">Email của bạn</label>
+                            <input id="password" class="wrapper__input" type="password" placeholder="Mật khẩu"/>
+                            <!-- <label class="wrapper__label" for="">Mật khẩu</label> -->
                             <div class="error-message"></div>
                         </div>
                         <div class="wrapper__form">
-                            <input id="password" class="wrapper__input" type="password" placeholder=" "/>
-                            <label class="wrapper__label" for="">Password của bạn</label>
-                            <div class="error-message"></div>
-                        </div>
-                        <div class="wrapper__form">
-                            <input id="again-password" class="wrapper__input" type="password" placeholder=" "/>
-                            <label class="wrapper__label" for="">Nhập lại password</label>
+                            <input id="again-password" class="wrapper__input" type="password" placeholder="Nhập lại mật khẩu"/>
+                            <!-- <label class="wrapper__label" for="">Nhập lại mật khẩu</label> -->
                             <div class="error-message"></div>
                         </div>
                     </form>

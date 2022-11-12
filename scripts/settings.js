@@ -1,5 +1,3 @@
-import { products } from "./json.js";
-
 // Lựa chọn các item trên nav-item
 const navItems = document.querySelectorAll('.nav-item');
 const sectionItems = document.querySelectorAll('.section > div');
@@ -48,11 +46,11 @@ function showProduct() {
             <td style="width: 15%">${arr[i][j].price}</td>
             <td style="width: 15%"><img src="${arr[i][j].image}"></td>
             <td style="width: 15%">
-            <div class="tooltip update">
+            <div class="tooltip update" onclick="editProduct(${i}, ${j})">
                     <i class="fa fa-wrench"></i>
                     <span class="tooltiptext">Sửa</span>
                 </div>
-                <div class="tooltip delete">
+                <div class="tooltip delete" onclick="deleteProduct(${i}, ${j})">
                     <i class="fa fa-trash"></i>
                     <span class="tooltiptext">Xóa</span>
                 </div>
@@ -64,6 +62,8 @@ function showProduct() {
     document.getElementById('table-product').innerHTML = htmls;
     localStorage.setItem("product", JSON.stringify(arr));
 }
+
+// D:\\MINHQUAN\\Workspace\\Do an web\\WEB_FOOD\\
 
 showProduct();
 
@@ -113,6 +113,9 @@ function addProduct() {
             }, 1300)
             
             showProduct();
+            imgProduct.value = "";
+            nameProduct.value = "";
+            priceProduct.value = "";
         }
         else {
             setTimeout(function() {
@@ -136,35 +139,65 @@ function addProduct() {
 addProduct();
 
 // Xử lý xóa sản phẩm
-const removeProductBtns = document.querySelectorAll('.tooltip.delete');
 const notifyDelete = document.querySelector('.notify__delete');
 
-console.log(notifyDelete)
+function deleteProduct(i, j) {
+    notifyDelete.innerHTML = `<div class="notify__delete-text">
+                Bạn có chắc sẽ xóa sản phẩm này không?
+            </div>
+            <div class="notify__delete-btn">
+                <div class="notify__delete-ok">
+                    OK
+                </div>
+                <div class="notify__delete-cancel">
+                    Hủy
+                </div>
+            </div>`
 
-function removeProduct() {
-    removeProductBtns.forEach(function(removeProductBtn) {
-        removeProductBtn.onclick = function() {
+    setTimeout(function() {
+        notifyDelete.style.transform = 'translate(-50%, 0)';
+        notifyDelete.style.opacity = '1';
+        document.querySelector('.notify__delete-ok').onclick = function() {
             const arr = JSON.parse(localStorage.getItem('product'));
+            notifyDelete.style.transform = 'translate(-50%, -270%)';
+            notifyDelete.style.opacity = '0';
 
-            setTimeout(function() {
-                notifyDelete.style.transform = 'translateY(0)';
-                document.querySelector('.notify__delete-ok').onclick = function() {
-                    
-                }
+            arr[i].splice(j, 1);
 
-                document.querySelector('.notify__delete-cancel').onclick = function() {
-                    notifyDelete.style.transform = 'translateY(-170%)';
-                }
-            }, 200)
-            
-            setTimeout(function() {
-                
-            }, 1200)
+            localStorage.setItem("product", JSON.stringify(arr));
+            showProduct();
         }
-    })
+        document.querySelector('.notify__delete-cancel').onclick = function() {
+            notifyDelete.style.transform = 'translate(-50%, -270%)';
+            notifyDelete.style.opacity = '0';
+        }
+    }, 200)
+    
 }
 
-removeProduct();
+// Sửa lỗi ảnh
+function updateProductImg(files, id) {
+    var url = '';
+    if(files.length) url = window.URL.createObjectURL(files[0]);
+    
+    document.getElementById(id).src = url;
+
+    const reader = new FileReader();
+    reader.addEventListener("load", function () {
+        // convert image file to base64 string
+        previewSrc = reader.result;
+        document.getElementById(id).src = previewSrc;
+    }, false);
+
+    if (files[0]) {
+        reader.readAsDataURL(files[0]);
+    }
+}
+
+// Xử lý sửa sản phẩm
+function editProduct(i, j) {
+    
+}
     
 /*function timSanPham() {
     const arr = JSON.parse(localStorage.getItem('product'))

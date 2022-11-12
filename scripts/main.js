@@ -253,7 +253,7 @@ const loginBack = document.querySelector('.login-back-icon');
 
 function openFormLogin() {
     loginBtn.onclick = function() {
-        const arr = JSON.parse(localStorage.getItem('accountStorage'));
+        const arr = JSON.parse(localStorage.getItem('account'));
         if(arr[0].isAdmin == false && arr[0].isUser == false) {
             formSignup.style.display = 'none';
             formSignin.style.display = 'block';
@@ -291,8 +291,8 @@ openFormLogin();
 closeFormLogin();
 
 // ** Xử lý lưu dữ liệu trên form Đăng ký/Đăng nhập
+const loginFullname = document.getElementById('fullname');
 const loginUsername = document.getElementById('username');
-const loginEmail = document.getElementById('email');
 const loginpassword = document.getElementById('password');
 const loginAgainPassword = document.getElementById('again-password');
 const overlayNotify = document.querySelector('.overlay-notify');
@@ -307,41 +307,147 @@ function setDefaultAccount() {
             isLogout: true
         },
         {
-            Name: 'user',
-            Email: 'user',
+            Fullname: 'user',
+            Username: 'user',
             Password: 'user'
         }
     ];
     
-    localStorage.setItem("accountStorage", JSON.stringify(accounts));
+    localStorage.setItem("account", JSON.stringify(accounts));
 }
 
-function addLogin() {
-    var Name = loginUsername.value;
-    var email = loginEmail.value;
+loginFullname.onblur = function() {
+    var fullname = loginFullname.value;
+    checkFullname(fullname, 2);
+}
+
+loginUsername.onblur = function() {
+    var username = loginUsername.value;
+    checkUsername(username, 3);
+}
+
+loginpassword.addEventListener('blur', function() {
     var password = loginpassword.value;
-    var arr = localStorage.getItem('accountStorage') ? JSON.parse(localStorage.getItem('accountStorage')) : [];
+    checkPassword(password, 4);
+})
+
+loginAgainPassword.addEventListener('blur', function() {
+    var againPassword = loginAgainPassword.value;
+    var password = loginpassword.value;
+    checkAgainPassword(password, againPassword, 5);
+})
+
+
+function addLogin() {
+    var fullname = loginFullname.value;
+    var username = loginUsername.value;
+    var password = loginpassword.value;
+
+    var arr = localStorage.getItem('account') ? JSON.parse(localStorage.getItem('account')) : [];
     var User = {
-        Name: Name,
-        Email: email,
+        Fullname: fullname,
+        Username: username,
         Password: password
     }
     arr.push(User);
-    localStorage.setItem('accountStorage', JSON.stringify(arr));
+    localStorage.setItem('account', JSON.stringify(arr));
     clear();
+}
+
+// ** Check lỗi Form
+var isFullname = false;
+var isUsername = false;
+var isPassword = false;
+var isAgainPassword = false;
+var errorMessage = document.querySelectorAll('.error-message');
+
+function checkFullname(fullname, index) {
+    if(fullname === '' || fullname === null) {
+        errorMessage[index].innerHTML = `<i class="fa-solid fa-circle-exclamation"></i>
+                                        Họ tên không được để trống`
+        errorMessage[index].style.opacity = '1';
+    }
+    else if(fullname.length > 30) {
+        errorMessage[index].innerHTML = `<i class="fa-solid fa-circle-exclamation"></i>
+                                        Họ tên từ 1-30 ký tự`
+        errorMessage[index].style.opacity = '1';
+    }
+    else {
+        isFullname = true;
+        errorMessage[index].style.opacity = '0';
+    }
+}
+
+function checkUsername(username, index) {
+    const arr = JSON.parse(localStorage.getItem('account'));
+    for(let i=0; i < arr.length; i++) {
+        if(username === '' || username === null) {
+            errorMessage[index].innerHTML = `<i class="fa-solid fa-circle-exclamation"></i>
+                                            Tên đăng nhập không được để trống`
+            errorMessage[index].style.opacity = '1';
+        }
+        else if(username.length < index || username.length > 20) {
+            errorMessage[index].innerHTML = `<i class="fa-solid fa-circle-exclamation"></i>
+                                            Tên đăng nhập từ index-20 ký tự`
+            errorMessage[index].style.opacity = '1';
+        }
+        else if(arr[i].Username === username) {
+            errorMessage[index].innerHTML = `<i class="fa-solid fa-circle-exclamation"></i>
+                                            Tên đăng nhập bị trùng, vui lòng nhập tên khác`
+            errorMessage[index].style.opacity = '1';
+        }
+        else {
+            isUsername = true;
+            errorMessage[index].style.opacity = '0';
+        }
+    }
+}
+
+function checkPassword(password, index) {
+    if(password === '' || password === null) {
+        errorMessage[index].innerHTML = `<i class="fa-solid fa-circle-exclamation"></i>
+                                        Mật khẩu không được để trống`
+        errorMessage[index].style.opacity = '1';
+    }
+    else if(password.length < 8) {
+        errorMessage[index].innerHTML = `<i class="fa-solid fa-circle-exclamation"></i>
+                                        Mật khẩu ít nhất có 8 ký tự`;
+        errorMessage[index].style.opacity = '1';
+    }
+    else {
+        isPassword = true;
+        errorMessage[index].style.opacity = '0';
+    }
+}
+
+function checkAgainPassword(password, againPassword, index) {
+    if(againPassword === '' || againPassword === null) {
+        errorMessage[index].innerHTML = `<i class="fa-solid fa-circle-exclamation"></i>
+                                        Mật khẩu không được để trống`
+        errorMessage[index].style.opacity = '1';
+    }
+    else if(password !== againPassword) {
+        errorMessage[index].innerHTML = `<i class="fa-solid fa-circle-exclamation"></i>
+                                        Mật khẩu nhập lại không đúng`;
+        errorMessage[index].style.opacity = '1';
+    }
+    else {
+        isAgainPassword = true;
+        errorMessage[index].style.opacity = '0';
+    }
 }
 
 // Kiểm tra đăng nhập Người dùng bình thường
 function checkSignin() {
-    var Name = document.getElementById('Username').value;
+    var Username = document.getElementById('Username').value;
     var Password = document.getElementById('Password').value;
-    const arr = JSON.parse(localStorage.getItem('accountStorage'));
+    const arr = JSON.parse(localStorage.getItem('account'));
     for(let i = 0; i < arr.length; i++) {
-        if(arr[i].Name == Name && arr[i].Password == Password) {
-            arr[1].Name = arr[i].Name;
-            arr[1].Email = arr[i].Email;
+        if(arr[i].Username == Username && arr[i].Password == Password) {
+            arr[1].Fullname = arr[i].Fullname;
+            arr[1].Username = arr[i].Username;
             arr[1].Password = arr[i].Password;
-            localStorage.setItem('accountStorage', JSON.stringify(arr));
+            localStorage.setItem('account', JSON.stringify(arr));
             return true;
         }
     }
@@ -351,11 +457,11 @@ function checkSignin() {
 
 // Kiểm tra đăng nhập Người dùng là Admin
 function checkAdmin() {
-    var Name = document.getElementById('Username').value;
+    var Username = document.getElementById('Username').value;
     var Password = document.getElementById('Password').value;
-    const arr = JSON.parse(localStorage.getItem('accountStorage'));
+    const arr = JSON.parse(localStorage.getItem('account'));
     for(let i = 0; i < arr.length; i++) {
-        if (Name == "admin" && Password == "admin") {
+        if (Username == "admin" && Password == "admin") {
             return true;
         }
     }
@@ -364,33 +470,60 @@ function checkAdmin() {
 }
 
 function clear() {
+    loginFullname.value = "";
     loginUsername.value = "";
-    loginEmail.value = "";
     loginpassword.value = "";
     loginAgainPassword.value = "";
 }
 
-document.getElementById('login-btn').onclick = function() {
-    setTimeout(function() {
-        addLogin();
-        overlayNotify.style.transform = 'translateX(0)';
-        overlayNotify.style.opacity = '1';
-        overlayNotify.innerHTML = `<div class="login-notify success">
-                                        <i class="fa-solid fa-circle-check"></i>
-                                        Đăng ký thành công
+document.getElementById('login-btn').onclick = function(e) {
+    if(isFullname === true && isUsername === true && isPassword === true && isAgainPassword === true) {
+        setTimeout(function() {
+            addLogin();
+            overlayNotify.style.transform = 'translateX(0)';
+            overlayNotify.style.opacity = '1';
+            overlayNotify.innerHTML = `<div class="login-notify success">
+                                            <i class="fa-solid fa-circle-check"></i>
+                                            Đăng ký thành công
+                                        </div>`;
+        }, 500)
+        
+        setTimeout(function() {
+            overlayNotify.style.transform = 'translateX(100%)';
+            overlayNotify.style.opacity = '0';
+            formSignup.style.display = 'none';
+            formSignin.style.display = 'block';
+        }, 2000)
+    }
+    else {
+        setTimeout(function() {
+            overlayNotify.style.transform = 'translateX(0)';
+            overlayNotify.style.opacity = '1';
+            overlayNotify.innerHTML = `<div class="login-notify error">
+                                        <i class="fa-solid fa-circle-xmark"></i>
+                                        Đăng ký chưa hợp lệ!!
                                     </div>`;
-    }, 500)
-    
-    setTimeout(function() {
-        overlayNotify.style.transform = 'translateX(100%)';
-        overlayNotify.style.opacity = '0';
-        formSignup.style.display = 'none';
-        formSignin.style.display = 'block';
-    }, 2000)
+        }, 500)
+
+        setTimeout(function() {
+            overlayNotify.style.transform = 'translateX(100%)';
+            overlayNotify.style.opacity = '0';
+        }, 2000)
+    }
+}
+
+document.getElementById('Username').onblur = function() {
+    var username = document.getElementById('Username').value;
+    checkUsername(username, 0);
+}
+
+document.getElementById('Password').onblur = function() {
+    var password = document.getElementById('Password').value;
+    checkPassword(password, 1);
 }
 
 document.getElementById('Login-Btn').onclick = function() {
-    const arr = JSON.parse(localStorage.getItem('accountStorage'));
+    const arr = JSON.parse(localStorage.getItem('account'));
     if(checkAdmin()) {
         arr[0].isAdmin = true;
         arr[0].isUser = false;
@@ -411,8 +544,6 @@ document.getElementById('Login-Btn').onclick = function() {
             overlayNotify.style.opacity = '0';
             overlayLogin.classList.remove('open');
         }, 2000)
-
-        window.location.pathname = "/html/settings.html";
 
     }
     else if(checkSignin()) {
@@ -451,17 +582,17 @@ document.getElementById('Login-Btn').onclick = function() {
         setTimeout(function() {
             overlayNotify.style.transform = 'translateX(100%)';
             overlayNotify.style.opacity = '0';
-            document.getElementById('Email').value = "";
+            document.getElementById('Username').value = "";
             document.getElementById('Password').value = "";
         }, 2000)
     }
 
-    localStorage.setItem('accountStorage',JSON.stringify(arr))
+    localStorage.setItem('account',JSON.stringify(arr))
 }
 
 // Kiểm tra tài khoản đã có hay chưa
 function checkAccount() {
-    const arr = JSON.parse(localStorage.getItem("accountStorage"));
+    const arr = JSON.parse(localStorage.getItem("account"));
 
     if(arr == null ) {
         setDefaultAccount();
@@ -480,11 +611,9 @@ function checkAccount() {
             }
 
             document.querySelector('.sidebar__log-out').classList.remove('hide');
-            document.getElementById('section__header-login').style.color = 'white';
-            document.getElementById('section__header-login').style.cursor = 'default';
         }
 
-        localStorage.setItem('accountStorage',JSON.stringify(arr));
+        localStorage.setItem('account',JSON.stringify(arr));
     }   
 }
 
@@ -494,7 +623,7 @@ const notify = document.querySelector('.notify');
 
 function checkLogout() {
     logout.onclick = function() {
-        const arr = JSON.parse(localStorage.getItem("accountStorage"));
+        const arr = JSON.parse(localStorage.getItem("account"));
 
         arr[0].isLogout = true;
         arr[0].isAdmin = false;
@@ -516,7 +645,7 @@ function checkLogout() {
 
         document.querySelector('.section__header-title-text.login').innerHTML = 'Đăng ký <br> Đăng nhập';
         document.querySelector('.sidebar__log-out').classList.add('hide');
-        localStorage.setItem('accountStorage',JSON.stringify(arr));
+        localStorage.setItem('account',JSON.stringify(arr));
 
         setTimeout(function() {
             window.location.pathname = "/html/index.html";
@@ -566,8 +695,6 @@ amountBtns.forEach((amountBtn, index) => {
         }
     }
 })
-
-// ** Check lỗi login
 
 // ** tìm kiếm sản phẩm
 

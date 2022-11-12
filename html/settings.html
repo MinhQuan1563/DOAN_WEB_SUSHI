@@ -21,6 +21,9 @@
     <link rel="stylesheet" href="../css/base.css">
     <link rel="stylesheet" href="../css/responsive.css">
 
+    <!-- Link JS -->
+    <link rel="stylesheet" href="../scripts/settings.js">
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js"></script>
 
 </head>
@@ -130,8 +133,9 @@
                         <tr>
                             <td>Hình ảnh:</td>
                             <td>
-                                <img src="">
-                                <input type="file" name="" id="">
+                                <img src="" id="productImgAdd">
+                                <!-- <input type="file" name="" id="" onchange="updateProductImg(this.files, 'productImgAdd')"> -->
+                                <input type="file" name="" id="" onchange="handleInput(event)">
                             </td>
                         </tr>
                         <tr>
@@ -151,17 +155,7 @@
                 </div>
 
                 <div class="notify__delete">
-                    <div class="notify__delete-text">
-                        Bạn có chắc sẽ xóa sản phẩm này không?
-                    </div>
-                    <div class="notify__delete-btn">
-                        <div class="notify__delete-ok">
-                            OK
-                        </div>
-                        <div class="notify__delete-cancel">
-                            Hủy
-                        </div>
-                    </div>
+                    
                 </div>
             </div>
     
@@ -237,7 +231,7 @@
     </div>
 
     <!-- Javascript -->
-    <script type="module" src="../scripts/settings.js"></script>
+    <script src="../scripts/settings.js"></script>
 </body>
 </html>
 
