@@ -289,7 +289,8 @@ header h2 {
 
 
 /* Overlay */
-.overlay.product {
+.overlay.product.edit,
+.overlay.product.add {
     transform: scale(0);
     transition: .2s ease;
     background-color: #020202d8;

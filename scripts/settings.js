@@ -31,17 +31,23 @@ navItems.forEach(function(navItem, index) {
     }
 })
 
+var imgSrc;
+function uploadImg(event) {
+    imgSrc = URL.createObjectURL(event.target.files[0]);
+}
+
 // Render sản phẩm ra Table
 function showProduct() {
     const arr = JSON.parse(localStorage.getItem('product'));
     var htmls = '<table>';
     let temp = 1;
+    var a = ["Bento", "Sushi", "Sashimi", "Combo Sashimi", "Món ăn kèm", "Nước uống và tráng miệng"]
     for (let i = 0; i < arr.length; i++) {
         for (let j = 0; j < arr[i].length; j++) {
             htmls += `
             <tr>
             <td style="width: 5%">${temp++}</td>
-            <td style="width: 10%">${"shushi"}</td>
+            <td style="width: 10%">${a[i]}</td>
             <td style="width: 40%" class="fa__left">${arr[i][j].name}</td>
             <td style="width: 15%">${arr[i][j].price}</td>
             <td style="width: 15%"><img src="${arr[i][j].image}"></td>
@@ -69,7 +75,8 @@ showProduct();
 
 // Xử lý thêm sản phẩm
 const addProductBtn = document.getElementById('add-product');
-const overlayProduct = document.querySelector('.overlay.product');
+const overlayProduct = document.querySelector('.overlay.product.add');
+const overlayProduct2 = document.querySelector('.overlay.product.edit');
 const confirmAdd = document.getElementById('add-btn');
 const indexType = document.querySelector('.overlay.product select');
 const nameProduct = document.querySelector('.overlay.product input.name');
@@ -90,10 +97,11 @@ function addProduct() {
 
         if(img != "" && name != "" && price != "") {
             arr[indexType.value].push({
-                img: img,
+                img: imgSrc,
                 name: name,
                 price: price
             })
+            console.log(imgSrc)
             
             localStorage.setItem("product", JSON.stringify(arr));
             
@@ -175,12 +183,16 @@ function deleteProduct(i, j) {
     
 }
 
+
+
 // Sửa lỗi ảnh
 function updateProductImg(files, id) {
-    var url = '';
-    if(files.length) url = window.URL.createObjectURL(files[0]);
+    // var url = '';
+    // if(files.length) url = window.URL.createObjectURL(files[0]);
     
-    document.getElementById(id).src = url;
+    // document.getElementById(id).src = url;
+
+    // console.log(url);
 
     const reader = new FileReader();
     reader.addEventListener("load", function () {
@@ -194,9 +206,69 @@ function updateProductImg(files, id) {
     }
 }
 
+
+
 // Xử lý sửa sản phẩm
 function editProduct(i, j) {
+    const arr = JSON.parse(localStorage.getItem('product'));
+    var htmls = `
+    <div class="close" onclick="this.parentElement.style.transform = 'scale(0)';">
+                        <i class="fa-solid fa-xmark"></i>
+                    </div>
+                    <table class="overlayTable table-outline table-content table-header">
+                        <tr>
+                            <th colspan="2">Xóa Sản Phẩm</th>
+                        </tr>
+                        <tr>
+                            <td>Loại sản phẩm:</td>
+                            <td>
+                                <select>`
+
+    var tmp = ["Bento", "Sushi", "Sashimi", "Combo Sashimi", "Món ăn kèm", "Nước uống và tráng miệng"];
+    for(var k in tmp) {
+        if(i == k)
+            htmls += (`<option value="`+k+`" selected>`+tmp[k]+`</option>`);
+        else
+            htmls += (`<option value="`+k+`">`+tmp[k]+`</option>`);
+    }
     
+    htmls += `</select>
+                </td>
+            </tr>
+            <tr>
+                <td>Tên sản phẩm:</td>
+                <td><input type="text" class="name" value="${arr[i][j].name}"></td>
+            </tr>
+            <tr>
+                <td>Hình ảnh:</td>
+                <td>
+                    <img src="${arr[i][j].image}" id="productImgAdd">
+                    <input type="file" name="" id=""  onchange="uploadImg(this.files, 'productImgAdd', event)">
+                </td>
+            </tr>
+            <tr>
+                <td>Giá tiền:</td>
+                <td><input type="text" class="price-2" value="${arr[i][j].price}"></td>
+            </tr>
+            <tr>
+                <td colspan="2" class="table-footer">
+                    <button id="edit-btn">SỬA</button>
+                </td>
+            </tr>
+        </table>
+
+        <div class="notify">
+            
+        </div>`
+    document.querySelector('.overlay.product.edit').innerHTML = htmls;
+    overlayProduct2.style.transform = 'scale(1)';
+
+    const editBtn = document.getElementById('edit-btn');
+
+    editBtn.onclick = function() {
+        
+    }
+
 }
     
 /*function timSanPham() {

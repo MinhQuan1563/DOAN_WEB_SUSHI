@@ -21,9 +21,6 @@
     <link rel="stylesheet" href="../css/base.css">
     <link rel="stylesheet" href="../css/responsive.css">
 
-    <!-- Link JS -->
-    <link rel="stylesheet" href="../scripts/settings.js">
-
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js"></script>
 
 </head>
@@ -105,7 +102,7 @@
                     </button>
                 </div>
     
-                <div class="overlay product">
+                <div class="overlay product add">
                     <div class="close" onclick="this.parentElement.style.transform = 'scale(0)';">
                         <i class="fa-solid fa-xmark"></i>
                     </div>
@@ -134,8 +131,7 @@
                             <td>Hình ảnh:</td>
                             <td>
                                 <img src="" id="productImgAdd">
-                                <!-- <input type="file" name="" id="" onchange="updateProductImg(this.files, 'productImgAdd')"> -->
-                                <input type="file" name="" id="" onchange="handleInput(event)">
+                                <input type="file" name="" id=""  onchange="uploadImg(event)">
                             </td>
                         </tr>
                         <tr>
@@ -152,6 +148,10 @@
                     <div class="notify">
                         
                     </div>
+                </div>
+
+                <div class="overlay product edit">
+
                 </div>
 
                 <div class="notify__delete">
