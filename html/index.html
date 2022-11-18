@@ -60,8 +60,11 @@
                     <img style="z-index: 1000;" src="../images/logo.png" alt="">
                     <div class="section__header-title-searchbar">
                         <div class="section__header-searchbar-child">
-                            <input type="text" placeholder="Search for sushi, sashimi, bento..." />
-                            <i class="fa-solid fa-magnifying-glass"></i>
+                            <div class="section__delete">
+                                <p class="fa-solid fa-xmark"></p>
+                            </div>
+                            <input type="text" id="section__search" placeholder="Search for sushi, sashimi, bento..." />
+                            <i class="fa-solid fa-magnifying-glass" id="search" onclick="searchProduct()"></i>
                         </div>
                     </div>
                     <div class="section__header-title-notified section__header-title-icon">
@@ -152,19 +155,62 @@
                     <li>Món ăn kèm</li>
                     <li>Nước uống và tráng miệng</li>
                 </ul>
+
                 <div class="section__content-title">
                     <h2>Thực đơn</h2>
-                    <div class="section__content-filter">
+                    <div class="section__content-filter" id="filter-btn">
                         <i class="fa-solid fa-filter"></i>
                         <p>Bộ lọc</p>
                     </div>
                 </div>
-                <ul class="section__content-list"></ul>
+
+                <div class="filter">
+                    <div class="filter__header">
+                        <ul class="filter__header-selectors">
+                            <li>Bento</li>
+                            <li>Sushi</li>
+                            <li>Sashimi</li>
+                            <li>Combo</li>
+                            <li>Món kèm</li>
+                            <li>Tráng miệng</li>
+                        </ul>
+                        <div class="filter__content">
+                            <div class="filter__content-item-note">
+                                <label for="">Tên sản phẩm</label>
+                                <div class="filter__item">
+                                    <input type="text" id="nameproduct" placeholder="Tên ..." />
+                                </div>
+                            </div>
+                            <div class="filter__content-item-note">
+                                <label for="">Khoảng giá</label>
+                                <div class="filter__item">
+                                    <div>
+                                        <input type="text" id="moneymin" placeholder="0" />
+                                        <span>.000</span>
+                                    </div>
+                                    <p class="fa-solid fa-arrow-right"></p>
+                                    <div>
+                                        <input type="text" id="moneymax" placeholder="2.249" />
+                                        <span>.000</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <button class="Submit__Search" onclick="filterHandle()">Xác Nhận</button>
+                    </div>
+        
+                </div>
+
+                <ul class="section__content-list">
+                    
+                </ul>
+
                 <div id="pagination">
                     <i class="ti-arrow-circle-left btn-prev"></i>
                     <ul class="pagi-number-page"></ul>
                     <i class="ti-arrow-circle-right btn-next active"></i>
                 </div>
+
             </div>
 
             <div class="section__content checkout">
@@ -463,8 +509,10 @@
             </div>
             </footer>
         </div>
+        
+        
 
-        <div class="overlay">
+        <div class="overlay detail">
             <div class="modal">
                 <i class="fa-solid fa-xmark close-icon"></i>
                 <div class="modal__inner">
