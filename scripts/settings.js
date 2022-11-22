@@ -36,40 +36,90 @@ function uploadImg(event) {
     imgSrc = URL.createObjectURL(event.target.files[0]);
 }
 
+// Xử lý gía sản phẩm
+function addComma(number) {
+    number = '' + number;
+    if (number.length > 3) {
+        var mod = number.length % 3;
+        var output = (mod > 0 ? (number.substring(0,mod)) : '');
+        for (i=0 ; i < Math.floor(number.length / 3); i++) {
+            if ((mod == 0) && (i == 0))
+                output += number.substring(mod+ 3 * i, mod + 3 * i + 3);
+            else
+                output+= ',' + number.substring(mod + 3 * i, mod + 3 * i + 3);
+        }
+        return (output);
+    }
+    else return number;
+}
+
+function deleteComma(s) {
+    var arr = s.split(',');
+    var money = '';
+    for(let i=0; i < arr.length; i++) {
+        money += arr[i];
+    }
+
+    return parseInt(money);
+}
+
+// Hàm lấy Loại sản phẩm
+function getTypeProduct(type) {
+    var a = ["Bento", "Sushi", "Sashimi", "Combo Sashimi", "Món ăn kèm", "Nước uống và tráng miệng"]
+    var s;
+    switch(type) {
+        case 'bento':
+            s = a[0];
+            break;
+        case 'sushi':
+            s = a[1];
+            break;
+        case 'sashimi':
+            s = a[2];
+            break;
+        case 'combosashimi':
+            s = a[3];
+            break;
+        case 'monkem':
+            s = a[4];
+            break;
+        case 'trangmieng':
+            s = a[5];
+            break;
+    }
+
+    return s;
+}
+
 // Render sản phẩm ra Table
 function showProduct() {
-    const arr = JSON.parse(localStorage.getItem('product'));
+    const arr = localStorage.getItem('product') ? JSON.parse(localStorage.getItem('product')) : products;
     var htmls = '<table>';
     let temp = 1;
-    var a = ["Bento", "Sushi", "Sashimi", "Combo Sashimi", "Món ăn kèm", "Nước uống và tráng miệng"]
     for (let i = 0; i < arr.length; i++) {
-        for (let j = 0; j < arr[i].length; j++) {
-            htmls += `
-            <tr>
-            <td style="width: 5%">${temp++}</td>
-            <td style="width: 10%">${a[i]}</td>
-            <td style="width: 40%" class="fa__left">${arr[i][j].name}</td>
-            <td style="width: 15%">${arr[i][j].price}</td>
-            <td style="width: 15%"><img src="${arr[i][j].image}"></td>
-            <td style="width: 15%">
-            <div class="tooltip update" onclick="editProduct(${i}, ${j})">
-                    <i class="fa fa-wrench"></i>
-                    <span class="tooltiptext">Sửa</span>
-                </div>
-                <div class="tooltip delete" onclick="deleteProduct(${i}, ${j})">
-                    <i class="fa fa-trash"></i>
-                    <span class="tooltiptext">Xóa</span>
-                </div>
-            </td>
-            </tr>`
-        }
+        htmls += `
+        <tr>
+        <td style="width: 5%">${temp++}</td>
+        <td style="width: 10%">${getTypeProduct(arr[i].type)}</td>
+        <td style="width: 40%" class="fa__left">${arr[i].name}</td>
+        <td style="width: 15%">${arr[i].price}</td>
+        <td style="width: 15%"><img src="${arr[i].image}"></td>
+        <td style="width: 15%">
+        <div class="tooltip update" onclick="editProduct(${i})">
+                <i class="fa fa-wrench"></i>
+                <span class="tooltiptext">Sửa</span>
+            </div>
+            <div class="tooltip delete" onclick="deleteProduct(${i})">
+                <i class="fa fa-trash"></i>
+                <span class="tooltiptext">Xóa</span>
+            </div>
+        </td>
+        </tr>`
     }
     htmls += '</table>';
     document.getElementById('table-product').innerHTML = htmls;
     localStorage.setItem("product", JSON.stringify(arr));
 }
-
-// D:\\MINHQUAN\\Workspace\\Do an web\\WEB_FOOD\\
 
 showProduct();
 
@@ -78,7 +128,7 @@ const addProductBtn = document.getElementById('add-product');
 const overlayProduct = document.querySelector('.overlay.product.add');
 const overlayProduct2 = document.querySelector('.overlay.product.edit');
 const confirmAdd = document.getElementById('add-btn');
-const indexType = document.querySelector('.overlay.product select');
+const valueType = document.querySelector('.overlay.product select');
 const nameProduct = document.querySelector('.overlay.product input.name');
 const imgProduct = document.querySelector('.overlay.product input[type="file"]');
 const priceProduct = document.querySelector('.overlay.product input.price');
@@ -90,16 +140,18 @@ function addProduct() {
     })
     
     confirmAdd.onclick = function() {
-        const arr = JSON.parse(localStorage.getItem('product'));
+        const arr = localStorage.getItem('product') ? JSON.parse(localStorage.getItem('product')) : products;
         const img = imgProduct.value;
         const name = nameProduct.value;
-        const price = priceProduct.value
+        const price = priceProduct.value;
+        const type = valueType.value;
 
         if(img != "" && name != "" && price != "") {
-            arr[indexType.value].push({
-                img: imgSrc,
+            arr.push({
+                image: imgSrc,
                 name: name,
-                price: price
+                price: addComma(price),
+                type: type
             })
             console.log(imgSrc)
             
@@ -149,7 +201,7 @@ addProduct();
 // Xử lý xóa sản phẩm
 const notifyDelete = document.querySelector('.notify__delete');
 
-function deleteProduct(i, j) {
+function deleteProduct(i) {
     notifyDelete.innerHTML = `<div class="notify__delete-text">
                 Bạn có chắc sẽ xóa sản phẩm này không?
             </div>
@@ -166,11 +218,11 @@ function deleteProduct(i, j) {
         notifyDelete.style.transform = 'translate(-50%, 0)';
         notifyDelete.style.opacity = '1';
         document.querySelector('.notify__delete-ok').onclick = function() {
-            const arr = JSON.parse(localStorage.getItem('product'));
+            const arr = localStorage.getItem('product') ? JSON.parse(localStorage.getItem('product')) : products;
             notifyDelete.style.transform = 'translate(-50%, -270%)';
             notifyDelete.style.opacity = '0';
 
-            arr[i].splice(j, 1);
+            arr.splice(i, 1);
 
             localStorage.setItem("product", JSON.stringify(arr));
             showProduct();
@@ -206,11 +258,9 @@ function updateProductImg(files, id) {
     }
 }
 
-
-
 // Xử lý sửa sản phẩm
-function editProduct(i, j) {
-    const arr = JSON.parse(localStorage.getItem('product'));
+function editProduct(i) {
+    const arr = localStorage.getItem('product') ? JSON.parse(localStorage.getItem('product')) : products;
     var htmls = `
     <div class="close" onclick="this.parentElement.style.transform = 'scale(0)';">
                         <i class="fa-solid fa-xmark"></i>
@@ -224,12 +274,12 @@ function editProduct(i, j) {
                             <td>
                                 <select>`
 
-    var tmp = ["Bento", "Sushi", "Sashimi", "Combo Sashimi", "Món ăn kèm", "Nước uống và tráng miệng"];
-    for(var k in tmp) {
-        if(i == k)
-            htmls += (`<option value="`+k+`" selected>`+tmp[k]+`</option>`);
+    var tmps = ["bento", "sushi", "sashimi", "combosashimi", "monkem", "trangmieng"];
+    for(var tmp of tmps) {
+        if(arr[i].type === tmp)
+            htmls += (`<option value="`+tmp+`" selected>`+getTypeProduct(tmp)+`</option>`);
         else
-            htmls += (`<option value="`+k+`">`+tmp[k]+`</option>`);
+            htmls += (`<option value="`+tmp+`">`+getTypeProduct(tmp)+`</option>`);
     }
     
     htmls += `</select>
@@ -237,18 +287,18 @@ function editProduct(i, j) {
             </tr>
             <tr>
                 <td>Tên sản phẩm:</td>
-                <td><input type="text" class="name" value="${arr[i][j].name}"></td>
+                <td><input type="text" class="name" value="${arr[i].name}"></td>
             </tr>
             <tr>
                 <td>Hình ảnh:</td>
                 <td>
-                    <img src="${arr[i][j].image}" id="productImgAdd">
-                    <input type="file" name="" id=""  onchange="uploadImg(this.files, 'productImgAdd', event)">
+                    <img src="${arr[i].image}" id="productImgAdd">
+                    <input type="file" name="" id=""  onchange="uploadImg(this.files, 'productImgAdd')">
                 </td>
             </tr>
             <tr>
                 <td>Giá tiền:</td>
-                <td><input type="text" class="price-2" value="${arr[i][j].price}"></td>
+                <td><input type="text" class="price-2" value="${arr[i].price}"></td>
             </tr>
             <tr>
                 <td colspan="2" class="table-footer">
@@ -263,14 +313,68 @@ function editProduct(i, j) {
     document.querySelector('.overlay.product.edit').innerHTML = htmls;
     overlayProduct2.style.transform = 'scale(1)';
 
-    const editBtn = document.getElementById('edit-btn');
-
-    editBtn.onclick = function() {
-        
-    }
+    
 
 }
+
+// function changeProduct() {
+//     const editBtn = document.getElementById('edit-btn');
+
+//     editBtn.onclick = function() {
+//         const type = document.querySelector('.overlay.product select').value;
+//         const name = document.querySelector('.overlay.product input.name').value;
+//         const img = document.querySelector('.overlay.product input[type="file"]').value;
+//         const price = document.querySelector('.overlay.product input.price').value;
+
+//         console.log(name)
+
+//         // if(img != "" && name != "" && price != "") {
+//         //     arr[i] = {
+//         //         img: img,
+//         //         name: name,
+//         //         price: addComma(price),
+//         //         type: type
+//         //     }
+            
+//         //     localStorage.setItem("product", JSON.stringify(arr));
+            
+//         //     setTimeout(function() {
+//         //         notify.classList.add('success');
+//         //         notify.innerHTML = `<i class="fa-solid fa-circle-check"></i>
+//         //         Sửa sản phẩm thành công`;
+//         //         notify.style.opacity = '1';
+//         //     }, 200)
+            
+//         //     setTimeout(function() {
+//         //         notify.style.opacity = '0';
+//         //     }, 1200)
+            
+//         //     setTimeout(function() {
+//         //         overlayProduct.style.transform = 'scale(0)';
+//         //     }, 1300)
+            
+//         //     showProduct();
+//         // }
+//         // else {
+//         //     setTimeout(function() {
+//         //         notify.classList.add('error');
+//         //         notify.innerHTML = `<i class="fa-solid fa-circle-xmark"></i>
+//         //                         Chưa điền đủ thông tin sản phẩm`;
+//         //         notify.style.opacity = '1';
+//         //     }, 200)
     
+//         //     setTimeout(function() {
+//         //         notify.style.opacity = '0';
+//         //     }, 1200)
+//         // }
+//         // notify.classList.remove('error');
+//         // notify.classList.remove('success');
+//         // notify.innerHTML = '';
+//     }
+// }
+
+// changeProduct()
+
 /*function timSanPham() {
     const arr = JSON.parse(localStorage.getItem('product'))
     var list = [];
@@ -307,5 +411,4 @@ function editProduct(i, j) {
     }
     document.getElementById('test').innerHTML = x;
 }*/
-
 

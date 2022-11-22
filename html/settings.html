@@ -114,12 +114,12 @@
                             <td>Loại sản phẩm:</td>
                             <td>
                                 <select>
-                                    <option value="0">Bento</option>
-                                    <option value="1">Sushi</option>
-                                    <option value="2">Sashimi</option>
-                                    <option value="3">Combo Sashimi</option>
-                                    <option value="4">Món ăn kèm</option>
-                                    <option value="5">Nước uống và tráng miệng</option>
+                                    <option value="bento">Bento</option>
+                                    <option value="sushi">Sushi</option>
+                                    <option value="sashimi">Sashimi</option>
+                                    <option value="combosashimi">Combo Sashimi</option>
+                                    <option value="monkem">Món ăn kèm</option>
+                                    <option value="trangmieng">Nước uống và tráng miệng</option>
                                 </select>
                             </td>
                         </tr>
@@ -131,7 +131,7 @@
                             <td>Hình ảnh:</td>
                             <td>
                                 <img src="" id="productImgAdd">
-                                <input type="file" name="" id=""  onchange="uploadImg(event)">
+                                <input type="file" name="" id=""  onchange="updateProductImg(this.files, 'productImgAdd')">
                             </td>
                         </tr>
                         <tr>

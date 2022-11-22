@@ -345,7 +345,7 @@ button, select, input {
 /* Hiện thông báo */
 .notify__delete,
 .notify {
-    position: absolute;
+    position: fixed;
     top: 6%;
     padding: 20px;
     margin: 20px;
