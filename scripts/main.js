@@ -517,6 +517,8 @@ var products = [
     }
 ]
 
+// console.log(splitImg('C:\\fakepath\\img-0-11.png'))
+
 const Products = localStorage.getItem('product') ? JSON.parse(localStorage.getItem('product')) : products;
 
 if(Products === products) {
@@ -1255,10 +1257,6 @@ function checkLogout() {
         document.querySelector('.section__header-title-text.login').innerHTML = 'Đăng nhập';
         document.querySelector('.sidebar__log-out').classList.add('hide');
         localStorage.setItem('account',JSON.stringify(arr));
-
-        setTimeout(function() {
-            window.location.pathname = "/html/index.html";
-        }, 2000)
     }
 }
 
@@ -1387,6 +1385,8 @@ filterBtn.addEventListener('click', function() {
         isFilter = false;
         document.querySelector('.filter').style.display = "none";
         document.querySelector('.filter').style.opacity = "0";
+        renderProduct(getProducts('bento'));
+        renderProductDefault(getProducts('bento'));
     }
 })
 
@@ -1427,6 +1427,22 @@ function filterHandle() {
     moneyMin = parseInt(moneyMin);
     moneyMax = parseInt(moneyMax);
 
+    if(moneyMin > moneyMax && moneyMin !== '' && moneyMax !== '') {
+        setTimeout(function() {
+            notify.style.transform = 'translateX(0)';
+            notify.style.opacity = '1';
+            notify.innerHTML = `<div class="login-notify error">
+                                    <i class="fa-solid fa-circle-xmark"></i>
+                                    Khoảng giá không hơp lệ
+                                </div>`;
+        }, 300)
+
+        setTimeout(function() {
+            notify.style.transform = 'translateX(100%)';
+            notify.style.opacity = '0';
+        }, 1500)
+    }
+
     var arrtemp1;
     var arrtemp2 = [];
     var arrtemp3 = [];
@@ -1452,8 +1468,8 @@ function filterHandle() {
         
         var temp = Products[i].price;
         var money = parseInt(Products[i].price.split(','));
-        if(moneyMin !== NaN && moneyMax !== NaN && (money >= moneyMin && money <= moneyMax)) {
-            if(Number.isNaN(moneyMin) === true || Number.isNaN(moneyMax) === true) {
+        if((Number.isNaN(moneyMin) === true || Number.isNaN(moneyMax) === true) && typeof moneyMin !== 'number' || typeof moneyMax !== 'number') {
+            // if(moneyMin === NaN  moneyMax === NaN) {
                 setTimeout(function() {
                     notify.style.transform = 'translateX(0)';
                     notify.style.opacity = '1';
@@ -1462,18 +1478,21 @@ function filterHandle() {
                                             Giá sản phẩm phải là chữ số
                                         </div>`;
                 }, 300)
-
+        
                 setTimeout(function() {
                     notify.style.transform = 'translateX(100%)';
                     notify.style.opacity = '0';
-                }, 1000)
-            }
-            else {
+                }, 1500)
+                console.log(moneyMin)
+            // }
+        }
+        else {
+            if(moneyMin !== NaN && moneyMax !== NaN && (money >= moneyMin && money <= moneyMax)) {
                 Products[i].price = temp;
                 arrtemp3.push(Products[i]);
             }
         }
-
+        
     }
 
     var arrtemp = [];
@@ -1549,6 +1568,8 @@ modalCart.onclick = function(e) {
     e.stopPropagation();
 }
 
+var a = 0, b = 0;
+
 // Thêm vào giỏ hàng
 var addCart = document.querySelector(".modal__inner-add-cart");
 const cartNotify = document.querySelector('.cart-notify');
@@ -1582,6 +1603,8 @@ addCart.onclick = () => {
         
             arr.push(cart);
         }
+
+        renderCartNotify(arr)
     
         localStorage.setItem("shoppingCart", JSON.stringify(arr));
     
@@ -1784,6 +1807,9 @@ function updateCart() {
             document.getElementById("checkout__cart-total-amount").innerText = `${totalAmount}`;
             total = addComma(total);
             document.getElementById("checkout__cart-total-money").innerText = `${total} ₫`;
+            renderCartNotify(list)
+            a = totalAmount;
+            b = total;
         });
         initCart();
     }
@@ -1833,7 +1859,30 @@ function loadCartItem(items, callback) {
                                 </div>
                             </div>`;
     });
-    callback(total, totalAmount);
+    callback(total, totalAmount);   
+}
+
+// Render thông tin mua hàng ra thông báo
+function renderCartNotify(arr) {
+    var notifyCart = document.querySelector('.section__notify-cart-list');
+    notifyCart.innerHTML = '';
+
+    for(let i=0; i < arr.length; i++) {
+        notifyCart.innerHTML += `<li class="section__notify-cart-item">
+                                    <img src="${arr[i].img}" alt="">
+                                    <div class="section__notify-cart-info">
+                                        <div class="section__notify-cart-name">${arr[i].name}</div>
+                                        <div class="section__notify-cart-quantity">
+                                            <div class="section__notify-cart-amount">Số lượng: ${arr[i].amount}</div>
+                                            <div class="section__notify-cart-size">Size: ${arr[i].size}</div>
+                                        </div>
+                                        <div class="section__notify-cart-price">${arr[i].price}</div>
+                                    </div>
+                                </li>`
+    }
+
+    document.querySelector('.section__notify-footer-text').innerText = `Tổng tiền (${a}) sản phẩm: `
+    document.querySelector('.section__notify-footer-money').innerText = `${b} ₫`
 }
 
 // ==> Gọi các hàm để thực hiện xử lý

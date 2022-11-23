@@ -134,6 +134,11 @@ const imgProduct = document.querySelector('.overlay.product input[type="file"]')
 const priceProduct = document.querySelector('.overlay.product input.price');
 const notify = document.querySelector('.notify');
 
+function splitImg(img) {
+    var img2 = img.split('fakepath\\');
+    return '../images/' + img2[1];
+}
+
 function addProduct() {
     addProductBtn.addEventListener('click', function() {
         overlayProduct.style.transform = 'scale(1)';
@@ -141,19 +146,19 @@ function addProduct() {
     
     confirmAdd.onclick = function() {
         const arr = localStorage.getItem('product') ? JSON.parse(localStorage.getItem('product')) : products;
-        const img = imgProduct.value;
+        const img = splitImg(imgProduct.value);
         const name = nameProduct.value;
         const price = priceProduct.value;
         const type = valueType.value;
 
         if(img != "" && name != "" && price != "") {
             arr.push({
-                image: imgSrc,
+                image: img,
                 name: name,
                 price: addComma(price),
                 type: type
             })
-            console.log(imgSrc)
+            console.log(img)
             
             localStorage.setItem("product", JSON.stringify(arr));
             
