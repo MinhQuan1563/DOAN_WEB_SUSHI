@@ -343,8 +343,7 @@ button, select, input {
 }
 
 /* Hiện thông báo */
-.notify__delete,
-.notify {
+.notify__delete {
     position: fixed;
     top: 6%;
     padding: 20px;
@@ -358,19 +357,43 @@ button, select, input {
     transition: 0.3s ease-in;
 }
 
+.notify {
+    position: fixed;
+    top: 0;
+    right: 0;
+    transform: translateX(100%);
+    transition: all 0.8s;
+    opacity: 0;
+    z-index: 1000;
+}
+
 .notify__delete {
     border-radius: unset;
 }
 
-.notify.success {
+.inner-notify,
+.login-notify {
+    color: var(--white-color);
+    padding: 20px;
+    margin: 20px;
+    font-size: 18px;
+    font-weight: 900;
+    background-color: white;
+    border-radius: 50px;
+}
+
+.inner-notify.success,
+.login-notify.success {
     color: #3eda3e;
 }
 
-.notify.error {
+.inner-notify.error,
+.login-notify.error {
     color: #de1818;
 }
 
-.notify i {
+.inner-notify i,
+.login-notify i {
     margin-right: 6px;
 }
 
@@ -451,7 +474,6 @@ button, select, input {
     visibility: visible;
     opacity: 1;
 }
-
 
 /* ======================== Switch Slider (Togggle) ======================= */
 

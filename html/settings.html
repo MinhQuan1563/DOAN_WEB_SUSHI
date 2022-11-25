@@ -83,11 +83,12 @@
                 <table class="table-header">
                     <tr>
                         <th title="Sắp xếp" style="width: 5%">STT</th>
+                        <th title="Sắp xếp" style="width: 10%">Mã</th>
                         <th title="Sắp xếp" style="width: 10%">Loại</th>
-                        <th title="Sắp xếp" style="width: 40%">Tên</th>
+                        <th title="Sắp xếp" style="width: 35%">Tên</th>
                         <th title="Sắp xếp" style="width: 15%">Giá</th>
                         <th title="Sắp xếp" style="width: 15%">Hình Ảnh</th>
-                        <th style="width: 15%">Hành động</th>
+                        <th style="width: 10%">Hành động</th>
                     </tr>
                 </table>
     
@@ -111,15 +112,19 @@
                             <th colspan="2">Thêm Sản Phẩm</th>
                         </tr>
                         <tr>
+                            <td>Mã sản phẩm:</td>
+                            <td><input type="text" id="maspThem"></td>
+                        </tr>
+                        <tr>
                             <td>Loại sản phẩm:</td>
                             <td>
-                                <select>
+                                <select name="selectProduct" onchange="autoMaSanPham(this.value)">
                                     <option value="bento">Bento</option>
                                     <option value="sushi">Sushi</option>
-                                    <option value="sashimi">Sashimi</option>
-                                    <option value="combosashimi">Combo Sashimi</option>
-                                    <option value="monkem">Món ăn kèm</option>
-                                    <option value="trangmieng">Nước uống và tráng miệng</option>
+                                    <option value="sashi">Sashimi</option>
+                                    <option value="combo">Combo Sashimi</option>
+                                    <option value="ankem">Món ăn kèm</option>
+                                    <option value="douong">Nước uống và tráng miệng</option>
                                 </select>
                             </td>
                         </tr>
@@ -136,7 +141,9 @@
                         </tr>
                         <tr>
                             <td>Giá tiền:</td>
-                            <td><input type="text" class="price"></td>
+                            <td>
+                                <input type="text" class="price">
+                            </td>
                         </tr>
                         <tr>
                             <td colspan="2" class="table-footer">
@@ -145,9 +152,7 @@
                         </tr>
                     </table>
 
-                    <div class="notify">
-                        
-                    </div>
+                    
                 </div>
 
                 <div class="overlay product edit">
@@ -158,6 +163,7 @@
                     
                 </div>
             </div>
+            
     
             <!-- Đơn Hàng -->
             <div class="section__order">
@@ -224,6 +230,9 @@
 
         </div>
     
+        <div class="notify">
+            
+        </div>
     
         <footer>
     

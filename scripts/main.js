@@ -1,539 +1,648 @@
 var products = [
     {
-        image: '../images/img-1-1.png',
+        image: 'img-1-1.png',
         name: 'Cơm Cá Đỏ Sốt Teriyaki',
         price: '99,000',
-        type: 'bento'
+        type: 'bento',
+        masp: 'bento0'
     },
     {
-        image: '../images/img-1-2.png',
+        image: 'img-1-2.png',
         name: 'Cơm Bento Thịt Heo Chiên Xù Sốt Tonkatsu',
         price: '99,000',
-        type: 'bento'
+        type: 'bento',
+        masp: 'bento1'
     },
     {
-        image: '../images/img-1-6.png',
+        image: 'img-1-6.png',
         name: 'Cơm Cá Hồi Sốt Teriyaki',
         price: '159,000',
-        type: 'bento'
+        type: 'bento',
+        masp: 'bento2'
     },
     {
-        image: '../images/img-1-7.png',
+        image: 'img-1-7.png',
         name: 'Cơm Tôm Chiên Xù',
         price: '169,000',
-        type: 'bento'
+        type: 'bento',
+        masp: 'bento3'
     },
     {
-        image: '../images/img-1-8.png',
+        image: 'img-1-8.png',
         name: 'Cơm Hải Sản',
         price: '169,000',
-        type: 'bento'
+        type: 'bento',
+        masp: 'bento4'
     },
     {
-        image: '../images/img-1-9.png',
+        image: 'img-1-9.png',
         name: 'Cơm Lươn Nhật',
         price: '189,000',
-        type: 'bento'
+        type: 'bento',
+        masp: 'bento5'
     },
     {
-        image: '../images/img-1-1.png',
+        image: 'img-1-1.png',
         name: 'Cơm Cá Đỏ Sốt Teriyaki',
         price: '99,000',
-        type: 'bento'
+        type: 'bento',
+        masp: 'bento6'
     },
     {
-        image: '../images/img-1-2.png',
+        image: 'img-1-2.png',
         name: 'Cơm Bento Thịt Heo Chiên Xù Sốt Tonkatsu',
         price: '99,000',
-        type: 'bento'
+        type: 'bento',
+        masp: 'bento7'
     },
     {
-        image: '../images/img-1-6.png',
+        image: 'img-1-6.png',
         name: 'Cơm Cá Hồi Sốt Teriyaki',
         price: '159,000',
-        type: 'bento'
+        type: 'bento',
+        masp: 'bento8'
     },
     {
-        image: '../images/img-1-7.png',
+        image: 'img-1-7.png',
         name: 'Cơm Tôm Chiên Xù',
         price: '169,000',
-        type: 'bento'
+        type: 'bento',
+        masp: 'bento9'
     },
     {
-        image: '../images/img-1-8.png',
+        image: 'img-1-8.png',
         name: 'Cơm Hải Sản',
         price: '169,000',
-        type: 'bento'
+        type: 'bento',
+        masp: 'bento10'
     },
     {
-        image: '../images/img-1-9.png',
+        image: 'img-1-9.png',
         name: 'Cơm Lươn Nhật',
         price: '189,000',
-        type: 'bento'
+        type: 'bento',
+        masp: 'bento11'
     },
     {
-        image: '../images/img-0-1.png',
+        image: 'img-0-1.png',
         name: 'Tempura Roll',
         price: '118,000',
-        type: 'sushi'
+        type: 'sushi',
+        masp: 'sushi0'
     },
     {
-        image: '../images/img-0-2.png',
+        image: 'img-0-2.png',
         name: 'Grilled Salmon Roll',
         price: '129,000',
-        type: 'sushi'
+        type: 'sushi',
+        masp: 'sushi1'
     },
     {
-        image: '../images/img-0-3.png',
+        image: 'img-0-3.png',
         name: 'Kani Crunchy Roll',
         price: '153,000',
-        type: 'sushi'
+        type: 'sushi',
+        masp: 'sushi2'
     },
     {
-        image: '../images/img-1-1.png',
+        image: 'img-1-1.png',
         name: 'Cơm Cá Đỏ Sốt Teriyaki',
         price: '99,000',
-        type: 'bento'
+        type: 'bento',
+        masp: 'bento12'
     },
     {
-        image: '../images/img-0-4.png',
+        image: 'img-0-4.png',
         name: 'Soft Shell Crab Roll',
         price: '168,000',
-        type: 'sushi'
+        type: 'sushi',
+        masp: 'sushi3'
     },
     {
-        image: '../images/img-0-5.png',
+        image: 'img-0-5.png',
         name: 'Avocado Roll',
         price: '95,000',
-        type: 'sushi'
+        type: 'sushi',
+        masp: 'sushi4'
     },
     {
-        image: '../images/img-0-6.png',
+        image: 'img-0-6.png',
         name: 'Tokachi Grilled Roll',
         price: '159,000',
-        type: 'sushi'
+        type: 'sushi',
+        masp: 'sushi5'
     },
     {
-        image: '../images/img-0-7.png',
+        image: 'img-0-7.png',
         name: 'Unagi Roll',
         price: '280,000',
-        type: 'sushi'
+        type: 'sushi',
+        masp: 'sushi6'
     },
     {
-        image: '../images/img-0-8.png',
+        image: 'img-0-8.png',
         name: 'Spicy Ebi Roll',
         price: '118,000',
-        type: 'sushi'
+        type: 'sushi',
+        masp: 'sushi7'
     },
     {
-        image: '../images/img-0-9.png',
+        image: 'img-0-9.png',
         name: 'Cơm Cuộn Rồng Xanh',
         price: '79,000',
-        type: 'sushi'
+        type: 'sushi',
+        masp: 'sushi8'
     },
     {
-        image: '../images/img-0-10.png',
+        image: 'img-0-10.png',
         name: 'Cơm Cuộn California',
         price: '139,000',
-        type: 'sushi'
+        type: 'sushi',
+        masp: 'sushi9'
     },
     {
-        image: '../images/img-0-11.png',
+        image: 'img-0-11.png',
         name: 'Cơm Cuộn Cá Hồi Nướng Tái',
         price: '139,000',
-        type: 'sushi'
+        type: 'sushi',
+        masp: 'sushi10'
     },
     {
-        image: '../images/img-0-12.png',
+        image: 'img-0-12.png',
         name: 'Cơm Cuộn Tôm Chiên Tempura',
         price: '179,000',
-        type: 'sushi'
+        type: 'sushi',
+        masp: 'sushi11'
     },
     {
-        image: '../images/img-0-13.png',
+        image: 'img-0-13.png',
         name: 'Cơm Cuộn Cầu Vồng',
         price: '179,000',
-        type: 'sushi'
+        type: 'sushi',
+        masp: 'sushi12'
     },
     {
-        image: '../images/img-0-14.png',
+        image: 'img-0-14.png',
         name: 'Cơm Cuộn Lươn Phô Mai',
         price: '199,000',
-        type: 'sushi'
+        type: 'sushi',
+        masp: 'sushi13'
     },
     {
-        image: '../images/img-0-15.png',
+        image: 'img-0-15.png',
         name: 'Cơm Cuộn Hải Sản',
         price: '199,000',
-        type: 'sushi'
+        type: 'sushi',
+        masp: 'sushi14'
     },
     {
-        image: '../images/img-2-1.png',
+        image: 'img-2-1.png',
         name: 'Sashimi Ốc Bulot Ireland',
         price: '189,000',
-        type: 'sashimi'
+        type: 'sashi',
+        masp: 'sashi0'
     },
     {
-        image: '../images/img-2-2.png',
+        image: 'img-2-2.png',
         name: 'Sashimi Cá Chim Việt Nam',
         price: '199,000',
-        type: 'sashimi'
+        type: 'sashi',
+        masp: 'sashi1'
     },
     {
-        image: '../images/img-2-3.png',
+        image: 'img-2-3.png',
         name: 'Sashimi Cá Mú Việt Nam',
         price: '219,000',
-        type: 'sashimi'
+        type: 'sashi',
+        masp: 'sashi2'
     },
     {
-        image: '../images/img-2-4.png',
+        image: 'img-2-4.png',
         name: 'Sashimi Tôm Sú Việt Nam',
         price: '249,000',
-        type: 'sashimi'
+        type: 'sashi',
+        masp: 'sashi3'
     },
     {
-        image: '../images/img-2-5.png',
+        image: 'img-2-5.png',
         name: 'Sashimi Cá Bơn Hàn Quốc',
         price: '399,000',
-        type: 'sashimi'
+        type: 'sashi',
+        masp: 'sashi4'
     },
     {
-        image: '../images/img-2-6.png',
+        image: 'img-2-6.png',
         name: 'Sashimi Bào Ngư Hàn Quốc',
         price: '499,000',
-        type: 'sashimi'
+        type: 'sashi',
+        masp: 'sashi5'
     },
     {
-        image: '../images/img-2-7.png',
+        image: 'img-2-7.png',
         name: 'Sashimi Ốc Vòi Voi',
         price: '889,000',
-        type: 'sashimi'
+        type: 'sashi',
+        masp: 'sashi6'
     },
     {
-        image: '../images/img-2-8.png',
+        image: 'img-2-8.png',
         name: 'Sashimi Bạch Tuộc',
         price: '169,000',
-        type: 'sashimi'
+        type: 'sashi',
+        masp: 'sashi7'
     },
     {
-        image: '../images/img-2-9.png',
+        image: 'img-2-9.png',
         name: 'Sashimi Trứng Cá Hồi',
         price: '239,000',
-        type: 'sashimi'
+        type: 'sashi',
+        masp: 'sashi8'
     },
     {
-        image: '../images/img-2-10.png',
+        image: 'img-2-10.png',
         name: 'Sashimi Bụng Cá Cam',
         price: '299,000',
-        type: 'sashimi'
+        type: 'sashi',
+        masp: 'sashi9'
     },
     {
-        image: '../images/img-2-11.png',
+        image: 'img-2-11.png',
         name: 'Sashimi Bụng Cá Hồi',
         price: '219,000',
-        type: 'sashimi'
+        type: 'sashi',
+        masp: 'sashi10'
     },
     {
-        image: '../images/img-2-12.png',
+        image: 'img-2-12.png',
         name: 'Sashimi Cá Trích Ép Trứng Đỏ',
         price: '169,000',
-        type: 'sashimi'
+        type: 'sashi',
+        masp: 'sashi11'
     },
     {
-        image: '../images/img-2-13.png',
+        image: 'img-2-13.png',
         name: 'Sashimi Cá Trích Ép Trứng Vàng',
         price: '169,000',
-        type: 'sashimi'
+        type: 'sashi',
+        masp: 'sashi12'
     },
     {
-        image: '../images/img-2-14.png',
+        image: 'img-2-14.png',
         name: 'Sashimi Cồi Sò Điệp Nhật',
         price: '239,000',
-        type: 'sashimi'
+        type: 'sashi',
+        masp: 'sashi13'
     },
     {
-        image: '../images/img-2-15.png',
+        image: 'img-2-15.png',
         name: 'Sashimi Sò Đỏ Hokkigai',
         price: '239,000',
-        type: 'sashimi'
+        type: 'sashi',
+        masp: 'sashi14'
     },
     {
-        image: '../images/img-2-16.png',
+        image: 'img-2-16.png',
         name: 'Sashimi Trứng Cá Chuồn',
         price: '169,000',
-        type: 'sashimi'
+        type: 'sashi',
+        masp: 'sashi15'
     },
     {
-        image: '../images/img-2-17.png',
+        image: 'img-2-17.png',
         name: 'Sashimi Thân Cá Hồi',
         price: '199,000',
-        type: 'sashimi'
+        type: 'sashi',
+        masp: 'sashi16'
     },
     {
-        image: '../images/img-2-2.png',
+        image: 'img-2-2.png',
         name: 'Sashimi Cá Chim Việt Nam',
         price: '199,000',
-        type: 'sashimi'
+        type: 'sashi',
+        masp: 'sashi17'
     },
     {
-        image: '../images/img-2-4.png',
+        image: 'img-2-4.png',
         name: 'Sashimi Tôm Sú Việt Nam',
         price: '249,000',
-        type: 'sashimi'
+        type: 'sashi',
+        masp: 'sashi18'
     },
     {
-        image: '../images/img-2-6.png',
+        image: 'img-2-6.png',
         name: 'Sashimi Bào Ngư Hàn Quốc',
         price: '499,000',
-        type: 'sashimi'
+        type: 'sashi',
+        masp: 'sashi19'
     },
     {
-        image: '../images/img-2-8.png',
+        image: 'img-2-8.png',
         name: 'Sashimi Bạch Tuộc',
         price: '169,000',
-        type: 'sashimi'
+        type: 'sashi',
+        masp: 'sashi20'
     },
     {
-        image: '../images/img-2-10.png',
+        image: 'img-2-10.png',
         name: 'Sashimi Bụng Cá Cam',
         price: '299,000',
-        type: 'sashimi'
+        type: 'sashi',
+        masp: 'sashi21'
     },
     {
-        image: '../images/img-3-1.png',
+        image: 'img-3-1.png',
         name: 'Combo Sashimi 3A',
         price: '269,000',
-        type: 'combosashimi'
+        type: 'combo',
+        masp: 'combo0'
     },
     {
-        image: '../images/img-3-2.png',
+        image: 'img-3-2.png',
         name: 'Combo Sashimi 3B',
         price: '289,000',
-        type: 'combosashimi'
+        type: 'combo',
+        masp: 'combo1'
     },
     {
-        image: '../images/img-3-3.png',
+        image: 'img-3-3.png',
         name: 'Combo Sashimi 3C',
         price: '319,000',
-        type: 'combosashimi'
+        type: 'combo',
+        masp: 'combo2'
     },
     {
-        image: '../images/img-3-4.png',
+        image: 'img-3-4.png',
         name: 'Combo Sashimi 3D',
         price: '349,000',
-        type: 'combosashimi'
+        type: 'combo',
+        masp: 'combo3'
     },
     {
-        image: '../images/img-3-5.png',
+        image: 'img-3-5.png',
         name: 'Combo Sashimi 3E',
         price: '389,000',
-        type: 'combosashimi'
+        type: 'combo',
+        masp: 'combo4'
     },
     {
-        image: '../images/img-3-6.png',
+        image: 'img-3-6.png',
         name: 'Combo Sashimi 3F',
         price: '598,000',
-        type: 'combosashimi'
+        type: 'combo',
+        masp: 'combo5'
     },
     {
-        image: '../images/img-3-7.png',
+        image: 'img-3-7.png',
         name: 'Combo Sashimi 5A',
         price: '499,000',
-        type: 'combosashimi'
+        type: 'combo',
+        masp: 'combo6'
     },
     {
-        image: '../images/img-3-8.png',
+        image: 'img-3-8.png',
         name: 'Combo Sashimi 5B',
         price: '549,000',
-        type: 'combosashimi'
+        type: 'combo',
+        masp: 'combo7'
     },
     {
-        image: '../images/img-3-9.png',
+        image: 'img-3-9.png',
         name: 'Combo Sashimi 5C',
         price: '849,000',
-        type: 'combosashimi'
+        type: 'combo',
+        masp: 'combo8'
     },
     {
-        image: '../images/img-3-10.png',
+        image: 'img-3-10.png',
         name: 'Combo Sashimi 5D',
         price: '749,000',
-        type: 'combosashimi'
+        type: 'combo',
+        masp: 'combo9'
     },
     {
-        image: '../images/img-3-11.png',
+        image: 'img-3-11.png',
         name: 'Combo Sashimi 7A',
         price: '999,000',
-        type: 'combosashimi'
+        type: 'combo',
+        masp: 'combo10'
     },
     {
-        image: '../images/img-3-12.png',
+        image: 'img-3-12.png',
         name: 'Combo Sashimi 7B',
         price: '999,000',
-        type: 'combosashimi'
+        type: 'combo',
+        masp: 'combo11'
     },
     {
-        image: '../images/img-3-13.png',
+        image: 'img-3-13.png',
         name: 'Combo Sashimi 7C',
         price: '990,000',
-        type: 'combosashimi'
+        type: 'combo',
+        masp: 'combo12'
     },
     {
-        image: '../images/img-3-14.png',
+        image: 'img-3-14.png',
         name: 'Combo Sashimi Hoàng Gia',
         price: '2,249,000',
-        type: 'combosashimi'
+        type: 'combo',
+        masp: 'combo13'
     },
     {
-        image: '../images/img-4-1.png',
+        image: 'img-4-1.png',
         name: 'Bánh Xèo Nhật',
         price: '89,000',
-        type: 'monkem'
+        type: 'ankem',
+        masp: 'ankem0'
     },
     {
-        image: '../images/img-4-2.png',
+        image: 'img-4-2.png',
         name: 'Cá Hồi Sốt Teriyaki',
         price: '99,000',
-        type: 'monkem'
+        type: 'ankem',
+        masp: 'ankem1'
     },
     {
-        image: '../images/img-4-3.png',
+        image: 'img-4-3.png',
         name: 'Đậu Nành Nhật',
         price: '35,000',
-        type: 'monkem'
+        type: 'ankem',
+        masp: 'ankem2'
     },
     {
-        image: '../images/img-4-4.png',
+        image: 'img-4-4.png',
         name: 'Gừng Hồng',
         price: '10,000',
-        type: 'monkem'
+        type: 'ankem',
+        masp: 'ankem3'
     },
     {
-        image: '../images/img-4-5.png',
+        image: 'img-4-5.png',
         name: 'Lá Tía Tô',
         price: '10,000',
-        type: 'monkem'
+        type: 'ankem',
+        masp: 'ankem4'
     },
     {
-        image: '../images/img-4-6.png',
+        image: 'img-4-6.png',
         name: 'Lẩu Hải Sản Cay',
         price: '399,000',
-        type: 'monkem'
+        type: 'ankem',
+        masp: 'ankem5'
     },
     {
-        image: '../images/img-4-7.png',
+        image: 'img-4-7.png',
         name: 'Mì Udon Hải Sản Cay',
         price: '199,000',
-        type: 'monkem'
+        type: 'ankem',
+        masp: 'ankem6'
     },
     {
-        image: '../images/img-4-8.png',
+        image: 'img-4-8.png',
         name: 'Rong Nho',
         price: '99,000',
-        type: 'monkem'
+        type: 'ankem',
+        masp: 'ankem7'
     },
     {
-        image: '../images/img-4-9.png',
+        image: 'img-4-9.png',
         name: 'Salad Cá Hồi Da Giòn',
         price: '119,000',
-        type: 'monkem'
+        type: 'ankem',
+        masp: 'ankem8'
     },
     {
-        image: '../images/img-4-10.png',
+        image: 'img-4-10.png',
         name: 'Salad Hải Sản Sốt Hành Tây',
         price: '169,000',
-        type: 'monkem'
+        type: 'ankem',
+        masp: 'ankem9'
     },
     {
-        image: '../images/img-4-11.png',
+        image: 'img-4-11.png',
         name: 'Salad Wakame',
         price: '69,000',
-        type: 'monkem'
+        type: 'ankem',
+        masp: 'ankem10'
     },
     {
-        image: '../images/img-4-12.png',
+        image: 'img-4-12.png',
         name: 'Soup Miso Đầu Cá Bơn',
         price: '79,000',
-        type: 'monkem'
+        type: 'ankem',
+        masp: 'ankem11'
     },
     {
-        image: '../images/img-4-13.png',
+        image: 'img-4-13.png',
         name: 'Soup Miso Đầu Cá Chim',
         price: '79,000',
-        type: 'monkem'
+        type: 'ankem',
+        masp: 'ankem12'
     },
     {
-        image: '../images/img-4-14.png',
+        image: 'img-4-14.png',
         name: 'Soup Miso Đầu Cá Hồi',
         price: '79,000',
-        type: 'monkem'
+        type: 'ankem',
+        masp: 'ankem13'
     },
     {
-        image: '../images/img-4-15.png',
+        image: 'img-4-15.png',
         name: 'Wasabi Tươi',
         price: '10,000',
-        type: 'monkem'
+        type: 'ankem',
+        masp: 'ankem14'
     },
     {
-        image: '../images/img-5-1.png',
+        image: 'img-5-1.png',
         name: 'Coca-Cola',
         price: '10,000',
-        type: 'trangmieng'
+        type: 'douong',
+        masp: 'douong0'
     },
     {
-        image: '../images/img-5-2.png',
+        image: 'img-5-2.png',
         name: 'Nước Suối Dasani',
         price: '10,000',
-        type: 'trangmieng'
+        type: 'douong',
+        masp: 'douong1'
     },
     {
-        image: '../images/img-5-3.png',
+        image: 'img-5-3.png',
         name: 'Tàu Hủ Tươi Sentofu - Vị Đào',
         price: '19,000',
-        type: 'trangmieng'
+        type: 'douong',
+        masp: 'douong2'
     },
     {
-        image: '../images/img-5-4.png',
+        image: 'img-5-4.png',
         name: 'Tàu Hủ Tươi Sentofu - Vị Dâu',
         price: '19,000',
-        type: 'trangmieng'
+        type: 'douong',
+        masp: 'douong3'
     },
     {
-        image: '../images/img-5-5.png',
+        image: 'img-5-5.png',
         name: 'Tàu Hủ Tươi Sentofu - Vị Lá Dứa',
         price: '19,000',
-        type: 'trangmieng'
+        type: 'douong',
+        masp: 'douong4'
     },
     {
-        image: '../images/img-5-6.png',
+        image: 'img-5-6.png',
         name: 'Tàu Hủ Tươi Sentofu - Vị Truyền Thống',
         price: '19,000',
-        type: 'trangmieng'
+        type: 'douong',
+        masp: 'douong5'
     },
     {
-        image: '../images/img-5-7.png',
+        image: 'img-5-7.png',
         name: 'Tàu Hủ Tươi Sentofu - Vị Việt Quất',
         price: '19,000',
-        type: 'trangmieng'
+        type: 'douong',
+        masp: 'douong6'
     }
 ]
 
+function splitImg(img) {
+    var img2 = img.split('fakepath\\');
+    if(img2.length === 1) {
+        return '../images/' + img2;
+    }
+    else {
+        return '../images/' + img2[1];
+    }
+}
+
 // console.log(splitImg('C:\\fakepath\\img-0-11.png'))
 
+// Set mặc định cho product
 const Products = localStorage.getItem('product') ? JSON.parse(localStorage.getItem('product')) : products;
 
 if(Products === products) {
     localStorage.setItem("product", JSON.stringify(Products))
 }
 
-var typeList = ['bento', 'sushi', 'sashimi', 'combosashimi', 'monkem', 'trangmieng'];
+var typeList = ['bento', 'sushi', 'sashi', 'combo', 'ankem', 'douong'];
 
-function getProducts(s) {
+function getProducts(s) {   
     var arr = [];
     for(let i=0; i < Products.length; i++) {
         if(Products[i].type === s)
             arr.push(Products[i]);
     }
     return arr;
+}
+
+function returnCurIndex(arr) {
+    var arr = localStorage.getItem("account") ? JSON.parse(localStorage.getItem("account")) : accounts;
+
+    for(let i=1; i < arr.length; i++) {
+        if((arr[0].isAdmin || arr[0].isUser) && (arr[i].Username === arr[0].Username && arr[i].Password === arr[0].Password)) {
+            return i;
+        }
+    }
+
+    return 1;
 }
 
 // ** Xử lý thay đổi URL trên sidebar
@@ -599,7 +708,7 @@ function renderProduct(items) {
         if(index >= start1 && index < end) {
             return `
                 <li class="section__content-item">
-                    <div class="section__content-item-img" style="background-image: url('${item.image}');"></div>
+                    <div class="section__content-item-img" style="background-image: url('${splitImg(item.image)}');"></div>
                     <div class="section__content-item-text">
                         <h3>${item.name}</h3>
                         <p>${item.price} ₫</p>
@@ -635,7 +744,7 @@ function productHandle(arrList) {
         }
 
         details[index].onclick = function() {
-            document.querySelector('.modal__inner-img').style.backgroundImage = `url(${arrList[index + perPage * (curPage - 1)].image})`;
+            document.querySelector('.modal__inner-img').style.backgroundImage = `url(${splitImg(arrList[index + perPage * (curPage - 1)].image)})`;
             document.querySelector('.modal__inner-heading').innerText = arrList[index + perPage * (curPage - 1)].name;
             document.querySelector('.modal__inner-price').innerText = arrList[index + perPage * (curPage - 1)].price;
             overlay.classList.add('open');
@@ -778,7 +887,6 @@ function changeNumPage(arrList) {
             getCurrentPage(curPage);
             renderProduct(arrList);
             productHandle(arrList);
-
         }
     }
 }
@@ -846,20 +954,37 @@ const loginAgainPassword = document.getElementById('again-password');
 const loginEmail = document.getElementById('email');
 const loginPhone = document.getElementById('phone');
 const loginAddress = document.getElementById('address');
+const loginNote = document.getElementById('mytextarea');
 const overlayNotify = document.querySelector('.overlay-notify');
 
 var accounts = [
     {
         isAdmin: false,
         isUser: false,
-        isLogout: true
-    },
-    {
+        isLogout: true,
         Fullname: 'user',
         Username: 'user',
         Password: 'user'
+    },
+    {
+        Fullname: 'Admin',
+        Password: 'admin',
+        Username: 'admin',
+        phone: '19001286',
+        address: '273 ADV DHSG',
+        email: 'cnttdhsg@gmail.com',
+        note: '',
+        cart: [],
+        donhang: []
     }
 ]
+
+// Set mặc định cho arr (account)
+const arr = localStorage.getItem('account') ? JSON.parse(localStorage.getItem('account')) : accounts;
+
+if(arr === accounts) {
+    localStorage.setItem("account", JSON.stringify(accounts))
+}
 
 loginFullname.onblur = function() {
     var fullname = loginFullname.value;
@@ -897,6 +1022,16 @@ loginAddress.addEventListener('blur', function() {
     checkAddress(address, 8);
 })
 
+document.getElementById('Username').onblur = function() {
+    var username = document.getElementById('Username').value;
+    checkUsername(username, 0);
+}
+
+document.getElementById('Password').onblur = function() {
+    var password = document.getElementById('Password').value;
+    checkPassword(password, 1);
+}
+
 function addLogin() {
     var fullname = loginFullname.value;
     var username = loginUsername.value;
@@ -905,8 +1040,14 @@ function addLogin() {
     var arr = localStorage.getItem('account') ? JSON.parse(localStorage.getItem('account')) : accounts;
     var User = {
         Fullname: fullname,
+        Password: password,
         Username: username,
-        Password: password
+        phone: '',
+        address: '',
+        email: '',
+        note: '',
+        cart: [],
+        donhang: []
     }
     arr.push(User);
     localStorage.setItem('account', JSON.stringify(arr));
@@ -1061,11 +1202,11 @@ function checkSignin() {
     var Username = document.getElementById('Username').value;
     var Password = document.getElementById('Password').value;
     var arr = localStorage.getItem('account') ? JSON.parse(localStorage.getItem('account')) : accounts;
-    for(let i = 0; i < arr.length; i++) {
-        if(arr[i].Username == Username && arr[i].Password == Password) {
-            arr[1].Fullname = arr[i].Fullname;
-            arr[1].Username = arr[i].Username;
-            arr[1].Password = arr[i].Password;
+    for(let i = 1; i < arr.length; i++) {
+        if(arr[i].Username === Username && arr[i].Password === Password) {
+            arr[0].Fullname = arr[i].Fullname;
+            arr[0].Username = arr[i].Username;
+            arr[0].Password = arr[i].Password;
             localStorage.setItem('account', JSON.stringify(arr));
             return true;
         }
@@ -1074,13 +1215,26 @@ function checkSignin() {
     return false;
 }
 
+// Kiểm tra nhấn Enter vào form đk, đn
+document.getElementById('Password').addEventListener('keydown', function(e) {
+    if(e.key == 'Enter' || e.which == 13) {
+        btnSignin();
+    }
+})
+
+document.getElementById('again-password').addEventListener('keydown', function(e) {
+    if(e.key == 'Enter' || e.which == 13) {
+        btnSignup();
+    }
+})
+
 // Kiểm tra đăng nhập Người dùng là Admin
 function checkAdmin() {
     var Username = document.getElementById('Username').value;
     var Password = document.getElementById('Password').value;
     var arr = localStorage.getItem('account') ? JSON.parse(localStorage.getItem('account')) : accounts;
-    for(let i = 0; i < arr.length; i++) {
-        if (Username == "admin" && Password == "admin") {
+    for(let i = 1; i < arr.length; i++) {
+        if (Username == "admin" && Password == "admin" && arr[i].Username === Username && arr[i].Password === Password) {
             return true;
         }
     }
@@ -1095,7 +1249,7 @@ function clear() {
     loginAgainPassword.value = "";
 }
 
-document.getElementById('login-btn').onclick = function(e) {
+function btnSignup() {
     if(isFullname === true && isUsername === true && isPassword === true && isAgainPassword === true) {
         setTimeout(function() {
             addLogin();
@@ -1131,22 +1285,19 @@ document.getElementById('login-btn').onclick = function(e) {
     }
 }
 
-document.getElementById('Username').onblur = function() {
-    var username = document.getElementById('Username').value;
-    checkUsername(username, 0);
+document.getElementById('login-btn').onclick = function(e) {
+    btnSignup();
 }
 
-document.getElementById('Password').onblur = function() {
-    var password = document.getElementById('Password').value;
-    checkPassword(password, 1);
-}
-
-document.getElementById('Login-Btn').onclick = function() {
+function btnSignin() {
     var arr = localStorage.getItem('account') ? JSON.parse(localStorage.getItem('account')) : accounts;
     if(checkAdmin()) {
         arr[0].isAdmin = true;
         arr[0].isUser = false;
         arr[0].isLogout = false;
+        arr[0].Fullname = arr[1].Fullname;
+        arr[0].Username = arr[1].Username;
+        arr[0].Password = arr[1].Password;
 
         setTimeout(function() {
             overlayNotify.style.transform = 'translateX(0)';
@@ -1169,7 +1320,7 @@ document.getElementById('Login-Btn').onclick = function() {
         arr[0].isUser = true;
         arr[0].isAdmin = false;
         arr[0].isLogout = false;
-
+              
         setTimeout(function() {
             overlayNotify.style.transform = 'translateX(0)';
             overlayNotify.style.opacity = '1';
@@ -1177,7 +1328,7 @@ document.getElementById('Login-Btn').onclick = function() {
                                         <i class="fa-solid fa-circle-check"></i>
                                         Đăng nhập thành công
                                     </div>`;
-            checkSignin();                        
+            checkSignin();
             checkAccount();
         }, 500)
 
@@ -1201,12 +1352,16 @@ document.getElementById('Login-Btn').onclick = function() {
         setTimeout(function() {
             overlayNotify.style.transform = 'translateX(100%)';
             overlayNotify.style.opacity = '0';
-            document.getElementById('Username').value = "";
-            document.getElementById('Password').value = "";
         }, 2000)
+        document.getElementById('Username').value = "";
+        document.getElementById('Password').value = "";
     }
-
     localStorage.setItem('account',JSON.stringify(arr))
+}
+
+document.getElementById('Login-Btn').onclick = function() {
+    btnSignin();
+    getNoProductCart();
 }
 
 // Kiểm tra tài khoản đã có hay chưa
@@ -1216,10 +1371,10 @@ function checkAccount() {
     if(arr[0].isAdmin != false || arr[0].isUser != false) {
         if(arr[0].isAdmin == true) {
             document.querySelector('.sidebar__menu-item:last-child').classList.remove('hide');
-            document.querySelector('.section__header-title-text.login').innerText = 'Admin';
+            document.querySelector('.section__header-title-text.login').innerText = arr[0].Fullname;
         }
         else if(arr[0].isUser == true) {
-            document.querySelector('.section__header-title-text.login').innerText = arr[1].Fullname;
+            document.querySelector('.section__header-title-text.login').innerText = arr[0].Fullname;
         }
 
         document.querySelector('.sidebar__log-out').classList.remove('hide');
@@ -1232,35 +1387,41 @@ function checkAccount() {
 const logout = document.querySelector('.sidebar__log-out');
 const notify = document.querySelector('.notify'); 
 
-function checkLogout() {
-    logout.onclick = function() {
-        var arr = localStorage.getItem('account') ? JSON.parse(localStorage.getItem('account')) : accounts;
+function btnLogout() {
+    var arr = localStorage.getItem('account') ? JSON.parse(localStorage.getItem('account')) : accounts;
 
-        arr[0].isLogout = true;
-        arr[0].isAdmin = false;
-        arr[0].isUser = false;
+    arr[0].isLogout = true;
+    arr[0].isAdmin = false;
+    arr[0].isUser = false;
+    arr[0].Fullname = 'user';
+    arr[0].Username = 'user';
+    arr[0].Password = 'user';
+    document.getElementById('Username').value = "";
+    document.getElementById('Password').value = "";
 
-        setTimeout(function() {
-            notify.style.transform = 'translateX(0)';
-            notify.style.opacity = '1';
-            notify.innerHTML = `<div class="inner-notify success">
-                                    <i class="fa-solid fa-person-running"></i>
-                                    Đăng xuất thành công
-                                </div>`;
-        }, 500)
-        
-        setTimeout(function() {
-            notify.style.transform = 'translateX(100%)';
-            notify.style.opacity = '0';
-        }, 1500)
+    setTimeout(function() {
+        notify.style.transform = 'translateX(0)';
+        notify.style.opacity = '1';
+        notify.innerHTML = `<div class="inner-notify success">
+                                <i class="fa-solid fa-person-running"></i>
+                                Đăng xuất thành công
+                            </div>`;
+    }, 500)
+    
+    setTimeout(function() {
+        notify.style.transform = 'translateX(100%)';
+        notify.style.opacity = '0';
+    }, 1300)
 
-        document.querySelector('.section__header-title-text.login').innerHTML = 'Đăng nhập';
-        document.querySelector('.sidebar__log-out').classList.add('hide');
-        localStorage.setItem('account',JSON.stringify(arr));
-    }
+    document.querySelector('.section__header-title-text.login').innerHTML = 'Đăng nhập';
+    document.querySelector('.sidebar__log-out').classList.add('hide');
+    localStorage.setItem('account',JSON.stringify(arr));
 }
 
-checkLogout();
+logout.onclick = function() {
+    btnLogout();
+    getNoProductCart();
+}
 
 // ** Xử lý cuộn lên trang đầu
 const scrollToTop = document.getElementById('scroll-to-top');
@@ -1433,15 +1594,42 @@ function filterHandle() {
             notify.style.opacity = '1';
             notify.innerHTML = `<div class="login-notify error">
                                     <i class="fa-solid fa-circle-xmark"></i>
-                                    Khoảng giá không hơp lệ
+                                    Khoảng giá không hợp lệ
                                 </div>`;
         }, 300)
+
+        moneyMin = '';
+        moneyMax = '';
 
         setTimeout(function() {
             notify.style.transform = 'translateX(100%)';
             notify.style.opacity = '0';
         }, 1500)
+
+        return ;
     }
+    else if((Number.isNaN(moneyMin) === true || Number.isNaN(moneyMax) === true) && (moneyMin.toString().length == 3 || moneyMax.toString().length == 3)) {
+        setTimeout(function() {
+            notify.style.transform = 'translateX(0)';
+            notify.style.opacity = '1';
+            notify.innerHTML = `<div class="login-notify error">
+                                    <i class="fa-solid fa-circle-xmark"></i>
+                                    Giá sản phẩm phải là chữ số
+                                </div>`;
+        }, 300)
+
+        moneyMin = '';
+        moneyMax = '';
+
+        setTimeout(function() {
+            notify.style.transform = 'translateX(100%)';
+            notify.style.opacity = '0';
+        }, 1500)
+
+        return;
+    }
+    var a = toString(moneyMin)
+    console.log(moneyMin.toString().length)
 
     var arrtemp1;
     var arrtemp2 = [];
@@ -1468,29 +1656,9 @@ function filterHandle() {
         
         var temp = Products[i].price;
         var money = parseInt(Products[i].price.split(','));
-        if((Number.isNaN(moneyMin) === true || Number.isNaN(moneyMax) === true) && typeof moneyMin !== 'number' || typeof moneyMax !== 'number') {
-            // if(moneyMin === NaN  moneyMax === NaN) {
-                setTimeout(function() {
-                    notify.style.transform = 'translateX(0)';
-                    notify.style.opacity = '1';
-                    notify.innerHTML = `<div class="login-notify error">
-                                            <i class="fa-solid fa-circle-xmark"></i>
-                                            Giá sản phẩm phải là chữ số
-                                        </div>`;
-                }, 300)
-        
-                setTimeout(function() {
-                    notify.style.transform = 'translateX(100%)';
-                    notify.style.opacity = '0';
-                }, 1500)
-                console.log(moneyMin)
-            // }
-        }
-        else {
-            if(moneyMin !== NaN && moneyMax !== NaN && (money >= moneyMin && money <= moneyMax)) {
-                Products[i].price = temp;
-                arrtemp3.push(Products[i]);
-            }
+        if(moneyMin !== NaN && moneyMax !== NaN && (money >= moneyMin && money <= moneyMax)) {
+            Products[i].price = temp;
+            arrtemp3.push(Products[i]);
         }
         
     }
@@ -1551,62 +1719,141 @@ const pay = document.getElementById('pay');
 const overlayCart = document.querySelector('.overlay.cart-info');
 const closeCart = document.querySelector('.close-icon.cart');
 const modalCart = document.querySelector('.modal.checkout__info');
+const confirmBtn = document.getElementById('confirm-btn');
 
-pay.addEventListener('click', function() {
-    overlayCart.classList.add('open');
-})
+document.querySelector('.section__notify-footer-tocart').onclick = function() {
+    document.querySelector('.sidebar__menu-item.active').classList.remove('active');
+    sidebarItems[2].classList.add('active');
 
-closeCart.onclick = function() {
-    overlayCart.classList.remove('open');
+    sectionContents.forEach(function(sectionContent) {
+        sectionContent.style.display = 'none';
+    })
+
+    document.querySelector('.section__content.checkout').style.display = "block";
+    updateCart();
 }
 
-overlayCart.onclick = function() {
-    overlayCart.classList.remove('open');
+function payHandle() {
+    for(let i=1; i < arr.length; i++) {
+        if((arr[0].isAdmin || arr[0].isUser) && arr[i].Username === arr[0].Username && arr[i].Password === arr[0].Password) {
+            pay.addEventListener('click', function() {
+                overlayCart.classList.add('open');
+            })
+            
+            closeCart.onclick = function() {
+                overlayCart.classList.remove('open');
+            }
+            
+            overlayCart.onclick = function() {
+                overlayCart.classList.remove('open');
+            }
+            
+            modalCart.onclick = function(e) {
+                e.stopPropagation();
+            }
+
+            confirmBtn.addEventListener('click', function() {
+                thongTinDonHang(i);
+            })
+            
+        }
+        else {
+            getNoProductCart();
+            pay.removeEventListener('click', function() {})
+        }
+    }
 }
 
-modalCart.onclick = function(e) {
-    e.stopPropagation();
-}
+payHandle()
 
-var a = 0, b = 0;
+function thongTinDonHang(i) {
+    var arr = localStorage.getItem("account") ? JSON.parse(localStorage.getItem("account")) : accounts;
+    var email = loginEmail.value;
+    var phone = loginPhone.value;
+    var address = loginAddress.value;
+    var note = loginNote.value;
+
+    if(isEmail && isPhone && isAddress) {
+        arr[i].email = email;
+        arr[i].phone = phone;
+        arr[i].address = address;
+        arr[i].note = note;
+
+        setTimeout(function() {
+            notify.style.transform = 'translateX(0)';
+            notify.style.opacity = '1';
+            notify.innerHTML = `<div class="login-notify success">
+                                    <i class="fa-sharp fa-solid fa-circle-check"></i>
+                                    Xác nhận thành công
+                                </div>`;
+        }, 300)
+    
+        setTimeout(function() {
+            notify.style.transform = 'translateX(100%)';
+            notify.style.opacity = '0';
+        }, 1500)
+
+        setTimeout(function() {
+            overlayCart.classList.remove('open');
+        }, 1700)
+    }
+    else {
+        setTimeout(function() {
+            notify.style.transform = 'translateX(0)';
+            notify.style.opacity = '1';
+            notify.innerHTML = `<div class="login-notify error">
+                                    <i class="fa-solid fa-triangle-exclamation"></i>
+                                    Xác nhận thất bại !!
+                                </div>`;
+        }, 300)
+    
+        setTimeout(function() {
+            notify.style.transform = 'translateX(100%)';
+            notify.style.opacity = '0';
+        }, 1500) 
+    }
+
+    localStorage.setItem("account", JSON.stringify(arr));
+}
 
 // Thêm vào giỏ hàng
 var addCart = document.querySelector(".modal__inner-add-cart");
 const cartNotify = document.querySelector('.cart-notify');
 
 addCart.onclick = () => {
-    var acc = localStorage.getItem('account') ? JSON.parse(localStorage.getItem('account')) : accounts;
-    if(acc[0].isUser === true || acc[0].isAdmin === true) {
+    var arr = localStorage.getItem("account") ? JSON.parse(localStorage.getItem("account")) : accounts;
+    if(arr[0].isUser === true || arr[0].isAdmin === true) {
+        var list = arr[returnCurIndex()].cart;
         var added = false;
-        var arr = localStorage.getItem("shoppingCart") ? JSON.parse(localStorage.getItem("shoppingCart")) : [];
-        var img = document.querySelector('.modal__inner-img').style.backgroundImage.split('"')[1];
+        var image = document.querySelector('.modal__inner-img').style.backgroundImage.split('"')[1];
         var name = document.querySelector('.modal__inner-heading').innerText;
         var price = document.querySelector('.modal__inner-price').innerText;
         var size = document.querySelector('.modal__inner-size select').value;
         var amount = parseInt(document.querySelector('.modal__inner-amount input[type="text"]').value)
     
-        for(let i=0; i < arr.length; i++) {
-            if(arr[i].img === img && arr[i].name === name && arr[i].price === price && arr[i].size === size) {
-                arr[i].amount += amount;
+        for(let j=0; j < list.length; j++) {
+            if(list[j].image === image && list[j].name === name && list[j].price === price && list[j].size === size) {
+                list[j].amount += amount;
                 added = true;
             }
         }
-    
+
         if(!added) {
             var cart = {
-                img: img,
+                image: image,
                 name: name,
                 price: price,
                 size: size,
                 amount: amount
             }
         
-            arr.push(cart);
+            list.push(cart);
         }
 
-        renderCartNotify(arr)
+        renderCartNotify(list)
+        updateCart();
     
-        localStorage.setItem("shoppingCart", JSON.stringify(arr));
+        localStorage.setItem("account", JSON.stringify(arr));
     
         setTimeout(function() {
             cartNotify.style.transform = 'translateX(0)';
@@ -1621,32 +1868,30 @@ addCart.onclick = () => {
             cartNotify.style.transform = 'translateX(100%)';
             cartNotify.style.opacity = '0';
         }, 1500)
+
     }
     else {
-        setTimeout(function() {
-            cartNotify.style.transform = 'translateX(0)';
-            cartNotify.style.opacity = '1';
-            cartNotify.innerHTML = `<div class='notify__confirm'>
-                                        <div class="notify__confirm-text">
-                                            Bạn cần đăng nhập để mua hàng !
+        cartNotify.style.transform = 'translateX(0)';
+        cartNotify.style.opacity = '1';
+        cartNotify.innerHTML = `<div class='notify__confirm'>
+                                    <div class="notify__confirm-text">
+                                        Bạn cần đăng nhập để mua hàng !
+                                    </div>
+                                    <div class="notify__confirm-btn">
+                                        <div class="notify__confirm-ok">
+                                            OK
                                         </div>
-                                        <div class="notify__confirm-btn">
-                                            <div class="notify__confirm-ok">
-                                                OK
-                                            </div>
-                                            <div class="notify__confirm-cancel">
-                                                Hủy
-                                            </div>
+                                        <div class="notify__confirm-cancel">
+                                            Hủy
                                         </div>
-                                    </div>`;
+                                    </div>
+                                </div>`;
 
-            document.querySelector('.notify__confirm').onclick = function(e) {
-                e.stopPropagation();
-            }
-        }, 200)
+        document.querySelector('.notify__confirm').onclick = function(e) {
+            e.stopPropagation();
+        }
 
-        setTimeout(function() {
-            document.querySelector('.notify__confirm-ok').onclick = function() {
+        document.querySelector('.notify__confirm-ok').onclick = function() {
                 cartNotify.style.transform = 'translateX(100%)';
                 cartNotify.style.opacity = '0';
                 openFormLogin();
@@ -1655,8 +1900,10 @@ addCart.onclick = () => {
                 cartNotify.style.transform = 'translateX(100%)';
                 cartNotify.style.opacity = '0';
             }
-        }, 500)
     }
+
+    renderCartNotify(list)
+    updateCart()
 }
 
 // Xử lý giá sản phẩm
@@ -1699,8 +1946,6 @@ function getCurDate() {
     return s;
 }
 
-console.log(getCurDate())
-
 function getNoProductCart() {
     var arr = localStorage.getItem('account') ? JSON.parse(localStorage.getItem('account')) : accounts;
     if(arr[0].isAdmin === false && arr[0].isUser === false) {
@@ -1709,17 +1954,24 @@ function getNoProductCart() {
                                                                         </div>`
         document.getElementById("checkout__cart-total-amount").innerText = '0';
         document.getElementById("checkout__cart-total-money").innerText = '0 ₫';
+        document.querySelector('.product-remove-all').style.cursor = 'not-allowed';
+        pay.removeEventListener('click', function() {});
+        pay.style.cursor = 'not-allowed';
+        document.querySelector('.section__notify-cart').style.visibility = 'hidden';
     }
 
-    var list = localStorage.getItem("shoppingCart") ? JSON.parse(localStorage.getItem("shoppingCart")) : [];
-    if(list.length === 0) {
+    if(arr[returnCurIndex()].cart.length === 0) {
         document.querySelector('.checkout__cart-products').innerHTML = `<div class="checkout__no-product">
                                                                             Giỏ hàng trống
                                                                         </div>`
         document.getElementById("checkout__cart-total-amount").innerText = '0';
         document.getElementById("checkout__cart-total-money").innerText = '0 ₫';
+        document.querySelector('.product-remove-all').style.cursor = 'not-allowed';
+        document.querySelector('.section__notify-footer-text').innerText = 'Tổng tiền (0) sản phẩm: ';
+        document.querySelector('.section__notify-footer-money').innerText = '0 ₫';
+        pay.removeEventListener('click', function() {});
+        pay.style.cursor = 'not-allowed';
     }
-    
 }
 
 function initCart() {
@@ -1745,11 +1997,17 @@ function initCart() {
             document.querySelector('.notify__confirm-ok').onclick = function(e) {
                 notify.style.transform = 'translateX(100%)';
                 notify.style.opacity = '0';
-                var list = localStorage.getItem("shoppingCart") ? JSON.parse(localStorage.getItem("shoppingCart")) : [];
+                var arr = localStorage.getItem("account") ? JSON.parse(localStorage.getItem("account")) : accounts;
+                var list = arr[returnCurIndex()].cart;
+
                 list.splice(e.currentTarget.dataset.index, 1);
-                localStorage.setItem("shoppingCart", JSON.stringify(list));
+
+                
+                renderCartNotify(list)
+                localStorage.setItem("account", JSON.stringify(arr));
                 updateCart();
             }
+
             document.querySelector('.notify__confirm-cancel').onclick = function() {
                 notify.style.transform = 'translateX(100%)';
                 notify.style.opacity = '0';
@@ -1775,12 +2033,14 @@ function initCart() {
                                 </div>
                             </div>`;
 
-        document.querySelector('.notify__confirm-ok').onclick = function(e) {
+        document.querySelector('.notify__confirm-ok').onclick = function() {
             notify.style.transform = 'translateX(100%)';
             notify.style.opacity = '0';
-            var list = localStorage.getItem("shoppingCart") ? JSON.parse(localStorage.getItem("shoppingCart")) : [];
+            var arr = localStorage.getItem("account") ? JSON.parse(localStorage.getItem("account")) : accounts;
+            var list = arr[returnCurIndex()].cart
             list.splice(0, list.length);
-            localStorage.setItem("shoppingCart", JSON.stringify(list));
+            renderCartNotify(list)
+            localStorage.setItem("account", JSON.stringify(arr));
             updateCart();
         }
         document.querySelector('.notify__confirm-cancel').onclick = function() {
@@ -1792,26 +2052,31 @@ function initCart() {
     var amountCart = document.querySelectorAll(".checkout__amount");
     amountCart.forEach((ele) => {
         ele.onchange = (e) => {
-            var list = localStorage.getItem("shoppingCart") ? JSON.parse(localStorage.getItem("shoppingCart")) : [];
+            var arr = localStorage.getItem("account") ? JSON.parse(localStorage.getItem("account")) : accounts;
+            var list = arr[returnCurIndex()].cart;
+
             list[e.currentTarget.dataset.index]["amount"] = e.currentTarget.value;
-            localStorage.setItem("shoppingCart", JSON.stringify(list));
+            renderCartNotify(list)
+            localStorage.setItem("account", JSON.stringify(arr));
             updateCart();
         };
     });
 }
 
 function updateCart() {
-    var list = localStorage.getItem("shoppingCart") ? JSON.parse(localStorage.getItem("shoppingCart")) : [];
+    var arr = localStorage.getItem("account") ? JSON.parse(localStorage.getItem("account")) : accounts;
+    var list = arr[returnCurIndex()].cart;
     if (list.length > 0) {
         loadCartItem(list, (total, totalAmount) => {
             document.getElementById("checkout__cart-total-amount").innerText = `${totalAmount}`;
             total = addComma(total);
             document.getElementById("checkout__cart-total-money").innerText = `${total} ₫`;
             renderCartNotify(list)
-            a = totalAmount;
-            b = total;
+            document.querySelector('.section__notify-footer-text').innerText = `Tổng tiền (${totalAmount}) sản phẩm: `
+            document.querySelector('.section__notify-footer-money').innerText = `${total} ₫`
         });
         initCart();
+        document.querySelector('.product-remove-all').style.cursor = 'pointer';
     }
     else {
         getNoProductCart();
@@ -1829,7 +2094,7 @@ function loadCartItem(items, callback) {
         totalAmount += parseInt(item.amount);
         sum = addComma(sum);
         cartList.innerHTML += `<div class="checkout__cart-product">
-                                <img src="${item.img}">
+                                <img src="${item.image}">
                                 <div class="product-info">
                                     <div class="product-name-one">Tên Món: </div>
                                     <h3 class="product-name">${item.name}</h3>
@@ -1859,6 +2124,8 @@ function loadCartItem(items, callback) {
                                 </div>
                             </div>`;
     });
+    document.querySelector('.section__notify-footer-text').innerText = `Tổng tiền (${totalAmount}) sản phẩm: `
+    document.querySelector('.section__notify-footer-money').innerText = `${total} ₫`
     callback(total, totalAmount);   
 }
 
@@ -1869,7 +2136,7 @@ function renderCartNotify(arr) {
 
     for(let i=0; i < arr.length; i++) {
         notifyCart.innerHTML += `<li class="section__notify-cart-item">
-                                    <img src="${arr[i].img}" alt="">
+                                    <img src="${arr[i].image}" alt="">
                                     <div class="section__notify-cart-info">
                                         <div class="section__notify-cart-name">${arr[i].name}</div>
                                         <div class="section__notify-cart-quantity">
@@ -1880,9 +2147,6 @@ function renderCartNotify(arr) {
                                     </div>
                                 </li>`
     }
-
-    document.querySelector('.section__notify-footer-text').innerText = `Tổng tiền (${a}) sản phẩm: `
-    document.querySelector('.section__notify-footer-money').innerText = `${b} ₫`
 }
 
 // ==> Gọi các hàm để thực hiện xử lý
@@ -1893,3 +2157,15 @@ sectionControl(sectionItems);
 scrollTopHandle();
 checkAccount();
 
+var a = [
+    {
+        b: '',
+        c: 4,
+        d: [
+            5, 6, 7
+        ],
+        e: 9
+    }
+]
+
+// console.log(a[0].b)
