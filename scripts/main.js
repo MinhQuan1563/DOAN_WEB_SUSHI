@@ -632,8 +632,24 @@ function getProducts(s) {
     return arr;
 }
 
+// Xử lý slider chuyển động
+var slides = document.querySelectorAll('.slide__box');
+var i = 1;
+setInterval(function() {
+    slides.forEach(function(slide) {
+        slide.style.display = 'none';
+    });
+    if (slides[i]) {
+        slides[i].style.display = 'block';
+    }
+    i++;
+    if (i == 4) {
+        i = 0;
+    }
+}, 4000);
+
 // Trả về vị trí trong mảng của KH đang đăng nhập
-function returnCurIndex(arr) {
+function returnCurIndex() {
     var arr = localStorage.getItem("account") ? JSON.parse(localStorage.getItem("account")) : accounts;
 
     for(let i=1; i < arr.length; i++) {
@@ -642,7 +658,7 @@ function returnCurIndex(arr) {
         }
     }
 
-    return 1;
+    return -1;
 }
 
 // ** Xử lý thay đổi URL trên sidebar
@@ -972,6 +988,7 @@ var accounts = [
         Password: 'admin',
         Username: 'admin',
         email: 'cnttdhsg@gmail.com',
+        ngaydangky: '',
         cart: [],
         donhang: []
     }
@@ -1040,6 +1057,7 @@ function addLogin() {
         Fullname: fullname,
         Password: password,
         Username: username,
+        ngaydangky: getCurDate(),
         email: '',
         cart: [],
         donhang: []
@@ -1068,11 +1086,13 @@ function checkFullname(fullname, index) {
         errorMessage[index].innerHTML = `<i class="fa-solid fa-circle-exclamation"></i>
                                         Họ tên không được để trống`
         errorMessage[index].style.opacity = '1';
+        isFullname = false;
     }
     else if(fullname.length > 30) {
         errorMessage[index].innerHTML = `<i class="fa-solid fa-circle-exclamation"></i>
                                         Họ tên từ 1-30 ký tự`
         errorMessage[index].style.opacity = '1';
+        isFullname = false;
     }
     else {
         isFullname = true;
@@ -1087,16 +1107,19 @@ function checkUsername(username, index) {
             errorMessage[index].innerHTML = `<i class="fa-solid fa-circle-exclamation"></i>
                                             Tên đăng nhập không được để trống`
             errorMessage[index].style.opacity = '1';
+            isUsername = false;
         }
         else if(username.length < 5) {
             errorMessage[index].innerHTML = `<i class="fa-solid fa-circle-exclamation"></i>
                                             Tên đăng nhập có ít nhất 5 ký tự`
             errorMessage[index].style.opacity = '1';
+            isUsername = false;
         }
         else if(arr[i].Username === username && index != 0) {
             errorMessage[index].innerHTML = `<i class="fa-solid fa-circle-exclamation"></i>
                                             Tên đăng nhập bị trùng, vui lòng nhập tên khác`
             errorMessage[index].style.opacity = '1';
+            isUsername = false;
         }
         else {
             isUsername = true;
@@ -1110,11 +1133,13 @@ function checkPassword(password, index) {
         errorMessage[index].innerHTML = `<i class="fa-solid fa-circle-exclamation"></i>
                                         Mật khẩu không được để trống`
         errorMessage[index].style.opacity = '1';
+        isPassword = false;
     }
     else if(password.length < 8 && password !== 'admin') {
         errorMessage[index].innerHTML = `<i class="fa-solid fa-circle-exclamation"></i>
                                         Mật khẩu có ít nhất 8 ký tự`;
         errorMessage[index].style.opacity = '1';
+        isPassword = false;
     }
     else {
         isPassword = true;
@@ -1127,11 +1152,13 @@ function checkAgainPassword(password, againPassword, index) {
         errorMessage[index].innerHTML = `<i class="fa-solid fa-circle-exclamation"></i>
                                         Mật khẩu không được để trống`
         errorMessage[index].style.opacity = '1';
+        isAgainPassword = false;
     }
     else if(password !== againPassword) {
         errorMessage[index].innerHTML = `<i class="fa-solid fa-circle-exclamation"></i>
                                         Mật khẩu nhập lại không đúng`;
         errorMessage[index].style.opacity = '1';
+        isAgainPassword = false;
     }
     else {
         isAgainPassword = true;
@@ -1145,11 +1172,13 @@ function checkEmail(email, index) {
         errorMessage[index].innerHTML = `<i class="fa-solid fa-circle-exclamation"></i>
                                         Email không được để trống`
         errorMessage[index].style.opacity = '1';
+        isEmail = false;
     }
     else if(!regExp.test(email)) {
         errorMessage[index].innerHTML = `<i class="fa-solid fa-circle-exclamation"></i>
                                         Hãy nhập email hợp lệ. (example@gmail.com)`
         errorMessage[index].style.opacity = '1';
+        isEmail = false;
     }
     else {
         isEmail = true;
@@ -1163,16 +1192,19 @@ function checkPhone(phone, index) {
         errorMessage[index].innerHTML = `<i class="fa-solid fa-circle-exclamation"></i>
                                         SĐT không được để trống`
         errorMessage[index].style.opacity = '1';
+        isPhone = false;
     }
     else if(hasWhiteSpace(phone)) {
         errorMessage[index].innerHTML = `<i class="fa-solid fa-circle-exclamation"></i>
                                         SĐT không được chứa khoảng trắng`
         errorMessage[index].style.opacity = '1';
+        isPhone = false;
     }
     else if(!regExp.test(phone)) {
         errorMessage[index].innerHTML = `<i class="fa-solid fa-circle-exclamation"></i>
                                         Hãy nhập sđt hợp lệ. (07xxxxxxxx)`
         errorMessage[index].style.opacity = '1';
+        isPhone = false;
     }
     else {
         isPhone = true;
@@ -1185,6 +1217,7 @@ function checkAddress(address, index) {
         errorMessage[index].innerHTML = `<i class="fa-solid fa-circle-exclamation"></i>
                                         Địa chỉ không được để trống`
         errorMessage[index].style.opacity = '1';
+        isAddress = false;
     }
     else {
         isAddress = true;
@@ -1245,6 +1278,14 @@ function clear() {
 }
 
 function btnSignup() {
+    var fullname = loginFullname.value;
+    checkFullname(fullname, 2);
+    var username = loginUsername.value;
+    checkUsername(username, 3);
+    var password = loginpassword.value;
+    checkPassword(password, 4);
+    var againPassword = loginAgainPassword.value;
+    checkAgainPassword(password, againPassword, 5);
     if(isFullname === true && isUsername === true && isPassword === true && isAgainPassword === true) {
         setTimeout(function() {
             addLogin();
@@ -1315,6 +1356,7 @@ function btnSignin() {
         arr[0].isUser = true;
         arr[0].isAdmin = false;
         arr[0].isLogout = false;
+    getNoProductCart();
               
         setTimeout(function() {
             overlayNotify.style.transform = 'translateX(0)';
@@ -1325,6 +1367,7 @@ function btnSignin() {
                                     </div>`;
             checkSignin();
             checkAccount();
+            getNoProductCart();
         }, 500)
 
         setTimeout(function() {
@@ -1332,7 +1375,6 @@ function btnSignin() {
             overlayNotify.style.opacity = '0';
             overlayLogin.classList.remove('open');
         }, 2000)
-
     }
     else {
         setTimeout(function() {
@@ -1351,7 +1393,9 @@ function btnSignin() {
         document.getElementById('Username').value = "";
         document.getElementById('Password').value = "";
     }
+
     localStorage.setItem('account',JSON.stringify(arr))
+
 }
 
 document.getElementById('Login-Btn').onclick = function() {
@@ -1384,6 +1428,10 @@ const notify = document.querySelector('.notify');
 
 function btnLogout() {
     var arr = localStorage.getItem('account') ? JSON.parse(localStorage.getItem('account')) : accounts;
+
+    if(arr[0].isAdmin == true) {
+        document.querySelector('.sidebar__menu-item:last-child').classList.add('hide');
+    }
 
     arr[0].isLogout = true;
     arr[0].isAdmin = false;
@@ -1479,6 +1527,7 @@ function deleteSearchHandle() {
 var deleteSearch = document.querySelector('.section__delete');
 deleteSearch.addEventListener('click', function() {
     deleteSearchHandle();
+    deleteSearch.style.display = 'none';
 })
 
 sectionSearch.oninput = function() {
@@ -1496,9 +1545,11 @@ function searchProduct() {
     if (x != '') {
         sectionMenu.style.display = 'none';
         sectionTitle.style.display = 'none';
+        deleteSearch.style.display = 'none';
     } else {
         sectionMenu.style.display = 'flex';
         sectionTitle.style.display = 'flex';
+        deleteSearch.style.display = 'block';
     }
 
     const arrProducts = [];
@@ -1709,13 +1760,14 @@ function filterHandle() {
     }
 }
 
-// Xử lý giỏ hàng
+// ** Xử lý giỏ hàng
 const pay = document.getElementById('pay');
 const overlayCart = document.querySelector('.overlay.cart-info');
 const closeCart = document.querySelector('.close-icon.cart');
 const modalCart = document.querySelector('.modal.checkout__info');
 const confirmBtn = document.getElementById('confirm-btn');
 
+// Xử lý khi ấn vào xem giỏ hàng
 document.querySelector('.section__notify-footer-tocart').onclick = function() {
     document.querySelector('.sidebar__menu-item.active').classList.remove('active');
     sidebarItems[2].classList.add('active');
@@ -1728,41 +1780,66 @@ document.querySelector('.section__notify-footer-tocart').onclick = function() {
     updateCart();
 }
 
-function payHandle() {
-    for(let i=1; i < arr.length; i++) {
-        if((arr[0].isAdmin || arr[0].isUser) && arr[i].Username === arr[0].Username && arr[i].Password === arr[0].Password) {
-            pay.addEventListener('click', function() {
-                overlayCart.classList.add('open');
-            })
-            
-            closeCart.onclick = function() {
-                overlayCart.classList.remove('open');
-            }
-            
-            overlayCart.onclick = function() {
-                overlayCart.classList.remove('open');
-            }
-            
-            modalCart.onclick = function(e) {
-                e.stopPropagation();
-            }
+// Xử lý khi ấn vào thanh toán
+pay.addEventListener('click', function() {
+    var arr = localStorage.getItem("account") ? JSON.parse(localStorage.getItem("account")) : accounts;
+    if(returnCurIndex() != -1) {
+        overlayCart.classList.add('open');
 
-            loginEmail.value = arr[i].email;
+        loginEmail.value = arr[returnCurIndex()].email;
 
+        if(arr[returnCurIndex()].cart.length > 0) {
             confirmBtn.addEventListener('click', function() {
-                thongTinDonHang(i);
+                thongTinDonHang(returnCurIndex());
             })
-            
-        }
-        else {
-            getNoProductCart();
-            pay.removeEventListener('click', function() {})
         }
     }
+    else {
+        notify.style.transform = 'translateX(0)';
+        notify.style.opacity = '1';
+        notify.innerHTML = `<div class='notify__confirm'>
+                                    <div class="notify__confirm-text">
+                                        Bạn cần đăng nhập để mua hàng !
+                                    </div>
+                                    <div class="notify__confirm-btn">
+                                        <div class="notify__confirm-ok">
+                                            OK
+                                        </div>
+                                        <div class="notify__confirm-cancel">
+                                            Hủy
+                                        </div>
+                                    </div>
+                                </div>`;
+
+        document.querySelector('.notify__confirm').onclick = function(e) {
+            e.stopPropagation();
+        }
+
+        document.querySelector('.notify__confirm-ok').onclick = function() {
+                notify.style.transform = 'translateX(100%)';
+                notify.style.opacity = '0';
+                openFormLogin();
+            }
+            document.querySelector('.notify__confirm-cancel').onclick = function() {
+                notify.style.transform = 'translateX(100%)';
+                notify.style.opacity = '0';
+            }
+    }
+})
+
+closeCart.onclick = function() {
+    overlayCart.classList.remove('open');
 }
 
-payHandle()
+overlayCart.onclick = function() {
+    overlayCart.classList.remove('open');
+}
 
+modalCart.onclick = function(e) {
+    e.stopPropagation();
+}
+
+// Form thông tin đơn hàng
 function thongTinDonHang(i) {
     var arr = localStorage.getItem("account") ? JSON.parse(localStorage.getItem("account")) : accounts;
 
@@ -1771,17 +1848,22 @@ function thongTinDonHang(i) {
     var address = loginAddress.value;
     var note = loginNote.value;
 
+    var soluong = document.getElementById('checkout__cart-total-amount').innerText; 
+    var tongtien = document.getElementById('checkout__cart-total-money').innerText;
+
     checkEmail(email, 6);
+    checkPhone(phone, 7);
+    checkAddress(address, 8);
 
     if(isEmail && isPhone && isAddress) {
         arr[i].email = email;
 
         arr[i].donhang.push(
             {
-                trangthai: 'chưa xác nhận',
+                trangthai: 'Chưa xử lý',
                 ngaymua: getCurDate().toString(),
-                soluong: 5,
-                tongtien: 10000,
+                soluong: soluong,
+                tongtien: tongtien,
                 phone: phone,
                 address: address,
                 ghichu: note,
@@ -1805,11 +1887,14 @@ function thongTinDonHang(i) {
 
         setTimeout(function() {
             overlayCart.classList.remove('open');
+            // Reset lại thành rỗng
             loginPhone.value = '';
             loginAddress.value = '';
             loginNote.value = '';
+
             // Xóa các sp khỏi giỏ hàng
-            deleteAllCart()
+            deleteAllCart();
+            updateCart();
         }, 1700)
     }
     else {
@@ -1828,7 +1913,9 @@ function thongTinDonHang(i) {
         }, 1500) 
     }
 
+    getNoProductCart()
     localStorage.setItem("account", JSON.stringify(arr));
+    updateCart()
 }
 
 // Thêm vào giỏ hàng
@@ -1837,7 +1924,7 @@ const cartNotify = document.querySelector('.cart-notify');
 
 addCart.onclick = () => {
     var arr = localStorage.getItem("account") ? JSON.parse(localStorage.getItem("account")) : accounts;
-    if(arr[0].isUser === true || arr[0].isAdmin === true) {
+    if(returnCurIndex() != -1) {
         var list = arr[returnCurIndex()].cart;
         var added = false;
         var image = document.querySelector('.modal__inner-img').style.backgroundImage.split('"')[1];
@@ -1962,31 +2049,28 @@ function getCurDate() {
 
 function getNoProductCart() {
     var arr = localStorage.getItem('account') ? JSON.parse(localStorage.getItem('account')) : accounts;
-    if(arr[0].isAdmin === false && arr[0].isUser === false) {
+    if(returnCurIndex() === -1) {
         document.querySelector('.checkout__cart-products').innerHTML = `<div class="checkout__no-product">
                                                                             Bạn chưa đăng nhập
                                                                         </div>`
         document.getElementById("checkout__cart-total-amount").innerText = '0';
         document.getElementById("checkout__cart-total-money").innerText = '0 ₫';
-        document.querySelector('.product-remove-all').style.cursor = 'not-allowed';
-        pay.removeEventListener('click', function() {});
-        pay.style.cursor = 'not-allowed';
-        document.querySelector('.section__notify-cart').style.visibility = 'hidden';
+        document.querySelector('.section__notify-cart-list').innerHTML = `<span>Bạn chưa đăng nhập</span>`;
     }
-
-    if(arr[returnCurIndex()].cart.length === 0) {
+    else if(arr[returnCurIndex()].cart.length === 0) {
         document.querySelector('.checkout__cart-products').innerHTML = `<div class="checkout__no-product">
                                                                             Giỏ hàng trống
                                                                         </div>`
         document.getElementById("checkout__cart-total-amount").innerText = '0';
         document.getElementById("checkout__cart-total-money").innerText = '0 ₫';
-        document.querySelector('.product-remove-all').style.cursor = 'not-allowed';
         document.querySelector('.section__notify-footer-text').innerText = 'Tổng tiền (0) sản phẩm: ';
         document.querySelector('.section__notify-footer-money').innerText = '0 ₫';
-        pay.removeEventListener('click', function() {});
-        pay.style.cursor = 'not-allowed';
+        document.querySelector('.section__notify-cart-list').innerHTML = `<span>Giỏ hàng trống</span>`;
+        
     }
 }
+
+getNoProductCart()
 
 function deleteAllCart() {
     var arr = localStorage.getItem("account") ? JSON.parse(localStorage.getItem("account")) : accounts;
@@ -2001,11 +2085,52 @@ function initCart() {
     var removeCart = document.querySelectorAll(".product-remove");
     removeCart.forEach((ele) => {
         ele.onclick = () => {
+            if(returnCurIndex() != -1) {
+                notify.style.transform = 'translateX(0)';
+                notify.style.opacity = '1';
+                notify.innerHTML = `<div class='notify__confirm'>
+                                        <div class="notify__confirm-text">
+                                            Bạn xác nhận xóa đơn hàng này?
+                                        </div>
+                                        <div class="notify__confirm-btn">
+                                            <div class="notify__confirm-ok">
+                                                OK
+                                            </div>
+                                            <div class="notify__confirm-cancel">
+                                                Hủy
+                                            </div>
+                                        </div>
+                                    </div>`;
+        
+                document.querySelector('.notify__confirm-ok').onclick = function(e) {
+                    notify.style.transform = 'translateX(100%)';
+                    notify.style.opacity = '0';
+                    var arr = localStorage.getItem("account") ? JSON.parse(localStorage.getItem("account")) : accounts;
+                    var list = arr[returnCurIndex()].cart;
+    
+                    list.splice(e.currentTarget.dataset.index, 1);
+                    
+                    renderCartNotify(list)
+                    localStorage.setItem("account", JSON.stringify(arr));
+                    updateCart();
+                }
+    
+                document.querySelector('.notify__confirm-cancel').onclick = function() {
+                    notify.style.transform = 'translateX(100%)';
+                    notify.style.opacity = '0';
+                }
+            }
+        };
+    });
+
+    var removeAll = document.querySelector('.product-remove-all');
+    removeAll.onclick = function() {
+        if(returnCurIndex() != -1) {
             notify.style.transform = 'translateX(0)';
             notify.style.opacity = '1';
             notify.innerHTML = `<div class='notify__confirm'>
                                     <div class="notify__confirm-text">
-                                        Bạn xác nhận xóa đơn hàng này?
+                                        Bạn có chắc chắn xóa hết sản phẩm trong giỏ !!
                                     </div>
                                     <div class="notify__confirm-btn">
                                         <div class="notify__confirm-ok">
@@ -2017,87 +2142,52 @@ function initCart() {
                                     </div>
                                 </div>`;
     
-            document.querySelector('.notify__confirm-ok').onclick = function(e) {
+            document.querySelector('.notify__confirm-ok').onclick = function() {
                 notify.style.transform = 'translateX(100%)';
                 notify.style.opacity = '0';
-                var arr = localStorage.getItem("account") ? JSON.parse(localStorage.getItem("account")) : accounts;
-                var list = arr[returnCurIndex()].cart;
-
-                list.splice(e.currentTarget.dataset.index, 1);
-
-                
-                renderCartNotify(list)
-                localStorage.setItem("account", JSON.stringify(arr));
-                updateCart();
+                deleteAllCart()
             }
-
             document.querySelector('.notify__confirm-cancel').onclick = function() {
                 notify.style.transform = 'translateX(100%)';
                 notify.style.opacity = '0';
             }
-        };
-    });
-
-    var removeAll = document.querySelector('.product-remove-all');
-    removeAll.onclick = function() {
-        notify.style.transform = 'translateX(0)';
-        notify.style.opacity = '1';
-        notify.innerHTML = `<div class='notify__confirm'>
-                                <div class="notify__confirm-text">
-                                    Bạn có chắc chắn xóa hết sản phẩm trong giỏ !!
-                                </div>
-                                <div class="notify__confirm-btn">
-                                    <div class="notify__confirm-ok">
-                                        OK
-                                    </div>
-                                    <div class="notify__confirm-cancel">
-                                        Hủy
-                                    </div>
-                                </div>
-                            </div>`;
-
-        document.querySelector('.notify__confirm-ok').onclick = function() {
-            notify.style.transform = 'translateX(100%)';
-            notify.style.opacity = '0';
-            deleteAllCart()
-        }
-        document.querySelector('.notify__confirm-cancel').onclick = function() {
-            notify.style.transform = 'translateX(100%)';
-            notify.style.opacity = '0';
         }
     }
     
     var amountCart = document.querySelectorAll(".checkout__amount");
     amountCart.forEach((ele) => {
         ele.onchange = (e) => {
-            var arr = localStorage.getItem("account") ? JSON.parse(localStorage.getItem("account")) : accounts;
-            var list = arr[returnCurIndex()].cart;
-
-            list[e.currentTarget.dataset.index]["amount"] = e.currentTarget.value;
-            renderCartNotify(list)
-            localStorage.setItem("account", JSON.stringify(arr));
-            updateCart();
+            if(returnCurIndex() != -1) {
+                var arr = localStorage.getItem("account") ? JSON.parse(localStorage.getItem("account")) : accounts;
+                var list = arr[returnCurIndex()].cart;
+    
+                list[e.currentTarget.dataset.index]["amount"] = e.currentTarget.value;
+                renderCartNotify(list)
+                localStorage.setItem("account", JSON.stringify(arr));
+                updateCart();
+            }
         };
     });
 }
 
 function updateCart() {
-    var arr = localStorage.getItem("account") ? JSON.parse(localStorage.getItem("account")) : accounts;
-    var list = arr[returnCurIndex()].cart;
-    if (list.length > 0) {
-        loadCartItem(list, (total, totalAmount) => {
-            document.getElementById("checkout__cart-total-amount").innerText = `${totalAmount}`;
-            total = addComma(total);
-            document.getElementById("checkout__cart-total-money").innerText = `${total} ₫`;
-            renderCartNotify(list)
-            document.querySelector('.section__notify-footer-text').innerText = `Tổng tiền (${totalAmount}) sản phẩm: `
-            document.querySelector('.section__notify-footer-money').innerText = `${total} ₫`
-        });
-        initCart();
-        document.querySelector('.product-remove-all').style.cursor = 'pointer';
-    }
-    else {
-        getNoProductCart();
+    if(returnCurIndex() != -1) {
+        var arr = localStorage.getItem("account") ? JSON.parse(localStorage.getItem("account")) : accounts;
+        var list = arr[returnCurIndex()].cart;
+        if (list.length > 0) {
+            loadCartItem(list, (total, totalAmount) => {
+                document.getElementById("checkout__cart-total-amount").innerText = `${totalAmount}`;
+                total = addComma(total);
+                document.getElementById("checkout__cart-total-money").innerText = `${total} ₫`;
+                renderCartNotify(list)
+                document.querySelector('.section__notify-footer-text').innerText = `Tổng tiền (${totalAmount}) sản phẩm: `
+                document.querySelector('.section__notify-footer-money').innerText = `${total} ₫`
+            });
+            initCart();
+        }
+        else {
+            getNoProductCart();
+        }
     }
 }
 
@@ -2174,16 +2264,3 @@ sidebarControl();
 sectionControl(sectionItems);
 scrollTopHandle();
 checkAccount();
-
-var a = [
-    {
-        b: '',
-        c: 4,
-        d: [
-            5, 6, 7
-        ],
-        e: 9
-    }
-]
-
-// console.log(a[0].b)

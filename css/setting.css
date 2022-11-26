@@ -290,7 +290,8 @@ header h2 {
 
 /* Overlay */
 .overlay.product.edit,
-.overlay.product.add {
+.overlay.product.add,
+.overlay.order {
     transform: scale(0);
     transition: .2s ease;
     background-color: #020202d8;
@@ -405,7 +406,7 @@ button, select, input {
 }
 
 .notify__delete-text {
-    font-size: 16px;
+    font-size: 18px;
     line-height: 20px;
 }
 
@@ -470,16 +471,32 @@ button, select, input {
     border-color: transparent transparent #555 transparent;
 }
 
+.tooltip.check .tooltiptext {
+    width: fit-content;
+    left: 8px;
+}
+
+.tooltip.cancle .tooltiptext {
+    width: fit-content;
+    left: 16px;
+}
+
 .tooltip:hover .tooltiptext {
     visibility: visible;
     opacity: 1;
 }
 
-/* ======================== Switch Slider (Togggle) ======================= */
+.table-content td.trangthai {
+    font-weight: 900;
+    color: #f86c6b;
+}
 
+.table-content td.trangthai.active {
+    font-weight: 900;
+    color: #5ce457d8;
+}
 
 /* The switch - the box around the slider */
-
 .switch {
     position: relative;
     display: inline-block;
@@ -657,4 +674,228 @@ input:checked+.slider:before {
 
 .number-page li:hover {
     background-color: var(--primary-color);
+}
+
+/* Chi tiết */
+#Order tr td:last-child {
+    transition: all ease-in 0.2s;
+    font-size: 24px;
+}
+
+#Order tr td:last-child:hover {
+    color: #2196F3;
+    font-size: 30px;
+}
+
+/* Content */
+.admin__content {
+    padding: 0 16px;
+    margin-left: var(--sidebar-width);
+    min-height: 100vh;
+}
+
+.admin__content-header {
+    padding: 16px 24px;
+    text-align: center;
+}
+
+.admin__content-header h3 {
+    font-size: 32px;
+}
+
+.admin__content-wrapper {
+    min-height: 100vh;
+}
+
+.admin__statis,
+.admin__order,
+.admin__product,
+.admin__user {
+    animation: slideLeft ease 0.3s;
+}
+
+/* Statistics */
+.admin__statis {
+    margin-top: 18px;
+}
+
+.admin__statis-sum {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin: 14px 0;
+}
+
+.admin__statis-sum-box {
+    display: flex;
+    align-items: center;
+    padding: 28px;
+    border-radius: 6px;
+    user-select: none;
+}
+
+.admin__statis-sum-box:hover {
+    box-shadow: 0px 3px 10px 0 #80808085;
+}
+
+.admin__statis-sum-box-icon {
+    width: 70px;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 16px;
+    border-radius: 8px;
+}
+
+.admin__statis-sum-box-icon.sum-order {
+    background-color: #ee3158;
+}
+
+.admin__statis-sum-box-icon.sum-product {
+    background-color: #3596f7;
+}
+
+.admin__statis-sum-box-icon.total {
+    background-color: #ffa800;
+}
+
+.admin__statis-sum-box-icon span {
+    color: #fff;
+    font-size: 30px;
+}
+
+.admin__statis-sum-box-icon i {
+    color: #fff;
+    font-size: 30px;
+}
+
+.admin__statis-sum-box-info h3 {
+    font-size: 18px;
+    margin-bottom: 6px;
+    color: blanchedalmond;
+}
+
+/* Statistics filter */
+.admin__statis-filter {
+    display: flex;
+    align-items: center;
+    margin-top: 24px;
+}
+
+.admin__statis-filter h3 {
+    font-size: 18px;
+    margin-right: 16px;
+    color: burlywood;
+}
+
+.admin__statis-filter select {
+    outline: none;
+    border: none;
+    font-size: 15px;
+}
+
+/* Chart */
+.admin__statis-chart-wrapper {
+    margin-top: 24px;
+}
+
+.admin__statis-chart-header {
+    margin-bottom: 14px;
+}
+
+.admin__statis-chart-header h3 {
+    font-size: 32px;
+    text-align: center;
+    color: wheat;
+}
+
+.admin__statis-chart-note {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.admin__statis-chart-note-item {
+    display: flex;
+    align-items: center;
+    margin: 0 16px;
+}
+
+.admin__statis-chart-note-item:nth-child(1) div {
+    background-color: #ee3158;
+}
+
+.admin__statis-chart-note-item:nth-child(2) div {
+    background-color: #3596f7;
+}
+
+.admin__statis-chart-note-item:nth-child(3) div {
+    background-color: #ffa800;
+}
+
+.admin__statis-chart-note-item div {
+    width: 40px;
+    height: 20px;
+    margin-right: 2px;
+}
+
+.admin__statis-chart-note-item p {
+    font-size: 16px;
+    margin-left: 10px;
+    color: lavenderblush;
+}
+
+.admin__statis-chart {
+    margin: 14px 0;
+    display: flex;  
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.admin__statis-chart-item {
+    text-align: center;
+}
+
+.admin__statis-chart-item:not(:first-child) {
+    margin-left: 10px;
+}
+
+.admin__statis-chart-box {
+    height: 300px;
+    display: flex;
+    align-items: flex-end;
+}
+
+.admin__statis-chart-box div {
+    height: var(--percent-height);
+    width: 30px;
+    position: relative;
+    animation: chartGrowth ease-in 0.4s;
+}
+
+.admin__statis-chart-box div:nth-child(1) {
+    background-color: #ee3158;
+}
+
+.admin__statis-chart-box div:nth-child(2) {
+    background-color: #3596f7;
+}
+
+.admin__statis-chart-box div:nth-child(3) {
+    background-color: #ffa800;
+}
+
+.admin__statis-chart-month {
+    display: block;
+    font-size: 16px;
+    margin-top: 8px;
+}
+
+.info-quantity {
+    font-size: 10px;
+    position: absolute;
+    top: -12px;
+    left: 50%;
+    transform: translateX(-50%);
 }

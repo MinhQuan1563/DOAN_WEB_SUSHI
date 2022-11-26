@@ -609,6 +609,33 @@ if(Products === products) {
     localStorage.setItem("product", JSON.stringify(Products))
 }
 
+var accounts = [
+    {
+        isAdmin: false,
+        isUser: false,
+        isLogout: true,
+        Fullname: 'user',
+        Username: 'user',
+        Password: 'user'
+    },
+    {
+        Fullname: 'Admin',
+        Password: 'admin',
+        Username: 'admin',
+        email: 'cnttdhsg@gmail.com',
+        ngaydangky: '',
+        cart: [],
+        donhang: []
+    }
+]
+
+// Set mặc định cho arr (account)
+const Arr = localStorage.getItem('account') ? JSON.parse(localStorage.getItem('account')) : accounts;
+
+if(Arr === accounts) {
+    localStorage.setItem("account", JSON.stringify(accounts))
+}
+
 // Lựa chọn các item trên nav-item
 const navItems = document.querySelectorAll('.nav-item');
 const sectionItems = document.querySelectorAll('.section > div');
@@ -963,7 +990,7 @@ function addProduct() {
 addProduct();
 
 // Xử lý xóa sản phẩm
-const notifyDelete = document.querySelector('.notify__delete');
+const notifyDelete = document.querySelectorAll('.notify__delete')[0];
 
 function deleteProduct(i) {
     notifyDelete.innerHTML = `<div class="notify__delete-text">
@@ -1002,13 +1029,6 @@ function deleteProduct(i) {
 
 // Hiện ảnh khi chọn file
 function updateProductImg(files, id) {
-    // var url = '';
-    // if(files.length) url = window.URL.createObjectURL(files[0]);
-    
-    // document.getElementById(id).src = url;
-
-    // console.log(url);
-
     const reader = new FileReader();
     reader.addEventListener("load", function () {
         // convert image file to base64 string
@@ -1230,6 +1250,177 @@ function editProduct(i) {
 
 }
 
+// ** Xử lý Bảng Khách Hàng
+function renderUser() {
+    const arrUser = localStorage.getItem('account') ? JSON.parse(localStorage.getItem('account')) : accounts;
+    var htmls = '<table>';
+    for (let i = 2; i < arrUser.length; i++) {
+        htmls += ` <tr>
+        <td style="width: 5%">${i - 1}</td>
+        <td style="width: 10%">${arrUser[i].ngaydangky}</td>
+        <td style="width: 20%">${arrUser[i].Fullname}</td>
+        <td style="width: 25%">${arrUser[i].email}</td>
+        <td style="width: 15%">${arrUser[i].Username}</td>
+        <td style="width: 20%">${arrUser[i].Password}</td>
+        <td style="width: 5%">
+            <div class="tooltip delete" onclick="deleteUser(${i})">
+                <i class="fa fa-trash"></i>
+                <span class="tooltiptext">Xóa</span>
+            </div>
+        </td>
+        </tr>`
+    }
+    htmls += '</table>';
+    document.querySelector('#User').innerHTML = htmls;
+    localStorage.setItem('account', JSON.stringify(arrUser));
+}
+renderUser();
+
+const notifyDelete2 = document.querySelectorAll('.notify__delete')[2];
+
+function deleteUser(i) {
+    notifyDelete2.innerHTML = `<div class="notify__delete-text">
+                Bạn có chắc sẽ xóa Khách Hàng này không?
+            </div>
+            <div class="notify__delete-btn">
+                <div class="notify__delete-ok">
+                    OK
+                </div>
+                <div class="notify__delete-cancel">
+                    Hủy
+                </div>
+            </div>`
+
+    notifyDelete2.style.transform = 'translate(-50%, 0)';
+    notifyDelete2.style.opacity = '1';
+    document.querySelector('.notify__delete-ok').onclick = function() {
+        const arr = localStorage.getItem('account') ? JSON.parse(localStorage.getItem('account')) : accounts;
+        notifyDelete2.style.transform = 'translate(-50%, -270%)';
+        notifyDelete2.style.opacity = '0';
+
+        arr.splice(i, 1);
+
+        localStorage.setItem("account", JSON.stringify(arr));
+        renderUser();
+    }
+
+    document.querySelector('.notify__delete-cancel').onclick = function() {
+        notifyDelete2.style.transform = 'translate(-50%, -270%)';
+        notifyDelete2.style.opacity = '0';
+    }
+}
+
+// ** Xử lý Đơn Hàng
+function renderOder() {
+    const arrUser = localStorage.getItem('account') ? JSON.parse(localStorage.getItem('account')) : accounts;
+    var htmls = '<table>';
+    var tmp = 1;
+    var switchColor;
+
+    for (let i = 1; i < arrUser.length; i++) {
+        for(let j = 0; j < arrUser[i].donhang.length; j++) {
+            if(arrUser[i].donhang.length > 0) {
+
+                if(arrUser[i].donhang[j].trangthai == 'Đã xử lý') {
+                    switchColor = 'active';
+                }
+                else {
+                    switchColor = '';
+                }
+
+                htmls += `<tr>
+                            <td style="width: 5%">${tmp++}</td>
+                            <td style="width: 10%">${arrUser[i].donhang[j].ngaymua}</td>
+                            <td style="width: 20%">${arrUser[i].Fullname}</td>
+                            <td style="width: 20%">${arrUser[i].donhang[j].tongtien}</td>
+                            <td class="trangthai ${switchColor}" style="width: 15%">${arrUser[i].donhang[j].trangthai}</td>
+                            <td style="width: 10%">
+                                <div class="tooltip check" onclick="duyet(${i}, ${j}, true)">
+                                    <i class="fa fa-check"></i>
+                                    <span class="tooltiptext">Duyệt</span>
+                                </div>
+                                <div class="tooltip cancle" onclick="duyet(${i}, ${j}, false)">
+                                    <i class="fa fa-remove"></i>
+                                    <span class="tooltiptext">Hủy</span>
+                                </div>
+                            </td>
+                            <td style="width: 10%"><i class="eye-icon ti-eye" onclick="showDetail(${i}, ${j})"></i></td>
+                        </tr>`
+            }
+        }
+    }
+    htmls += '</table>';
+    document.querySelector('#Order').innerHTML = htmls;
+    localStorage.setItem('account', JSON.stringify(arrUser));
+}
+renderOder()
+
+function duyet(i, j, duyetDon) {
+    const arrUser = localStorage.getItem('account') ? JSON.parse(localStorage.getItem('account')) : accounts;
+
+    if(duyetDon) {
+        arrUser[i].donhang[j].trangthai = 'Đã xử lý';
+    }
+    else {
+        const notifyDelete1 = document.querySelectorAll('.notify__delete')[1];
+        if(arrUser[i].donhang[j].trangthai == 'Đã xử lý') {
+            notifyDelete1.innerHTML = `<div class="notify__delete-text">
+                                            Không thể hủy đơn hàng đã xử lý !!
+                                        </div>
+                                        <div class="notify__delete-btn" style="justify-content: flex-end;">
+                                            <div class="notify__delete-ok">
+                                                OK
+                                            </div>
+                                        </div>`
+            notifyDelete1.style.transform = 'translate(-50%, 0)';
+            notifyDelete1.style.opacity = '1';
+
+            document.querySelector('.notify__delete-ok').onclick = function() {
+                notifyDelete1.style.transform = 'translate(-50%, -270%)';
+                notifyDelete1.style.opacity = '0';
+            }
+        }
+        else {
+            notifyDelete1.innerHTML = `<div class="notify__delete-text">
+                                            Bạn có chắc muốn hủy đơn hàng này không?
+                                        </div>
+                                        <div class="notify__delete-btn">
+                                            <div class="notify__delete-ok">
+                                                OK
+                                            </div>
+                                            <div class="notify__delete-cancel">
+                                                Hủy
+                                            </div>
+                                        </div>`
+        
+            notifyDelete1.style.transform = 'translate(-50%, 0)';
+            notifyDelete1.style.opacity = '1';
+            document.querySelector('.notify__delete-ok').onclick = function() {
+                notifyDelete1.style.transform = 'translate(-50%, -270%)';
+                notifyDelete1.style.opacity = '0';
+        
+                arrUser[i].donhang.splice(j, 1);
+
+                localStorage.setItem('account', JSON.stringify(arrUser));
+                renderOder();
+            }
+        
+            document.querySelector('.notify__delete-cancel').onclick = function() {
+                notifyDelete1.style.transform = 'translate(-50%, -270%)';
+                notifyDelete1.style.opacity = '0';
+            }
+        }
+    }
+
+    localStorage.setItem('account', JSON.stringify(arrUser));
+
+    renderOder();
+}
+
+var overlayOrder = document.querySelector('.overlay.order');
+function showDetail(i, j) {
+    overlayOrder.style.transform = 'scale(1)';
+}
 
 showProduct();
 renderPage();
