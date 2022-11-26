@@ -182,7 +182,7 @@ header h2 {
 
 /* phần chứa nội dung  */
 .table-content {
-    min-height: 200px;
+    min-height: 550px;
     max-height: 550px;
     overflow: auto;
     margin: 0 auto;
@@ -602,4 +602,59 @@ input:checked+.slider:before {
 
 .bg-warning {
     background-color: #ffc107;
+}
+
+/*Phân Trang Table Product*/
+.section__product .content__paging {
+    display: flex;
+    font-size: 16px;
+    justify-content: center;
+    align-items: center;
+    height: 60px;
+    margin-top: 40px;
+}
+
+.section__product .content__paging i {
+    font-size: 40px;
+    color: rgba(255, 255, 255, 0.3);
+    display: flex;
+}
+
+.section__product .content__paging i.btn-prev {
+    justify-content: flex-end;
+    margin-right: 8px;
+}
+
+.section__product .content__paging i.btn-next {
+    justify-content: flex-start;
+    margin-left: 8px;
+}
+
+.section__product .content__paging i.active {
+    cursor: pointer;
+    color: var(--white-color);
+}
+
+.number-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.number-page li.active {
+    background-color: var(--primary-color);
+}
+
+.number-page li {
+    color: var(--white-color);
+    border: 2px solid var(--white-color);
+    font-weight: 900;
+    padding: 10px 17px;
+    margin: 0 8px;
+    border-radius: 100%;
+    cursor: pointer;
+}
+
+.number-page li:hover {
+    background-color: var(--primary-color);
 }

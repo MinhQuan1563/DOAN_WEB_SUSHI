@@ -603,6 +603,7 @@ var products = [
     }
 ]
 
+// Cắt ảnh
 function splitImg(img) {
     var img2 = img.split('fakepath\\');
     if(img2.length === 1) {
@@ -613,8 +614,6 @@ function splitImg(img) {
     }
 }
 
-// console.log(splitImg('C:\\fakepath\\img-0-11.png'))
-
 // Set mặc định cho product
 const Products = localStorage.getItem('product') ? JSON.parse(localStorage.getItem('product')) : products;
 
@@ -622,8 +621,8 @@ if(Products === products) {
     localStorage.setItem("product", JSON.stringify(Products))
 }
 
+// Trả về loại sp
 var typeList = ['bento', 'sushi', 'sashi', 'combo', 'ankem', 'douong'];
-
 function getProducts(s) {   
     var arr = [];
     for(let i=0; i < Products.length; i++) {
@@ -633,6 +632,7 @@ function getProducts(s) {
     return arr;
 }
 
+// Trả về vị trí trong mảng của KH đang đăng nhập
 function returnCurIndex(arr) {
     var arr = localStorage.getItem("account") ? JSON.parse(localStorage.getItem("account")) : accounts;
 
@@ -686,6 +686,7 @@ function sidebarControl() {
     
 }
 
+// Render các sp và hiện ra phân trang mặc định ở trang đầu
 function renderProductDefault(arrList) {
     pageDefault();
     renderProduct(arrList);
@@ -970,10 +971,7 @@ var accounts = [
         Fullname: 'Admin',
         Password: 'admin',
         Username: 'admin',
-        phone: '19001286',
-        address: '273 ADV DHSG',
         email: 'cnttdhsg@gmail.com',
-        note: '',
         cart: [],
         donhang: []
     }
@@ -1042,10 +1040,7 @@ function addLogin() {
         Fullname: fullname,
         Password: password,
         Username: username,
-        phone: '',
-        address: '',
         email: '',
-        note: '',
         cart: [],
         donhang: []
     }
@@ -1752,6 +1747,8 @@ function payHandle() {
                 e.stopPropagation();
             }
 
+            loginEmail.value = arr[i].email;
+
             confirmBtn.addEventListener('click', function() {
                 thongTinDonHang(i);
             })
@@ -1768,16 +1765,29 @@ payHandle()
 
 function thongTinDonHang(i) {
     var arr = localStorage.getItem("account") ? JSON.parse(localStorage.getItem("account")) : accounts;
+
     var email = loginEmail.value;
     var phone = loginPhone.value;
     var address = loginAddress.value;
     var note = loginNote.value;
 
+    checkEmail(email, 6);
+
     if(isEmail && isPhone && isAddress) {
         arr[i].email = email;
-        arr[i].phone = phone;
-        arr[i].address = address;
-        arr[i].note = note;
+
+        arr[i].donhang.push(
+            {
+                trangthai: 'chưa xác nhận',
+                ngaymua: getCurDate().toString(),
+                soluong: 5,
+                tongtien: 10000,
+                phone: phone,
+                address: address,
+                ghichu: note,
+                sanpham: arr[i].cart
+            }
+        )
 
         setTimeout(function() {
             notify.style.transform = 'translateX(0)';
@@ -1795,6 +1805,11 @@ function thongTinDonHang(i) {
 
         setTimeout(function() {
             overlayCart.classList.remove('open');
+            loginPhone.value = '';
+            loginAddress.value = '';
+            loginNote.value = '';
+            // Xóa các sp khỏi giỏ hàng
+            deleteAllCart()
         }, 1700)
     }
     else {
@@ -1937,11 +1952,10 @@ function deleteComma(s) {
 function getCurDate() {
     var date = new Date();
 
-    var hour = date.getHours();
     var day = date.getDate();
     var month = date.getMonth() + 1;
     var year = date.getFullYear();
-    var s = `${hour}h, ${day}-${month}-${year}`;
+    var s = `${day}-${month}-${year}`;
 
     return s;
 }
@@ -1972,6 +1986,15 @@ function getNoProductCart() {
         pay.removeEventListener('click', function() {});
         pay.style.cursor = 'not-allowed';
     }
+}
+
+function deleteAllCart() {
+    var arr = localStorage.getItem("account") ? JSON.parse(localStorage.getItem("account")) : accounts;
+    var list = arr[returnCurIndex()].cart
+    list.splice(0, list.length);
+    renderCartNotify(list)
+    localStorage.setItem("account", JSON.stringify(arr));
+    updateCart();
 }
 
 function initCart() {
@@ -2015,8 +2038,8 @@ function initCart() {
         };
     });
 
-    var deleteProductAll = document.querySelector('.product-remove-all');
-    deleteProductAll.onclick = function() {
+    var removeAll = document.querySelector('.product-remove-all');
+    removeAll.onclick = function() {
         notify.style.transform = 'translateX(0)';
         notify.style.opacity = '1';
         notify.innerHTML = `<div class='notify__confirm'>
@@ -2036,12 +2059,7 @@ function initCart() {
         document.querySelector('.notify__confirm-ok').onclick = function() {
             notify.style.transform = 'translateX(100%)';
             notify.style.opacity = '0';
-            var arr = localStorage.getItem("account") ? JSON.parse(localStorage.getItem("account")) : accounts;
-            var list = arr[returnCurIndex()].cart
-            list.splice(0, list.length);
-            renderCartNotify(list)
-            localStorage.setItem("account", JSON.stringify(arr));
-            updateCart();
+            deleteAllCart()
         }
         document.querySelector('.notify__confirm-cancel').onclick = function() {
             notify.style.transform = 'translateX(100%)';

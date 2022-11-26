@@ -603,6 +603,12 @@ var products = [
     }
 ]
 
+const Products = localStorage.getItem('product') ? JSON.parse(localStorage.getItem('product')) : products;
+
+if(Products === products) {
+    localStorage.setItem("product", JSON.stringify(Products))
+}
+
 // Lựa chọn các item trên nav-item
 const navItems = document.querySelectorAll('.nav-item');
 const sectionItems = document.querySelectorAll('.section > div');
@@ -701,40 +707,126 @@ function getTypeProduct(type) {
     return s;
 }
 
-// Render sản phẩm ra Table
+// Xử lý phân trang và Render sản phẩm ra Table
+const arr = localStorage.getItem('product') ? JSON.parse(localStorage.getItem('product')) : products;
+var perPage = 12;
+var currentPage = 1;
+var start = 0;
+var end = perPage;
+var total = Math.ceil(arr.length / perPage);
+const btnPrev = document.querySelector('.btn-prev');
+const btnNext = document.querySelector('.btn-next');
+
 function showProduct() {
     const arr = localStorage.getItem('product') ? JSON.parse(localStorage.getItem('product')) : products;
     var htmls = '<table>';
-    let temp = 1;
-    for (let i = 0; i < arr.length; i++) {
-        htmls += `
-        <tr>
-        <td style="width: 5%">${temp++}</td>
-        <td style="width: 10%">${arr[i].masp}</td>
-        <td style="width: 10%">${getTypeProduct(arr[i].type)}</td>
-        <td style="width: 35%" class="fa__left">${arr[i].name}</td>
-        <td style="width: 15%">${arr[i].price}</td>
-        <td style="width: 15%"><img src="${splitImg(arr[i].image)}"></td>
-        <td style="width: 10%">
-            <div class="tooltip update" onclick="editProduct(${i})">
-                <i class="fa fa-wrench"></i>
-                <span class="tooltiptext">Sửa</span>
-            </div>
-            <div class="tooltip delete" onclick="deleteProduct(${i})">
-                <i class="fa fa-trash"></i>
-                <span class="tooltiptext">Xóa</span>
-            </div>
-        </td>
-        </tr>`
-    }
+    arr.map((item, index) => {
+        if (index >= start && index < end) {
+            htmls += `
+                <tr>
+                    <td style="width: 5%">${index+1}</td>
+                    <td style="width: 10%">${arr[index].masp}</td>
+                    <td style="width: 10%">${getTypeProduct(item.type)}</td>
+                    <td style="width: 35%" class="fa__left">${item.name}</td>
+                    <td style="width: 15%">${item.price}</td>
+                    <td style="width: 15%"><img src="${splitImg(item.image)}"></td>
+                    <td style="width: 10%">
+                        <div class="tooltip update" onclick="editProduct(${index})">
+                            <i class="fa fa-wrench"></i>
+                            <span class="tooltiptext">Sửa</span>
+                        </div>
+                        <div class="tooltip delete" onclick="deleteProduct(${index})">
+                            <i class="fa fa-trash"></i>
+                            <span class="tooltiptext">Xóa</span>
+                        </div>
+                    </td>
+                </tr>`
+            return htmls;
+        }
+    })
     htmls += '</table>';
     document.getElementById('table-product').innerHTML = htmls;
-    localStorage.setItem("product", JSON.stringify(arr));
 }
 
-showProduct();
+function getCurrentPage(currentPage) {
+    start = (currentPage - 1) * perPage;
+    end = currentPage * perPage;
+}
 
-// Xử lý thêm sản phẩm
+btnNext.addEventListener('click', function() {
+    currentPage++;
+    if (currentPage >= total) {
+        currentPage = total;
+        btnNext.classList.remove('active');
+        btnPrev.classList.add('active');
+    }
+    else {
+        btnNext.classList.add('active');
+        btnPrev.classList.add('active');
+    }
+    document.querySelector('.number-page li.active').classList.remove('active');
+    document.querySelectorAll('.number-page li')[currentPage - 1].classList.add('active');
+
+    getCurrentPage(currentPage);
+    showProduct();
+})
+
+btnPrev.addEventListener('click', function() {
+    currentPage--;
+    if (currentPage <= 1) {
+        currentPage = 1;
+        btnNext.classList.add('active');
+        btnPrev.classList.remove('active');
+    }
+    else {
+        btnNext.classList.add('active');
+        btnPrev.classList.add('active');
+    }
+    document.querySelector('.number-page li.active').classList.remove('active');
+    document.querySelectorAll('.number-page li')[currentPage - 1].classList.add('active');
+
+    getCurrentPage(currentPage);
+    showProduct();
+})
+
+function renderPage() {
+    var htmls = '';
+    htmls += `<li class="active">${1}</li>`;
+    for (let i = 2; i <= total; i++) {
+        htmls += `<li>${i}</li>`
+    }
+    document.getElementById('number-page').innerHTML = htmls;
+}
+
+function changePage() {
+    var currentPages = document.querySelectorAll('.number-page li');
+    for (let i = 0; i < currentPages.length; i++) {
+        currentPages[i].addEventListener('click', function() {
+            document.querySelector('.number-page li.active').classList.remove('active');
+            currentPages[i].classList.add('active');
+
+            if(i == 0) {
+                btnNext.classList.add('active');
+                btnPrev.classList.remove('active');
+            }
+            else if(i == currentPages.length - 1) {
+                btnNext.classList.remove('active');
+                btnPrev.classList.add('active');
+            }
+            else {
+                btnNext.classList.add('active');
+                btnPrev.classList.add('active');
+            }
+
+            var value = i + 1;
+            currentPage = value;
+            getCurrentPage(currentPage);
+            showProduct();
+        })
+    }
+}
+
+// ** Xử lý thêm sản phẩm
 const addProductBtn = document.getElementById('add-product');
 const overlayProduct = document.querySelector('.overlay.product.add');
 const overlayProduct2 = document.querySelector('.overlay.product.edit');
@@ -762,43 +854,90 @@ function addProduct() {
     
     confirmAdd.onclick = function() {
         const arr = localStorage.getItem('product') ? JSON.parse(localStorage.getItem('product')) : products;
-        const img = splitImg(imgProduct.value);
+        const image = splitImg(imgProduct.value);
         const name = nameProduct.value;
         const price = priceProduct.value;
         const type = valueType.value;
         const masp = document.getElementById('maspThem').value
 
-        if(img != "" && name != "" && price != "") {
-            arr.push({
-                image: img,
-                name: name,
-                price: addComma(price),
-                type: type,
-                masp: masp
-            })
+        if(imgProduct.value != "" && name != "" && price != "" && masp != '') {
+            // Kiểm tra có trùng mã hoặc tên
+            var check = true;
+            for(let i=0; i < arr.length; i++) {
+                if(arr[i].name == name) {
+                    setTimeout(function() {
+                        notify.style.transform = 'translateX(0)';
+                        notify.style.opacity = '1';
+                        notify.innerHTML = `<div class="login-notify error">
+                                                <i class="fa-solid fa-circle-xmark"></i>
+                                                Tên sản phẩm bị trùng !!
+                                            </div>`;
+                        
+                    }, 200)
             
-            localStorage.setItem("product", JSON.stringify(arr));
+                    setTimeout(function() {
+                        notify.style.transform = 'translateX(100%)';
+                        notify.style.opacity = '0';
+                    }, 1200)
+
+                    check = false;
+                }
+        
+                if(arr[i].masp == masp) {
+                    setTimeout(function() {
+                        notify.style.transform = 'translateX(0)';
+                        notify.style.opacity = '1';
+                        notify.innerHTML = `<div class="login-notify error">
+                                                <i class="fa-solid fa-circle-xmark"></i>
+                                                Mã sản phẩm bị trùng !!
+                                            </div>`;
+                        
+                    }, 200)
             
-            setTimeout(function() {
-                notify.style.transform = 'translateX(0)';
-                notify.style.opacity = '1';
-                notify.innerHTML = `<div class="login-notify success">
-                                        <i class="fa-sharp fa-solid fa-circle-check"></i>
-                                        Thêm sản phẩm thành công
-                                    </div>`;
-            }, 200)
-            
-            setTimeout(function() {
-                notify.style.transform = 'translateX(100%)';
-                notify.style.opacity = '0';
-            }, 1200)
-            
-            setTimeout(function() {
-                overlayProduct.style.transform = 'scale(0)';
-            }, 1300)
-            
-            showProduct();
-            clear();
+                    setTimeout(function() {
+                        notify.style.transform = 'translateX(100%)';
+                        notify.style.opacity = '0';
+                        return ;
+                    }, 1200)
+
+                    check = false;
+                }
+            }
+
+            if(check === true) {
+                arr.push({
+                    image: image,
+                    name: name,
+                    price: addComma(price),
+                    type: type,
+                    masp: masp
+                })
+                
+                localStorage.setItem("product", JSON.stringify(arr));
+                
+                setTimeout(function() {
+                    notify.style.transform = 'translateX(0)';
+                    notify.style.opacity = '1';
+                    notify.innerHTML = `<div class="login-notify success">
+                                            <i class="fa-sharp fa-solid fa-circle-check"></i>
+                                            Thêm sản phẩm thành công
+                                        </div>`;
+                }, 200)
+                
+                setTimeout(function() {
+                    notify.style.transform = 'translateX(100%)';
+                    notify.style.opacity = '0';
+                }, 1200)
+                
+                setTimeout(function() {
+                    overlayProduct.style.transform = 'scale(0)';
+                }, 1300)
+
+                changePage();
+                renderPage();
+                showProduct();
+                clear();
+            }
         }
         else {
             setTimeout(function() {
@@ -839,30 +978,29 @@ function deleteProduct(i) {
                 </div>
             </div>`
 
-    setTimeout(function() {
-        notifyDelete.style.transform = 'translate(-50%, 0)';
-        notifyDelete.style.opacity = '1';
-        document.querySelector('.notify__delete-ok').onclick = function() {
-            const arr = localStorage.getItem('product') ? JSON.parse(localStorage.getItem('product')) : products;
-            notifyDelete.style.transform = 'translate(-50%, -270%)';
-            notifyDelete.style.opacity = '0';
+    notifyDelete.style.transform = 'translate(-50%, 0)';
+    notifyDelete.style.opacity = '1';
+    document.querySelector('.notify__delete-ok').onclick = function() {
+        const arr = localStorage.getItem('product') ? JSON.parse(localStorage.getItem('product')) : products;
+        notifyDelete.style.transform = 'translate(-50%, -270%)';
+        notifyDelete.style.opacity = '0';
 
-            arr.splice(i, 1);
+        arr.splice(i, 1);
 
-            localStorage.setItem("product", JSON.stringify(arr));
-            showProduct();
-        }
-        document.querySelector('.notify__delete-cancel').onclick = function() {
-            notifyDelete.style.transform = 'translate(-50%, -270%)';
-            notifyDelete.style.opacity = '0';
-        }
-    }, 200)
+        localStorage.setItem("product", JSON.stringify(arr));
+        changePage();
+        renderPage();
+        showProduct();
+    }
+
+    document.querySelector('.notify__delete-cancel').onclick = function() {
+        notifyDelete.style.transform = 'translate(-50%, -270%)';
+        notifyDelete.style.opacity = '0';
+    }
     
 }
 
-
-
-// Sửa lỗi ảnh
+// Hiện ảnh khi chọn file
 function updateProductImg(files, id) {
     // var url = '';
     // if(files.length) url = window.URL.createObjectURL(files[0]);
@@ -915,7 +1053,6 @@ function autoMaSanPham2(sp) {
 // Xử lý sửa sản phẩm
 function editProduct(i) {
     const arr = localStorage.getItem('product') ? JSON.parse(localStorage.getItem('product')) : products;
-    autoMaSanPham()
     var htmls = `
     <div class="close" onclick="this.parentElement.style.transform = 'scale(0)';">
                         <i class="fa-solid fa-xmark"></i>
@@ -966,6 +1103,7 @@ function editProduct(i) {
             </tr>
         </table>`
 
+    var maspTmp = arr[i].masp;
     document.querySelector('.overlay.product.edit').innerHTML = htmls;
     overlayProduct2.style.transform = 'scale(1)';
 
@@ -989,34 +1127,81 @@ function editProduct(i) {
             image = splitImg(image2);
         }
     
-        if(name != "" && price != "") {
-            arr[i] = {
-                image: image,
-                name: name,
-                price: addComma(price),
-                type: type,
-                masp: masp
+        if(name != "" && price != "" && masp != "") {
+            // Kiểm tra có trùng mã hoặc tên
+            var check = true;
+            for(let i=0; i < arr.length; i++) {
+                if(arr[i].name == name) {
+                    setTimeout(function() {
+                        notify.style.transform = 'translateX(0)';
+                        notify.style.opacity = '1';
+                        notify.innerHTML = `<div class="login-notify error">
+                                                <i class="fa-solid fa-circle-xmark"></i>
+                                                Tên sản phẩm bị trùng !!
+                                            </div>`;
+                        
+                    }, 200)
+            
+                    setTimeout(function() {
+                        notify.style.transform = 'translateX(100%)';
+                        notify.style.opacity = '0';
+                    }, 1200)
+
+                    check = false;
+                }
+        
+                if(arr[i].masp == masp && masp != maspTmp) {
+                    setTimeout(function() {
+                        notify.style.transform = 'translateX(0)';
+                        notify.style.opacity = '1';
+                        notify.innerHTML = `<div class="login-notify error">
+                                                <i class="fa-solid fa-circle-xmark"></i>
+                                                Mã sản phẩm bị trùng !!
+                                            </div>`;
+                        
+                    }, 200)
+            
+                    setTimeout(function() {
+                        notify.style.transform = 'translateX(100%)';
+                        notify.style.opacity = '0';
+                        return ;
+                    }, 1200)
+
+                    check = false;
+                }
             }
-            
-            setTimeout(function() {
-                notify.style.transform = 'translateX(0)';
-                notify.style.opacity = '1';
-                notify.innerHTML = `<div class="login-notify success">
-                                        <i class="fa-solid fa-circle-check"></i>
-                                        Sửa sản phẩm thành công
-                                    </div>`;
-            }, 200)
-            
-            setTimeout(function() {
-                notify.style.transform = 'translateX(100%)';
-                notify.style.opacity = '0';
-            }, 1200)
-            
-            setTimeout(function() {
-                overlayProduct.style.transform = 'scale(0)';
-            }, 1300)
-            
-            showProduct();
+
+            if(check === true) {
+                arr[i] = {
+                    image: image,
+                    name: name,
+                    price: addComma(price),
+                    type: type,
+                    masp: masp
+                }
+                
+                setTimeout(function() {
+                    notify.style.transform = 'translateX(0)';
+                    notify.style.opacity = '1';
+                    notify.innerHTML = `<div class="login-notify success">
+                                            <i class="fa-solid fa-circle-check"></i>
+                                            Sửa sản phẩm thành công
+                                        </div>`;
+                }, 200)
+                
+                setTimeout(function() {
+                    notify.style.transform = 'translateX(100%)';
+                    notify.style.opacity = '0';
+                }, 1200)
+                
+                setTimeout(function() {
+                    overlayProduct.style.transform = 'scale(0)';
+                }, 1300)
+                
+                changePage();
+                renderPage();
+                showProduct();
+            }
         }
         else {
             setTimeout(function() {
@@ -1036,103 +1221,16 @@ function editProduct(i) {
         notify.innerHTML = '';
 
         localStorage.setItem("product", JSON.stringify(arr));
+
+        changePage();
+        renderPage();
         showProduct();
 
     }
 
 }
 
-// function changeProduct() {
-//     const editBtn = document.getElementById('edit-btn');
 
-//     editBtn.onclick = function() {
-//         const type = document.querySelector('.overlay.product select').value;
-//         const name = document.querySelector('.overlay.product input.name').value;
-//         const img = document.querySelector('.overlay.product input[type="file"]').value;
-//         const price = document.querySelector('.overlay.product input.price').value;
-//         const masp = document.getElementById('maspThem').value;
-        
-
-//         if(img != "" && name != "" && price != "") {
-//             arr[i] = {
-//                 img: img,
-//                 name: name,
-//                 price: addComma(price),
-//                 type: type
-//             }
-            
-//             localStorage.setItem("product", JSON.stringify(arr));
-            
-//             setTimeout(function() {
-//                 notify.classList.add('success');
-//                 notify.innerHTML = `<i class="fa-solid fa-circle-check"></i>
-//                 Sửa sản phẩm thành công`;
-//                 notify.style.opacity = '1';
-//             }, 200)
-            
-//             setTimeout(function() {
-//                 notify.style.opacity = '0';
-//             }, 1200)
-            
-//             setTimeout(function() {
-//                 overlayProduct.style.transform = 'scale(0)';
-//             }, 1300)
-            
-//             showProduct();
-//         }
-//         else {
-//             setTimeout(function() {
-//                 notify.classList.add('error');
-//                 notify.innerHTML = `<i class="fa-solid fa-circle-xmark"></i>
-//                                 Chưa điền đủ thông tin sản phẩm`;
-//                 notify.style.opacity = '1';
-//             }, 200)
-    
-//             setTimeout(function() {
-//                 notify.style.opacity = '0';
-//             }, 1200)
-//         }
-//         notify.classList.remove('error');
-//         notify.classList.remove('success');
-//         notify.innerHTML = '';
-//     }
-// }
-
-// changeProduct()
-
-/*function timSanPham() {
-    const arr = JSON.parse(localStorage.getItem('product'))
-    var list = [];
-    var x = `
-    <tr>
-    <th title="Sắp xếp" style="width: 5%"">Stt</th>
-    <th title="Sắp xếp" style="width: 10%"">Mã</th>
-    <th title="Sắp xếp" style="width: 40%"">Tên</th>
-    <th title="Sắp xếp" style="width: 15%"">Giá</th>
-    <th title="Sắp xếp" style="width: 15%"">Hình Ảnh</th>
-    <th style="width: 15%">Hành động</th>
-    </tr>
-    `
-    let temp = 0;
-    let temp2 = 0;
-    let temp3 = 0;
-    for (let i = 0; i < arr.length; i++) {
-        for (let j = 0; j < arr[i].length; j++) {
-            if (val == arr[i][j].name) {
-                list.push(arr[i][j]);
-                alert(list)
-            }
-        }
-    }
-    for (let i = 0; i < list.length; i++) {
-        x += `<tr>
-        <td>${temp++}</td>
-        <td>${temp2++}</td>
-        <td class="fa__left">${list[i].name}</td>
-        <td>${list[i].price}</td>
-        <td><img src="$list[i].image}"></td>
-        <td>${temp3++}</td>
-        </tr>`
-    }
-    document.getElementById('test').innerHTML = x;
-}*/
+showProduct();
+renderPage();
+changePage();
