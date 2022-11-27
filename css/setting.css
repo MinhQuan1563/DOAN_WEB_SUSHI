@@ -306,6 +306,11 @@ header h2 {
 
 .overlayTable td:first-child {
     text-align: right;
+    width: 220px;
+}
+
+.overlayTable td:last-child {
+    width: 300px;
 }
 
 .overlayTable input {
@@ -898,4 +903,20 @@ input:checked+.slider:before {
     top: -12px;
     left: 50%;
     transform: translateX(-50%);
+}
+
+/* Order Detail */
+.monan {
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.detail__monan {
+    text-align: left;
+    max-height: 0px;
+    transition: all linear 0.2s;
+}
+
+.detail__monan li {
+    line-height: 30px;
 }

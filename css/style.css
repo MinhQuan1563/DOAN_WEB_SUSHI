@@ -242,6 +242,7 @@
 }
 
 /* Notified cart */
+.section__login,
 .section__notify-cart {
     position: absolute;
     top: 40px;
@@ -258,6 +259,22 @@
     transform-origin: 100% top;
     opacity: 0;
     transition: all 0.3s;
+    box-shadow: 0 0 5px 1px #888888;
+}
+
+.section__login {
+    width: 200px;
+    left: -120px;
+}
+
+.section__login-list li {
+    font-size: 1.6rem;
+    padding: 12px 20px;
+    cursor: pointer;
+}
+
+.section__login-list li:hover {
+    background-color: #ddd;
 }
 
 .section__header-title-icon span {
@@ -269,11 +286,13 @@
     color: var(--primary-color);
 }
 
+.section__header-title-icon span:hover .section__login,
 .section__header-title-icon span:hover .section__notify-cart {
     transform: scale(1);
     opacity: 1;
 }
 
+.section__login::after,
 .section__notify-cart::after {
     content: "";
     display: block;
@@ -282,6 +301,8 @@
     right: 28px;
     border: 20px solid;
     border-color: transparent transparent var(--white-color) transparent;
+    z-index: -1;
+    cursor: pointer;
 }
 
 .header__pseudo::before {
@@ -293,6 +314,7 @@
     width: 128%;
     height: 30px;
     background-color: transparent;
+    cursor: pointer;
 }
 
 .section__notify-cart-list {
@@ -1998,4 +2020,197 @@ strong {
 
 .slide__img {
     width: 100%;
+}
+
+/* Info User */
+.donHangDaDat {
+    display: none;
+    background-color: #252836;
+}
+
+.nenTrang {
+    background-color: white;
+    padding: 0 20%;
+}
+
+.infoUser table {
+    border-collapse: collapse;
+    margin: 0 auto;
+}
+
+.infoUser table th {
+    font-size: 26px;
+    line-height: 30px;
+    font-weight: bold;
+    padding: 10px 5px;
+}
+
+.infoUser table td {
+    font-size: 18px;
+    line-height: 26px;
+}
+
+.infoUser table td:first-child {
+    font-weight: bold;
+    text-align: right;
+}
+
+.infoUser table td:last-child {
+    font-weight: bold;
+    text-align: center;
+    width: 300px;
+}
+
+.infoUser span {
+    font-size: 20px;
+    border-radius: 5px;
+    text-align: center;
+    transition-duration: .15s;
+}
+
+/* List Order */
+.nenTrang {
+    background-color: white;
+    padding: 0 18%;
+}
+
+.listSanPham {
+	margin: 50px auto;
+    border-collapse: collapse;
+    width: 100%;
+    font-size: 1.6rem;
+
+}
+
+/* thêm border và padding cho th */
+.listSanPham th {
+    border: 1px solid #ddd;
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #4CAF50;
+    color: white;
+    font-size: 1.8rem;
+}
+.listSanPham td {
+    border: 1px solid #ddd;
+}
+
+/* Đổi màu button khi hover vào tr */
+.listSanPham tr:hover td button {
+    background-color: rgb(176, 212, 177)
+}
+
+/* Canh giữa cho cột stt và th */
+.listSanPham tr td:first-child, .listSanPham tr th {
+	text-align: center;
+}
+
+/* những tr chẵn sẽ có màu khác */
+.listSanPham tr:nth-of-type(even) {
+    background-color: #f2f2f2;
+}
+
+/* Dòng tổng tiền thanh toán sẽ có màu đậm hơn */
+.listSanPham tr:not(:last-child):hover {
+    background-color: #e5e2e2;
+}
+
+/* Last child là dòng tổng tiền */
+.listSanPham tr:last-child {
+    background-color: #bbb;
+}
+
+/* Số lượng */
+.listSanPham .soluong {
+    text-align: center;
+}
+.listSanPham .soluong button {
+    width: 30px;
+    height: 30px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: transparent; 
+}
+.listSanPham .soluong button:hover {
+    background-color: #4CAF50; 
+}
+.listSanPham .soluong input {
+    border: none;
+    border-radius: 5px;
+    background-color: #f2f2f2;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    width: 70px;
+    height: 32px;
+}
+
+/* Link sản phẩm */
+.noPadding {
+    padding: 0 0 0 10px;
+    line-height: 40px;
+}
+
+.listSanPham td a {
+    display: block;
+    position: relative;
+    padding: 5px 0;
+    cursor: pointer;
+}
+.listSanPham td a:hover {
+    text-decoration: underline;
+}
+
+/* Hình ảnh sản phẩm */
+.imgHide img {
+    position: absolute;
+    left: 0;
+    top: 50px;
+    width: 150px;
+    height: 0;
+    border-radius: 10px;
+    transition-duration: .1s;
+    z-index: 10;
+}
+.imgHide a:hover img {
+    height: 150px;
+}
+
+.listSanPham td:not(:nth-child(2)) {
+    text-align: center;
+}
+
+.listSanPham tr td:last-child {
+    font-size: 1.8rem;
+}
+
+.listSanPham tr:last-child td:last-child {
+    background-color: #f86c6b;
+    color: white;
+    width: 245px;
+}
+
+.listSanPham tr:last-child td.active:last-child {
+    background-color: #5ce457d8;
+}
+
+.not-show {
+    display: none;
+}
+
+table {
+    overflow: hidden;
+}
+
+.listSanPham tr th:first-child {
+    position: relative;
+    cursor: pointer;
+}
+
+.listSanPham tr th i {
+    position: absolute;
+    top: 50%;
+    left: 25px;
 }

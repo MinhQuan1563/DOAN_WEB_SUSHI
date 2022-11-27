@@ -1302,6 +1302,7 @@ function deleteUser(i) {
 
         localStorage.setItem("account", JSON.stringify(arr));
         renderUser();
+        renderOder();
     }
 
     document.querySelector('.notify__delete-cancel').onclick = function() {
@@ -1420,6 +1421,42 @@ function duyet(i, j, duyetDon) {
 var overlayOrder = document.querySelector('.overlay.order');
 function showDetail(i, j) {
     overlayOrder.style.transform = 'scale(1)';
+
+    const arrUser = localStorage.getItem('account') ? JSON.parse(localStorage.getItem('account')) : accounts;
+    var listProduct = arrUser[i].donhang[j].sanpham;
+    var listOrder = arrUser[i].donhang[j];
+    var listUser = arrUser[i];
+
+    var tmp = '';
+    for(let k=0; k < listProduct.length; k++) {
+        tmp += `<li>[${listProduct[k].amount}] x ${listProduct[k].name} (${listProduct[k].size})</li>`
+    }
+
+    document.querySelector('.detail__monan').innerHTML = tmp;
+    document.querySelector('.detail__ngaytaodon').innerText = listOrder.ngaymua;
+    document.querySelector('.detail__khachhang').innerText = listUser.Fullname;
+    document.querySelector('.detail__email').innerText = listUser.email;
+    document.querySelector('.detail__diachi').innerText = listOrder.address;
+    document.querySelector('.detail__dienthoai').innerText = listOrder.phone;
+    document.querySelector('.detail__tongtien').innerText = listOrder.tongtien;
+    if(listOrder.ghichu == '') {
+        listOrder.ghichu = 'Không có';
+    }
+    document.querySelector('.detail__ghichu').innerText = listOrder.ghichu;
+    document.querySelector('.detail__trangthai').innerText = listOrder.trangthai;
+
+    localStorage.setItem('account', JSON.stringify(arrUser));
+}
+
+const dsMonAn = document.querySelector('.detail__monan');
+document.querySelector('.monan').onclick = function() {
+    var tmp = dsMonAn.offsetHeight + 'px';
+    if(tmp == '0px') {
+        dsMonAn.style.maxHeight = '100%';
+    }
+    else {
+        dsMonAn.style.maxHeight = '0px';
+    }
 }
 
 showProduct();

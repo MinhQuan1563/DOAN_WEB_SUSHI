@@ -280,45 +280,80 @@
                             <th colspan="2">Thông tin đơn hàng</th>
                         </tr>
                         <tr>
-                            <td>Mã sản phẩm:</td>
-                            <td>
-                                <input type="text" id="maspThem">
-                                <input type="text" id="maspThem">
+                            <td>Món ăn: </td>
+                            <td class="monan">
+                                <ul class="detail__monan">
+                                    
+                                </ul>
                             </td>
                         </tr>
                         <tr>
-                            <td>Loại sản phẩm:</td>
+                            <td>Ngày tạo đơn: </td>
                             <td>
-                                <select name="selectProduct" onchange="autoMaSanPham(this.value)">
-                                    <option value="bento">Bento</option>
-                                    <option value="sushi">Sushi</option>
-                                    <option value="sashi">Sashimi</option>
-                                    <option value="combo">Combo Sashimi</option>
-                                    <option value="ankem">Món ăn kèm</option>
-                                    <option value="douong">Nước uống và tráng miệng</option>
-                                </select>
+                                <div class="detail__ngaytaodon">
+                                    
+                                </div>
                             </td>
                         </tr>
                         <tr>
-                            <td>Tên sản phẩm:</td>
-                            <td><input type="text" class="name"></td>
-                        </tr>
-                        <tr>
-                            <td>Hình ảnh:</td>
+                            <td>Tên khách hàng: </td>
                             <td>
-                                <img src="" id="productImgAdd">
-                                <input type="file" name="" id=""  onchange="updateProductImg(this.files, 'productImgAdd')">
+                                <div class="detail__khachhang">
+                                    
+                                </div>
                             </td>
                         </tr>
                         <tr>
-                            <td>Giá tiền:</td>
+                            <td>Email: </td>
                             <td>
-                                <input type="text" class="price">
+                                <div class="detail__email">
+                                    
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Địa chỉ: </td>
+                            <td>
+                                <div class="detail__diachi">
+                                    
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Số điện thoại liên lạc: </td>
+                            <td>
+                                <div class="detail__dienthoai">
+                                    
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Tổng giá tiền: </td>
+                            <td>
+                                <div class="detail__tongtien">
+                                    
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Ghi chú thêm: </td>
+                            <td>
+                                <div class="detail__ghichu">
+                                    
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Trạng thái đơn hàng: </td>
+                            <td>
+                                <div class="detail__trangthai">
+                                    
+                                </div>
                             </td>
                         </tr>
                         <tr>
                             <td colspan="2" class="table-footer">
-                                <button id="add-btn">THÊM</button>
+                                <button id="detail__confirm">XÁC NHẬN</button>
                             </td>
                         </tr>
                     </table>
