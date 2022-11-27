@@ -694,7 +694,7 @@ function sidebarControl() {
                     document.querySelector('.section__contact.section__contact').style.display = "flex";
                     break;
                 case 4:
-                    window.location.pathname = '/html/settings.html';
+                    window.location.href = 'https://minhquan1563.github.io/DOAN_WEB_SUSHI/html/settings.html';
                     break;
             }
         }
@@ -1667,8 +1667,8 @@ function filterHandle() {
         setTimeout(function() {
             notify.style.transform = 'translateX(100%)';
             notify.style.opacity = '0';
+            return;
         }, 1500)
-        return;
     }
     // else if((Number.isNaN(moneyMin) === true || Number.isNaN(moneyMax) === true) && (moneyMin.toString().length == 3 || moneyMax.toString().length == 3)) {
     //     setTimeout(function() {

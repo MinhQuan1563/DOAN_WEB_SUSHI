@@ -663,7 +663,7 @@ navItems.forEach(function(navItem, index) {
                 document.querySelector('.section__customer').style.display = "block";
                 break;
             case 4:
-                window.location.pathname = '/html/index.html';
+                window.location.href = 'https://minhquan1563.github.io/DOAN_WEB_SUSHI/html/index.html';
                 break;
         }
     }
